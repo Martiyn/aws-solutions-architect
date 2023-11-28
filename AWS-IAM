@@ -1,1 +1,64 @@
+AWS IAM is a global (meaning it is not region locked) feature of the AWS services.
+IAM allows users of the AWS console to create their own users for different purposes.
+When initially creating an AWS account, the user starts off with a ROOT account.
+The ROOT account has absolute full privileges over any AWS services.
+It is considered best practice to never use the ROOT account for any tasks aside from creating an Admin account via the IAM console.
+It is extremely important to set MFA on the ROOT account, as well as the Admin account for maximum account security.
+Once the Admin account has been created, it must be given access to the management console, so that it can execute its admin functions properly.
+When performing different tasks, it is advised to create IAM profiles (non-admin ones) with the sufficient privileges in order to be able to execute the relevant tasks.
+The above-mentioned privileges are granted via IAM policies.
+IAM policies are in JSON format and are relatively easy to understand (by design).
+Policies can be seen in the following format:
 
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyAllAwsReourcesOutsideAccountExceptAmazonS3",
+      "Effect": "Deny",
+      "NotAction": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:PutObjectAcl"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:ResourceAccount": [
+            "111122223333"
+          ]
+        }
+      }
+    },
+    {
+      "Sid": "DenyAllS3ResourcesOutsideAccountExceptDataExchange",
+      "Effect": "Deny",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:PutObjectAcl"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEquals": {
+          "aws:ResourceAccount": [
+            "111122223333"
+          ]
+        },
+        "ForAllValues:StringNotEquals": {
+          "aws:CalledVia": [
+            "dataexchange.amazonaws.com"
+          ]
+        }
+      }
+    }
+  ]
+}
+
+The above example policy is for denying access to Amazon S3 resources outside your account except AWS Data Exchange.
+AWS policies usually contain the following parameters:
+Resource: This is the specified resource that the policy targets (like a particular S3 bucket or particular EC2 instance).
+The * symbol indicates a so-called "wildcard" (meaning it does not target a particular resource).
+Effect: The effect can either be "Allow" or "Deny" (to allow or deny the specified action).
+Action: The action that is to be targeted in the policy (ex. s3:GetObject)
+Statement: The statement of the policy.
