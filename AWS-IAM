@@ -62,3 +62,12 @@ The * symbol indicates a so-called "wildcard" (meaning it does not target a part
 Effect: The effect can either be "Allow" or "Deny" (to allow or deny the specified action).
 Action: The action that is to be targeted in the policy (ex. s3:GetObject)
 Statement: The statement of the policy.
+
+--------------------------------------------------------------------------------------------------------------------
+IAM Groups
+
+IAM groups are groupings of users that share the same policies.
+IAM policies can be attached to an entire group of people and will apply to said group once attached.
+IAM users can be members of multiple groups at once (ex. user Martiyn can be a part of group "Developers" and "SysAdmins").
+The IAM user will inherit the permissions (or lack there of) that have been applied via IAM policies to the groups.
+IAM groups cannot be a part of other IAM groups, only users can be members of IAM groups.
