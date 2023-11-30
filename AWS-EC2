@@ -1,1 +1,33 @@
+AWS EC2 Instances
+
+AWS EC2 instances are virtual computing instances that are hosted on AWS servers in different regions and availability zones.
+The EC2 instances can be launched with multiple different Operational Systems including:
+- Windows
+- Linux
+- MacOS
+The OS can be selected when creating the EC2 instance.
+In addition to the OS, when launching an EC2 instance, you can select all the different parameters you will need for it like:
+- RAM
+- CPU
+- Storage space (which can be either the built-in instance store or an attached store like EBS)
+- Firewall rules (via Security groups)
+- Network card (network speed, public IP address)
+- EC2 User script (executable script, which runs on first launch)
+
+When launching the EC2 instance, you can select its parameters from a list of such.
+Example of an EC2 instance selection:
+
+m5.2xlarge
+
+The above can be translated as the following:
+
+m - instance class
+5 - instance generation
+2xlarge - size within the instance class
+
+The different instance types can vary depending on the workload that would need to be executed.
+For workloads that require powerful computing capabilities, a Compute Optimized instance would be best.
+For workloads that require fast performance for workloads that process large data sets in memory, a Memory Optimized instance would be best.
+For workloads that require read and write access to large data sets on the local storage, a Storage Optimized instance would be best.
+
 
