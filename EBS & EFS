@@ -1,0 +1,24 @@
+Amazon EBS
+
+Amazon EBS (Elastic Block Store) is a storage mechanism for EC2 instances.
+It is essentially a network drive that can be attached to an EC2 instance.
+Considering it is a network drive, that means there may be latency when it is in use.
+This allows the EC2 instances to persist their data even after being terminated.
+EBS is bound by Availability Zones.
+It can be attached to only a single EC2 instance (unless using multiple connect).
+Billing for the service takes place only for the provisioned capacity.
+Multiple EBS storage instances can be attached to a single EC2 instance.
+EC2 instances by default have an assigned EBS store (root volume) that is set to terminate along with the instance by default.
+Snapshots can be created of the EBS storage, and new EBS storages can be created from the snapshot.
+Encryption of the EBS storages works in the following way:
+1. Create snapshot of EBS store
+2. Create new EBS store from the snapshot
+3. While creating the new EBS store, select the encrypt option
+EBS has multiple volume types:
+1. gp1/gp2 - General purpose SSD
+2. io1/io2 - High performance SSD
+3. st1 - Low cost HDD
+4. st2 - Lowest cost HDD
+NOTE: gp1/gp2 and io1/io2 can be used as the root volume volume type when launching an EC2 instance.
+
+------------------------------------------------------------------------------------------------------------------------------------
