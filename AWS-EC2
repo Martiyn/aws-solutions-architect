@@ -54,5 +54,7 @@ The following command must be input:
 - ssh -i .\EC2Tutorial.pem ec2-user@3.250.26.200
 NOTE: It is very important that you are in the directory that contains the "EC2Tutorial.pem" file.
 
+IMPORTANT: The easiest way to connect to an EC2 instance is via EC2 Instance connect.
+This does not require an SSH key and happens within the browser (separate tab).
 -------------------------------------------------------------------------------------------------------------------
 
