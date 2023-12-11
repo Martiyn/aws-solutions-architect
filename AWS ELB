@@ -1,0 +1,32 @@
+AWS ELB (Elastic load balancing)
+
+Load balancers are servers that control incoming traffic to other servers (downstream).
+Load balancers have the following characteristics:
+1. They spread the incoming load onto the AWS resources that are available (ex. EC2 instances).
+2. They provide a single point of contact to your application (DNS).
+3. They seemlessly handle failures of downstream instances.
+4. They provide SSL termination (HTTPS) to your websites.
+5. They have high availability across zones.
+6. They can enforce stickiness with cookies.
+7. They are able to separate public traffic from private traffic.
+8. They have the ability to perform health checks:
+   - Health checks are done on a port and route
+   - Health checks determine whether a resource is healthy and able to respond to requests (ex. EC2 instances)
+   - If health check response is other than 200, resource is deemed as unhealthy
+
+Load balancer types are the following:
+1. Application Load Balancer:
+   - HTTP, HTTPS, Websocket
+2. Network Load Balancer:
+   - TCP, TLS (secure TCP), UDP
+3. Gateway Load Balancer:
+   - IP Protocol
+
+!!IPORTANT:
+ - Load Balancer security groups can be linked to the security groups of EC2 instances (or other resources).
+ - This is for the purpose of allowing access to your EC2 instances only through the load balancer.
+ - This practice adds an extra layer of security to the underlying EC2 instances.
+ - HTTP and HTTPS traffic must be allowed for the load balancer security group
+ - The EC2 instances security group must be modified to allow HTTP and HTTPS access only if it comes from the load balancer.
+
+--------------------------------------------------------------------------------------------------------------------------------------------
