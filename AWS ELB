@@ -57,3 +57,20 @@ ALB forwards the client IP with the following header: X-Forwarded-For.
 ALB forwards the port with the following header: X-Forwarded-Port
 
 --------------------------------------------------------------------------------------------------------------------------------------------
+
+Network Load Balancer (NLB)
+
+NLB is layer 4 (TCP/UDP).
+NLB is optimized to handle millions of requests per second.
+NLB has much less latency time compared to ALB (100ms vs 400ms)
+NLB has one static IP per AZ.
+NLB supports assigning elastic IP (useful for whitelisting a specific IP).
+NLB is used for extreme performance with traffic (UDP & TCP).
+NLB is not included in free tier.
+NLB target groups can be:
+ - EC2 instances
+ - IP addresses (private)
+ - Application Load Balancers
+ - Health checks support TCP, HTTP & HTTPS
+
+--------------------------------------------------------------------------------------------------------------------------------------------
