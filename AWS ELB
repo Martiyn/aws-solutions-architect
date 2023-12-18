@@ -74,3 +74,22 @@ NLB target groups can be:
  - Health checks support TCP, HTTP & HTTPS
 
 --------------------------------------------------------------------------------------------------------------------------------------------
+
+Gateway Load Balancer (GWLB)
+
+GWLB is layer 4 (IP packets)
+GLWB is used for the management of a fleet of third-party virtual appliances in AWS (example):
+ - Firewall
+ - Intrusion detection
+ - Intrusion prevention
+ - Deep packet inspection
+ - Payload manipulation
+GWLB combines the following functions:
+ - Transparent Network gateway (single exit/entry for all traffic)
+ - Load Balancer (distributes traffic across virtual appliances)
+GWLB uses GENEVE protocol on 6081
+GWLB has the following target groups:
+ - EC2 instances (via instance ID)
+ - IP addresses (private)
+--------------------------------------------------------------------------------------------------------------------------------------------
+
