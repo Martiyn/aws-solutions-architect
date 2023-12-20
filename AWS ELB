@@ -141,3 +141,49 @@ SSL Certificates:
  - Both ALB and NLB support multiple listeners with multiple SSL certificates and use SNI.
 
 --------------------------------------------------------------------------------------------------------------------------------------------
+
+Auto Scaling Groups (ASG)
+
+ - Auto scaling groups manage the underlying resources depending on the load.
+ - Auto scaling groups allow for quick procurement or termination of resources in the cloud.
+ - The goal of an ASG is:
+    1. Scale out (add EC2 instances) or Scale in (remove EC2 instances) depending on the load.
+    2. Ensure that there is a minimum/maximum threshold for active EC2 instances.
+    3. Automatically register new EC2 instances to a Load Balancer.
+    4. Re-create an EC2 instance in case a previous one has been terminated (ex. due to being unhealthy).
+ - ASG are free to use (you only pay for the underlying EC2 instances).
+ - ASG requires a launch template in order to launch new instances
+ - Launch templates must include:
+    1. AMI + instance type
+    2. EC2 user data (optional)
+    3. EBS volumes
+    4. Security groups
+    5. SSH key pair (optional)
+    6. IAM roles for the EC2 instances (optional)
+    7. Network + subnets information
+    8. Load Balancer information
+ - ASG has a min. size, max. size and initial capacity, which must be defined.
+ - ASG also has scaling policies.
+ - CloudWatch can be integrated with ASG (to create alarms for scaling in and out).
+ - CloudWatch alarms can be configured to monitor certain metrics (ex. CPU usage).
+ - ASG have scaling policies, which can be classed as the following:
+    1. Target tracking scaling:
+      - Easiest to setup
+      - Ex. we want to set it to monitor the average CPU utilization to be about 40%
+    2. Simple/Step scaling
+      - Works with CloudWatch alarms (ex. an alarm keeps track of CPU usage and adds/removes instances depending on it)
+      - When CPU is above 70%, add two EC2 instances
+      - When CPU is below 30%, remove one EC2 instance
+    3. Scheduled actions:
+      - Anticipate scaling based on known usage patterns (ex. add more instances at 10:00 AM due to increased load)
+    4. Predictive scaling:
+      - Continuously forecast load and schedule scaling ahead of time
+ - Recommended metrics to scale the ASG are:
+    1. Average CPU utilization
+    2. Request count per target
+    3. Average Network in/out
+    4. Any custom metric that you wish to create
+ - After ASG scaling occurs, there is a cooldown period.
+ - During the cooldown period, the ASG will not terminate or create new instances.
+ - Default cooldown period is 300 seconds.
+
