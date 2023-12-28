@@ -24,3 +24,19 @@ AWS RDS (Relational Database Service)
  - A maximum DB storage threshold must be set.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+RDS Read replicas for read scalability
+
+ - Read replicas help you scale your database READS.
+ - You can have up to 15 read replicas.
+ - Read replicas can be within AZ, cross AZ or cross region.
+ - Replication is ASYNC, so reads are eventually consistent (progressively updated).
+ - Replicas can be promoted to become their own Database.
+ - Applications must update their connection string in order to leverage read replicas.
+ - Read replicas can be created to run separate workloads on the same Database (in order to not overload the Database).
+ - Read replicas can only be used for SELECT (read) statements so that no DB manipulation can occur (INSERT, DELETE, UPDATE).
+ - RDS has a cost when transferring data from one AZ to another.
+ - Read replicas in the same region do not have a fee.
+ - Read replicas transferred between regions have a fee.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
