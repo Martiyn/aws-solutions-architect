@@ -40,3 +40,18 @@ RDS Read replicas for read scalability
  - Read replicas transferred between regions have a fee.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+RDS Multi AZ for disaster recovery
+
+ - RDS Multi AZ is used for disaster recovery (in case the main DB has issues).
+ - RDS Multi AZ works SYNC (synchronously).
+ - When a change occurs in the main DB, it gets immediately updated to the backup.
+ - Multi AZ uses a single DNS name (in case of failure of the main DB, the app automatically connects to the backup).
+ - As multi AZ uses multiple availability zones, there is increased availability.
+ - Automatic failover in case of loss of AZ, loss of network or instance storage failure.
+ - No manual intervention with the apps is required (in case of failure).
+ - Not used for scaling (only backup).
+ - Read replicas can be setup as multi AZ for disaster recovery.
+ - RDS can go from single AZ to multi AZ with zero downtime (no need to stop the DB).
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
