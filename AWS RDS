@@ -55,3 +55,18 @@ RDS Multi AZ for disaster recovery
  - RDS can go from single AZ to multi AZ with zero downtime (no need to stop the DB).
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+RDS Custom
+
+ - Managed Oracle and Microsoft SQL Server with OS and DB customization.
+ - RDS: Automates setup, operation and scaling of database in AWS.
+ - Custom: Access to the underlying OS and DB, so you can:
+   1. Configure settings
+   2. Install patches
+   3. Enable native features
+   4. Access the underlying EC2 instance via SSH or SSM Session Manager
+ - NOTE: Always deactivate Automation Mode when performing customization (or you could break the DB).
+ - Always make a DB snapshot prior to customization.
+ - RDS Custom provides absolute admin access to the entire OS and DB.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
