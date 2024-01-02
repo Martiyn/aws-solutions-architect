@@ -70,3 +70,16 @@ RDS Custom
  - RDS Custom provides absolute admin access to the entire OS and DB.
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+RDS Backups
+
+ - Automated backups:
+   1. Daily full backup of the database (during the backup window)
+   2. Transaction logs are backed up by RDS every 5 minutes
+   3. Ability to restore to any point in time (from oldest backup to 5 minutes ago)
+   4. 1 to 35 days retention period (set to 0 to disable automated backups)
+
+ - Manual DB snapshots
+   1. Manually triggered by the user
+   2. Retention backup for as long as you want
+   
