@@ -1,26 +1,26 @@
 AWS IAM
 
-AWS IAM is a global (meaning it is not region locked) feature of the AWS services.
-IAM allows users of the AWS console to create their own users for different purposes.
+ - AWS IAM is a global (meaning it is not region locked) feature of the AWS services.
+ - IAM allows users of the AWS console to create their own users for different purposes.
 
 --------------------------------------------------------------------------------------------------------------------
 
 IAM users
 
-When initially creating an AWS account, the user starts off with a ROOT account.
-The ROOT account has absolute full privileges over any AWS services.
-It is considered best practice to never use the ROOT account for any tasks aside from creating an Admin account via the IAM console.
-It is extremely important to set MFA on the ROOT account, as well as the Admin account for maximum account security.
-Once the Admin account has been created, it must be given access to the management console, so that it can execute its admin functions properly.
-When performing different tasks, it is advised to create IAM profiles (non-admin ones) with the sufficient privileges in order to be able to execute the relevant tasks.
-The above-mentioned privileges are granted via IAM policies.
+ - When initially creating an AWS account, the user starts off with a ROOT account.
+ - The ROOT account has absolute full privileges over any AWS services.
+ - It is considered best practice to never use the ROOT account for any tasks aside from creating an Admin account via the IAM console.
+ - It is extremely important to set MFA on the ROOT account, as well as the Admin account for maximum account security.
+ - Once the Admin account has been created, it must be given access to the management console, so that it can execute its admin functions properly.
+ - When performing different tasks, it is advised to create IAM profiles (non-admin ones) with the sufficient privileges in order to be able to execute the relevant tasks.
+ - The above-mentioned privileges are granted via IAM policies.
 
 --------------------------------------------------------------------------------------------------------------------
 
 IAM policies
 
-IAM policies are in JSON format and are relatively easy to understand (by design).
-Policies can be seen in the following format:
+ - IAM policies are in JSON format and are relatively easy to understand (by design).
+ - Policies can be seen in the following format:
 
 {
   "Version": "2012-10-17",
@@ -67,31 +67,31 @@ Policies can be seen in the following format:
   ]
 }
 
-The above example policy is for denying access to Amazon S3 resources outside your account except AWS Data Exchange.
-AWS policies usually contain the following parameters:
-Resource: This is the specified resource that the policy targets (like a particular S3 bucket or particular EC2 instance).
-The * symbol indicates a so-called "wildcard" (meaning it does not target a particular resource).
-Effect: The effect can either be "Allow" or "Deny" (to allow or deny the specified action).
-Action: The action that is to be targeted in the policy (ex. s3:GetObject)
-Statement: The statement of the policy.
+ - The above example policy is for denying access to Amazon S3 resources outside your account except AWS Data Exchange.
+ - AWS policies usually contain the following parameters:
+ - Resource: This is the specified resource that the policy targets (like a particular S3 bucket or particular EC2 instance).
+ - The * symbol indicates a so-called "wildcard" (meaning it does not target a particular resource).
+ - Effect: The effect can either be "Allow" or "Deny" (to allow or deny the specified action).
+ - Action: The action that is to be targeted in the policy (ex. s3:GetObject)
+ - Statement: The statement of the policy.
 
 --------------------------------------------------------------------------------------------------------------------
 
 IAM Groups
 
-IAM groups are groupings of users that share the same policies.
-IAM policies can be attached to an entire group of people and will apply to said group once attached.
-IAM users can be members of multiple groups at once (ex. user Martiyn can be a part of group "Developers" and "SysAdmins").
-The IAM user will inherit the permissions (or lack there of) that have been applied via IAM policies to the groups.
-IAM groups cannot be a part of other IAM groups, only users can be members of IAM groups.
+ - IAM groups are groupings of users that share the same policies.
+ - IAM policies can be attached to an entire group of people and will apply to said group once attached.
+ - IAM users can be members of multiple groups at once (ex. user Martiyn can be a part of group "Developers" and "SysAdmins").
+ - The IAM user will inherit the permissions (or lack there of) that have been applied via IAM policies to the groups.
+ - IAM groups cannot be a part of other IAM groups, only users can be members of IAM groups.
 
 ---------------------------------------------------------------------------------------------------------------------
 
 IAM Roles
 
-IAM roles are permissions that can be applied to certain AWS resources via IAM Policies.
-The benefit of IAM roles is that they do not require set credentials, which gives them great flexibility.
-Example of an IAM role is a policy, which is attached to a certain AWS resource (like an EC2 instance), granting it permissions to perform certain actions.
-Once the policy is attached to the resource, it can then be configured to allow or deny actions of said resource.
-Example again being an AWS EC2 instance being granted permissions to access the contents of an S3 bucket.
-Once the EC2 instance is terminated, the IAM role is not applied to it anymore and is thus, not used further, creating no further obligations to it.
+ - IAM roles are permissions that can be applied to certain AWS resources via IAM Policies.
+ - The benefit of IAM roles is that they do not require set credentials, which gives them great flexibility.
+ - Example of an IAM role is a policy, which is attached to a certain AWS resource (like an EC2 instance), granting it permissions to perform certain actions.
+ - Once the policy is attached to the resource, it can then be configured to allow or deny actions of said resource.
+ - Example again being an AWS EC2 instance being granted permissions to access the contents of an S3 bucket.
+ - Once the EC2 instance is terminated, the IAM role is not applied to it anymore and is thus, not used further, creating no further obligations to it.
