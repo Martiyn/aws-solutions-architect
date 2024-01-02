@@ -1,60 +1,60 @@
 AWS EC2 Instances
 
-AWS EC2 instances are virtual computing instances that are hosted on AWS servers in different regions and availability zones.
-The EC2 instances can be launched with multiple different Operational Systems including:
-- Windows
-- Linux
-- MacOS
-The OS can be selected when creating the EC2 instance.
-In addition to the OS, when launching an EC2 instance, you can select all the different parameters you will need for it like:
-- RAM
-- CPU
-- Storage space (which can be either the built-in instance store or an attached store like EBS)
-- Firewall rules (via Security groups)
-- Network card (network speed, public IP address)
-- EC2 User script (executable script, which runs on first launch)
+ - AWS EC2 instances are virtual computing instances that are hosted on AWS servers in different regions and availability zones.
+ - The EC2 instances can be launched with multiple different Operational Systems including:
+   1. Windows
+   2. Linux
+   3.MacOS
+ - The OS can be selected when creating the EC2 instance.
+ - In addition to the OS, when launching an EC2 instance, you can select all the different parameters you will need for it like:
+   1. RAM
+   2. CPU
+   3. Storage space (which can be either the built-in instance store or an attached store like EBS)
+   4. Firewall rules (via Security groups)
+   5. Network card (network speed, public IP address)
+   6. EC2 User script (executable script, which runs on first launch)
 
-When launching the EC2 instance, you can select its parameters from a list of such.
-Example of an EC2 instance selection:
+ - When launching the EC2 instance, you can select its parameters from a list of such.
+ - Example of an EC2 instance selection:
 
-m5.2xlarge
+   1. m5.2xlarge
 
-The above can be translated as the following:
+ - The above can be translated as the following:
 
-m - instance class
-5 - instance generation
-2xlarge - size within the instance class
+   1. m - instance class
+   2. 5 - instance generation
+   3. 2xlarge - size within the instance class
 
-The different instance types can vary depending on the workload that would need to be executed.
-For workloads that require powerful computing capabilities, a Compute Optimized instance would be best.
-For workloads that require fast performance for workloads that process large data sets in memory, a Memory Optimized instance would be best.
-For workloads that require read and write access to large data sets on the local storage, a Storage Optimized instance would be best.
+ - The different instance types can vary depending on the workload that would need to be executed.
+ - For workloads that require powerful computing capabilities, a Compute Optimized instance would be best.
+ - For workloads that require fast performance for workloads that process large data sets in memory, a Memory Optimized instance would be best.
+ - For workloads that require read and write access to large data sets on the local storage, a Storage Optimized instance would be best.
 
 -------------------------------------------------------------------------------------------------------------------
 
 Connecting to EC2 instances via SSH.
 
-In order to be able to use the SSH utility to connect to an EC2 instance, when creating the instance, you must create a Key pair (login).
-When creating the Key pair, it will generate a .pem file, which is then used to authenticate your local shell against the EC2 instance.
-Depending on the OS that your machine is running, there are multiple different ways to connect to the EC2 instance via SSH.
+ - In order to be able to use the SSH utility to connect to an EC2 instance, when creating the instance, you must create a Key pair (login).
+ - When creating the Key pair, it will generate a .pem file, which is then used to authenticate your local shell against the EC2 instance.
+ - Depending on the OS that your machine is running, there are multiple different ways to connect to the EC2 instance via SSH.
 
-On Linux or MacOS, when you open a terminal, you must type in the following command:
-- ssh -i EC2Tutorial.pem ec2-user@3.250.26.200
-In the above command example "EC2Tutorial.pem" is the demonstration Key pair file for authentication.
-"ec2-user" is the default user that is created on your EC2 instance when it is launched.
-"3.250.26.200" is the public IP of the EC2 instance.
-The above may throw an error that the Key pair file is unprotected.
-To avoid this, the following command must be typed in:
-- chmod 0400 EC2Tutorial.pem
-The above command will protect the EC2Tutorial.pem file.
+ - On Linux or MacOS, when you open a terminal, you must type in the following command:
+    - ssh -i EC2Tutorial.pem ec2-user@3.250.26.200
+ - In the above command example "EC2Tutorial.pem" is the demonstration Key pair file for authentication.
+ - "ec2-user" is the default user that is created on your EC2 instance when it is launched.
+ - "3.250.26.200" is the public IP of the EC2 instance.
+ - The above may throw an error that the Key pair file is unprotected.
+ - To avoid this, the following command must be typed in:
+     chmod 0400 EC2Tutorial.pem
+ - The above command will protect the EC2Tutorial.pem file.
 
-On Windows <10, PuTTY must be used.
-On Windows 10 or above, you can use powershell to connect to the instance.
-The following command must be input:
-- ssh -i .\EC2Tutorial.pem ec2-user@3.250.26.200
-NOTE: It is very important that you are in the directory that contains the "EC2Tutorial.pem" file.
+ - On Windows <10, PuTTY must be used.
+ - On Windows 10 or above, you can use powershell to connect to the instance.
+ - The following command must be input:
+     - ssh -i .\EC2Tutorial.pem ec2-user@3.250.26.200
+ - NOTE: It is very important that you are in the directory that contains the "EC2Tutorial.pem" file.
 
-IMPORTANT: The easiest way to connect to an EC2 instance is via EC2 Instance connect.
-This does not require an SSH key and happens within the browser (separate tab).
+ - IMPORTANT: The easiest way to connect to an EC2 instance is via EC2 Instance connect.
+ - This does not require an SSH key and happens within the browser (separate tab).
 -------------------------------------------------------------------------------------------------------------------
 
