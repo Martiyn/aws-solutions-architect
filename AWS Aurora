@@ -1,0 +1,47 @@
+AWS Aurora
+
+ - AWS Aurora is a proprietary technology from AWS (not open sourced).
+ - Postgres and MySQL are bot supported as Aurora DB (meaning that they work with the same drivers).
+ - Aurora is AWS Cloud optimized, meaning that it has much faster performance than MySQL on RDS (5x faster) and Postgres on RDS (3x faster).
+ - Aurora storage automatically grows incrementally by 10 GB, up to 128 TB.
+ - Aurora can have up to 15 read replicas and the replication process is much faster than for MySQL (sub 10ms replica lag).
+ - Failover for Aurora is instantaneous, as it is cloud native (has very high availability).
+ - Aurora costs about 20% more than RDS but is much more efficient.
+ - Aurora keeps 6 copies across 3 AZ:
+   1. 4 copies out of 6 are needed for writes
+   2. 3 copies out of 6 are needed for reads
+   3. It has self-healing with P2P replication (whenever data gets corrupted, it gets repaired automatically)
+   4. Storage is striped across hundreds of volumes
+ - Only one Aurora instance takes writes (Master).
+ - If the Master cannot take the writes, there is an immediate automatic failover (less than 30s).
+ - There can be up to 15 read replicas to serve the reads (reads are not limited to one instance like the writes).
+ - Cross region replication is supported.
+ - The writer uses a "Writer endpoint", which points to the Master even in cases of failover (this is so the client is always directed to the proper instance).
+ - The reader uses a "Reader endpoint", which points to all the reads (up to 15) and load balances between the read replicas.
+ - Aurora has a feature called "Backtrack", which restores data to any point in time without using backups.
+ - Custom endpoints can be created for Aurora reads (this is for the purpose of targeting specific read instances ex. target a read request to a more powerful instance).
+ - When you define and use a custom endpoint, the default read endpoints stop being used (they are not lost or deleted however).
+ - Many custom endpoints can be defined in order to create separate subsets of the Aurora reads.
+ - Aurora also features a serverless option that:
+   1. Provides automated database instantiation and autoscaling based on actual usage
+   2. Is good for infrequent, intermittent or unpredictable workloads
+   3. Does not require capacity planning
+   4. Is pay per second of usage (can be more cost effective at times)
+ - Aurora has a Global Database feature that:
+   1. Has one primary region (read / write)
+   2. Can have up to 5 secondary (read-only) regions
+   3. Can have up to 16 Read Replicas per secondary region
+   4. Decreases latency
+   5. Promoting another region (for disaster recovery) has an RTO of < 1 minute
+   6. Cross-region replication takes less than a second
+ - Aurora can be integrated with Machine Learning, which:
+   1. Enables you to add ML-based predictions to your apps via SQL
+   2. Is simple, optimized and secure integration between Aurora and AWS ML services
+   3. Supports ML services Amazon SageMaker (use with any ML model) and Amazon Comprehend (for sentiment analysis)
+   4. Requires no ML experience is required for integration with ML
+   5. Use cases are:
+      - Fraud detection
+      - Ads targeting
+      - Sentiment analysis
+      - Product recommendations
+ 
