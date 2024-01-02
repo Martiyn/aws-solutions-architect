@@ -1,9 +1,9 @@
 AWS EC2 Instance Store
 
-EC2 Instance Store is a hardware attached to the physical hardware of the EC2 instance.
-Instance store does not persist once the instance is terminated (Ephemeral).
-Taking the above into consideration, the instance store has the following attributes:
-1. Absolutely no latency, as it is a physical hardware drive attached to the instance, rather then a network one like EBS.
-2. All storage is lost upon termination of the instance, so backing up the data is the responsibility of the user.
-3. In case of failure, all data is lost.
-4. The instance size attrinute determines the size of the store, and consequently, the number of IOPS that can be run.
+ - EC2 Instance Store is a hardware attached to the physical hardware of the EC2 instance.
+ - Instance store does not persist once the instance is terminated (Ephemeral).
+ - Taking the above into consideration, the instance store has the following attributes:
+   1. Absolutely no latency, as it is a physical hardware drive attached to the instance, rather then a network one like EBS.
+   2. All storage is lost upon termination of the instance, so backing up the data is the responsibility of the user.
+   3. In case of failure, all data is lost.
+   4. The instance size attrinute determines the size of the store, and consequently, the number of IOPS that can be run.
