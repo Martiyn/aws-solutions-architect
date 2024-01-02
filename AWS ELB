@@ -1,26 +1,26 @@
 AWS ELB (Elastic load balancing)
 
-Load balancers are servers that control incoming traffic to other servers (downstream).
-Load balancers have the following characteristics:
-1. They spread the incoming load onto the AWS resources that are available (ex. EC2 instances).
-2. They provide a single point of contact to your application (DNS).
-3. They seemlessly handle failures of downstream instances.
-4. They provide SSL termination (HTTPS) to your websites.
-5. They have high availability across zones.
-6. They can enforce stickiness with cookies.
-7. They are able to separate public traffic from private traffic.
-8. They have the ability to perform health checks:
-   - Health checks are done on a port and route
-   - Health checks determine whether a resource is healthy and able to respond to requests (ex. EC2 instances)
-   - If health check response is other than 200, resource is deemed as unhealthy
+ - Load balancers are servers that control incoming traffic to other servers (downstream).
+ - Load balancers have the following characteristics:
+    1. They spread the incoming load onto the AWS resources that are available (ex. EC2 instances).
+    2. They provide a single point of contact to your application (DNS).
+    3. They seemlessly handle failures of downstream instances.
+    4. They provide SSL termination (HTTPS) to your websites.
+    5. They have high availability across zones.
+    6. They can enforce stickiness with cookies.
+    7. They are able to separate public traffic from private traffic.
+    8. They have the ability to perform health checks:
+     - Health checks are done on a port and route
+     - Health checks determine whether a resource is healthy and able to respond to requests (ex. EC2 instances)
+     - If health check response is other than 200, resource is deemed as unhealthy
 
-Load balancer types are the following:
-1. Application Load Balancer:
-   - HTTP, HTTPS, Websocket
-2. Network Load Balancer:
-   - TCP, TLS (secure TCP), UDP
-3. Gateway Load Balancer:
-   - IP Protocol
+ - Load balancer types are the following:
+    1. Application Load Balancer:
+      - HTTP, HTTPS, Websocket
+    2. Network Load Balancer:
+      - TCP, TLS (secure TCP), UDP
+    3. Gateway Load Balancer:
+      - IP Protocol
 
 !!IPORTANT:
  - Load Balancer security groups can be linked to the security groups of EC2 instances (or other resources).
@@ -33,45 +33,45 @@ Load balancer types are the following:
 
 Application Load Balancer (ALB)
 
-The ALB is layer 7 (HTTP)
-ALB can balance the load to multiple HTTP applications across multiple machines (target groups).
-ALB can balance the load of multiple applications on one machine (ex: containers).
-ALB supports HTTP/2 and WebSocket
-ALB supports redirects (ex: from HTTP to HTTPS)
-ALB can route to different target groups:
- - Routing via path in the URL (ex: example.com/users, example.com/posts).
- - Routing via hostname in the URL (ex: first.example.com, second.example.com).
- - Routing via URL query parameters (ex: example.com/users?id=123&order=false).
-ALB is perfect when using micro services or container based apps (ex: Docker, AWS ECS).
-ALB has a port mapping feature to redirect to a dynamic port in ECS.
-ALB target groups can be:
- - EC2 instances (which can be managed by an autoscaling group) HTTP.
- - ECS tasks (managed by ECS) HTTP.
- - Lambda functions (HTTP requests translated into a JSON event).
- - IP addresses (private).
-ALB can route to multiple target groups concurrently.
-ALB health checks are at the target group level.
-ALB has a fixed hostname (XXX.region.elb.amazonaws.com).
-Application servers (ex: EC2 instances) do not see the client IP directly (due to the fact that they are communicating with the ALB).
-ALB forwards the client IP with the following header: X-Forwarded-For.
-ALB forwards the port with the following header: X-Forwarded-Port
+ - The ALB is layer 7 (HTTP)
+ - ALB can balance the load to multiple HTTP applications across multiple machines (target groups).
+ - ALB can balance the load of multiple applications on one machine (ex: containers).
+ - ALB supports HTTP/2 and WebSocket
+ - ALB supports redirects (ex: from HTTP to HTTPS)
+ - ALB can route to different target groups:
+    1. Routing via path in the URL (ex: example.com/users, example.com/posts).
+    2. Routing via hostname in the URL (ex: first.example.com, second.example.com).
+    3. Routing via URL query parameters (ex: example.com/users?id=123&order=false).
+ - ALB is perfect when using micro services or container based apps (ex: Docker, AWS ECS).
+ - ALB has a port mapping feature to redirect to a dynamic port in ECS.
+ - ALB target groups can be:
+    1. EC2 instances (which can be managed by an autoscaling group) HTTP.
+    2. ECS tasks (managed by ECS) HTTP.
+    3. Lambda functions (HTTP requests translated into a JSON event).
+    4. IP addresses (private).
+ - ALB can route to multiple target groups concurrently.
+ - ALB health checks are at the target group level.
+ - ALB has a fixed hostname (XXX.region.elb.amazonaws.com).
+ - Application servers (ex: EC2 instances) do not see the client IP directly (due to the fact that they are communicating with the ALB).
+ - ALB forwards the client IP with the following header: X-Forwarded-For.
+ - ALB forwards the port with the following header: X-Forwarded-Port
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
 Network Load Balancer (NLB)
 
-NLB is layer 4 (TCP/UDP).
-NLB is optimized to handle millions of requests per second.
-NLB has much less latency time compared to ALB (100ms vs 400ms)
-NLB has one static IP per AZ.
-NLB supports assigning elastic IP (useful for whitelisting a specific IP).
-NLB is used for extreme performance with traffic (UDP & TCP).
-NLB is not included in free tier.
-NLB target groups can be:
- - EC2 instances
- - IP addresses (private)
- - Application Load Balancers
- - Health checks support TCP, HTTP & HTTPS
+ - NLB is layer 4 (TCP/UDP).
+ - NLB is optimized to handle millions of requests per second.
+ - NLB has much less latency time compared to ALB (100ms vs 400ms)
+ - NLB has one static IP per AZ.
+ - NLB supports assigning elastic IP (useful for whitelisting a specific IP).
+ - NLB is used for extreme performance with traffic (UDP & TCP).
+ - NLB is not included in free tier.
+ - NLB target groups can be:
+    1. EC2 instances
+    2. IP addresses (private)
+    3. Application Load Balancers
+    4. Health checks support TCP, HTTP & HTTPS
 
 --------------------------------------------------------------------------------------------------------------------------------------------
 
