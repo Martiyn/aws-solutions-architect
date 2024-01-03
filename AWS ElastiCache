@@ -1,0 +1,28 @@
+AWS ElastiCache
+
+ - ElastiCache is used to get managed Redis or Memcached (same way that RDS is for managed relational DBs).
+ - Caches are in-memory databases with really high performance and low latency
+ - Helps reduce load off databases for read-intensive workloads
+ - Helps make your app stateless
+ - AWS takes care of OS maintenance, patching, optimizations, setup, config., monitoring, failure recovery and backups.
+ - ElastiCache requires heavy application code changes in order to be used (app must be configured to query the cache).
+ - ElastiCache solution architecture can be viewed as the following (DB Cache):
+    1. Application queries ElastiCache, if data is not available in the cache, it is fetched from RDS and stored in the cache.
+    2. Cache must have an invalidation strategy to ensure only the most current data is used
+ - ElastiCache solution architecture can be viewed as the following (User Session Store):
+    1. User logs into the application
+    2. Application writes the session data into ElastiCache
+    3. If the user gets on another app instance, the session data can be fetched from the cache
+ - Elasticache - Redis vs Memcached:
+    1. Redis:
+       - Multi-AZ with Auto-Failover
+       - Read Replicas to scale reads and have high availability
+       - Data durability using AOF persistence
+       - Backup & restore features
+       - Supports sets and sorted sets
+    2. Memcached
+       - Multi-node for partitioning of data (sharding)
+       - No high availability (no replication)
+       - Non-persistent
+       - No backup and restore
+       - Multi-threaded architecture
