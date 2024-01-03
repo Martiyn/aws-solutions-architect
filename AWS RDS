@@ -106,3 +106,14 @@ RDS Security
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+RDS Proxy
+
+ - Fully managed DB proxy for RDS
+ - It allows apps to pool and share DB connections established with the DB
+ - It improves DB efficiency by reducing the stress on DB resources (minimizes open connections)
+ - Serverless, autoscaling and highly available (multi-AZ)
+ - Reduced RDS & Aurora failover time by up to 66%
+ - Supports RDS and Aurora
+ - No code changes required for most apps
+ - Can enforce IAM Authentication for DB, and securely store credentials in AWS Secrets Manager
+ - RDS Proxy is never publicly accessible (must be accessed from VPC)
