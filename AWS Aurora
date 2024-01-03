@@ -44,6 +44,7 @@ AWS Aurora
       - Ads targeting
       - Sentiment analysis
       - Product recommendations
+
  - Aurora has Backups:
     1. Automated backups:
        - 1 to 35 days (cannot be disabled)
@@ -51,6 +52,7 @@ AWS Aurora
     2. Manual DB Snapshots:
        - Manually triggered by the user
        - Retention of backup lasts for as long as you want
+
  - Aurora has the below restore options:
     1. You can restore an Aurora database by using a snapshot or a backup (this creates a new database)
     2. You can restore a MySQL Aurora cluster from S3:
@@ -58,3 +60,11 @@ AWS Aurora
        - Store the backup file on Amazon S3
        - Restore the backup file onto a new Aurora cluster running MySQL
 
+ - Aurora features a DB cloning feature:
+    1. Creates a new Aurora DB Cluster from an existing one
+    2. It is faster than snapshot & restore
+    3. It uses a copy-on-write protocol
+       - Initially, the new DB cluster uses the same data volume as the original
+       - When updates are made to the new DB cluster data, then additional storage is allocated and data is copied and separated
+    4. It is very fast and cost-effective
+    5. Extremely useful when creating a "staging" DB from a "production" DB without impacting the production DB
