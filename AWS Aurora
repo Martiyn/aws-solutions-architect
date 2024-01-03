@@ -68,3 +68,14 @@ AWS Aurora
        - When updates are made to the new DB cluster data, then additional storage is allocated and data is copied and separated
     4. It is very fast and cost-effective
     5. Extremely useful when creating a "staging" DB from a "production" DB without impacting the production DB
+
+ - Aurora security:
+    1. Features at-rest encryption:
+       - Database master & replicas encryption using AWS KMS - must be defined at launch time
+       - If the master is not encrypted, the read replicas cannot be encrypted
+       - To encrypt an unencrypted DB, you must go through a DB snapshot and restore it as encrypted.
+    2. In-flight encryption (TLS-ready by default, use the AWS TLS root certs. client-side)
+    3. IAM Authentication (IAM roles to connect to your DB instead of username/pw)
+    4. Security Groups (control network access to your RDS / Aurora DB)
+    5. No SSH available
+    6. Audit logs can be enabled and sent to CloudWatch for longer retention
