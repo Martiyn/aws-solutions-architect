@@ -82,4 +82,9 @@ RDS Backups
  - Manual DB snapshots
     1. Manually triggered by the user
     2. Retention backup for as long as you want
-   
+
+ - You can restore an RDS backup or snapshot and create a new DB from it
+ - Restoring a MySQL DB from S3:
+    1. Create a backup of your on-premises DB
+    2. Store the backup on Amazon S3
+    3. Restore backup onto a new RDS instance running MySQL
