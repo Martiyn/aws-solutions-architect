@@ -26,3 +26,23 @@ AWS ElastiCache
        - Non-persistent
        - No backup and restore
        - Multi-threaded architecture
+
+ - ElastiCache has security features:
+    1. Supports IAM Auth (Redis only)
+    2. IAM policies on ElastiCache are only used for AWS API-level security
+    3. Redis AUTH:
+       - You can set a "pw/token" when creating the Redis cluster
+       - This is an extra level of security for your cache
+       - Support SSL in-flight encryption
+    4. Memcached supports SASL-based auth
+
+ - ElastiCache data loading patterns:
+    1. Lazy loading (all the read data is cached, data can become stale in cache)
+    2. Write through (Add or update data in the cache when written to DB)
+    3. Session store (store temporary session data in a cache)
+
+ - Use cases for Redis are:
+    1. Gaming leaderbords (computationally complex)
+    2. Redis sorted sets guarantee both uniqueness and element ordering
+    3. Each time a new element is added, it is ranked in real time, then added in correct order
+
