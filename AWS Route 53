@@ -72,4 +72,15 @@ Amazon Route 53
        - Can't create a CNAME record for the top node of a DNS namespace (Zone Apex)
        - Example of the above: you can't create for example.com, but you can create for www.example.com
     4. NS - Name servers for the Hosted Zone (Control how traffic is routed for a domain)
-       
+
+ - Route 53 has Hosted Zones
+ - Hosted zones are a container for records that define how to route traffic to a domain and its subdomains
+ - There are two types of hosted zones:
+    1. Public hosted zones - contains records that specify how to route traffic on the internet (public domain names): e.g., application.mypublicdomain.com
+    2. Private hosted zones - contains records that specify how you route traffic within one or more VPCs (private domain names): e.g., application.company.internal
+ - You pay $0.50 per month per hosted zone (adds up to about $12.00 per year)
+ - Public vs Private hosted zones:
+    1. Public hosted zones:
+       - Can answer queries from public clients
+    2. Private hosted zones:
+       - Can answer queries from within your VPC (private resources)
