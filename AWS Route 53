@@ -26,3 +26,19 @@ What is DNS
  - "api.www.example.com" is called the Fully qualified domain name (FQDN)
  - "http" is called the protocol
  - "http://api.www.example.com" is called the URL
+
+ - How DNS works:
+
+ Web Browser --> Local DNS Server --> Root DNS Server --> Local DNS Server --> TLD DNS Server --> Local DNS Server --> SLD DNS Server --> Local DNS Server --> Web Browser --> Web Server
+
+     1. The web browser makes a query to the local DNS server (managed by your company or ISP)
+     2. The local DNS server makes a query to the root DNS server (managed by ICANN)
+     3. The root DNS server returns a response to the local DNS server
+     4. The local DNS server then queries the TLD DNS server (managed by IANA)
+     5. The TLD DNS server returns a response to the local DNS server
+     6. The local DNS server then queries the SLD DNS server (managed by a domain registrar)
+     7. The SLD DNS server returns a response to the local DNS server
+     8. The local DNS server returns the IP address of the URL to the browser
+     9. The browser uses the IP address to access the web server (example.com)
+     
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
