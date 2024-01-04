@@ -42,3 +42,34 @@ What is DNS
      9. The browser uses the IP address to access the web server (example.com)
      
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Route 53
+
+ - Route 53 is a highly available, scalable, fully managed and Authoritative DNS
+    1. Authoritative = the customer is able to update the DNS records
+
+ - Route 53 is also a Domain Registrar
+ - Route 53 has the ability to check the health of network resources
+ - Route 53 is the only AWS service, which provides 100% availability SLA
+ - The name Route 53 is a reference to the traditional DNS port used by DNS services
+ - Route 53 records allow you to decide how you want to route traffic for a domain
+ - Each record contains the following:
+    1. Domain/subdomain name - e.g., example.com
+    2. Record type - e.g., A or AAAA
+    3. Value - e.g., 12.34.56.78
+    4. Routing policy - how Route 53 responds to queries
+    5. TTL (time to live) - amount of time the record cached at DNS resolvers
+
+ - Route 53 supports the following DNS record types:
+    1. A / AAAA / CNAME / NS (must know)
+    2. CAA / DS / MX / NAPTR / PTR / SOA / TXT / SPF / SRV (advanced)
+
+ - Record types:
+    1. A - maps a hostname to IPv4
+    2. AAAA - maps a hostname to IPv6
+    3. CNAME - maps a hostname to another hostname:
+       - The target is a domain name, which must have an A or AAAA record
+       - Can't create a CNAME record for the top node of a DNS namespace (Zone Apex)
+       - Example of the above: you can't create for example.com, but you can create for www.example.com
+    4. NS - Name servers for the Hosted Zone (Control how traffic is routed for a domain)
+       
