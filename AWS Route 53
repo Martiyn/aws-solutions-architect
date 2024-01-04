@@ -84,3 +84,17 @@ Amazon Route 53
        - Can answer queries from public clients
     2. Private hosted zones:
        - Can answer queries from within your VPC (private resources)
+
+ - Records TTL (Time to Live) is mandatory for each DNS record except for Alias records
+ - High TTL - e.g., 24hr
+    1. Less traffic on Route 53
+    2. Creates the possibility for outdated records
+ - Low TTL - e.g., 60 sec
+    1. More traffic on Route 53 (higher cost)
+    2. Records are outdated for less time
+    3. Easy to change records
+ - TTL of the record is cached in the client for the specified amount of time
+ - If there is a low TTL, then any updates of data are reflected when its duration runs out
+ - If there is high TTL, the updates will take longer to reflect
+ - Example of such changes can be the underlying IP address behind the hostname
+
