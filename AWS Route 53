@@ -1,0 +1,28 @@
+What is DNS
+
+ - Domain Name System, which translates the human friendly hostnames into the machine IP addresses
+ - www.google.com => 172.217.18.36
+ - DNS is the backbone of the internet
+ - DNS uses hierarchical naming structure
+    1. .com
+    2. example.com
+    3. www.example.com
+    4. api.example.com
+
+ - Domain Registrar (domain registry services): Amazon Route 53, GoDaddy, ...
+ - DNS Records: A, AAAA, CNAME, NS, ...
+ - Zone File: contains DNS records (matches hostnames to IP addresses)
+ - Name server: resolves DNS queries (Authorative or Non-Authorative)
+ - Top level domain (TLD): .com, .us, .gov, .org, ...
+ - Second level domain (SLD): google.com, amazon.com, ...
+ - Example URL for demonstration purposes:
+
+                http://api.www.example.com
+
+ - "." is called the root of the URL
+ - ".com." is called the top level domain (TLD)
+ - ".example.com." is called the second level domain (SLD)
+ - ".www.example.com." is called the Sub domain
+ - "api.www.example.com" is called the Fully qualified domain name (FQDN)
+ - "http" is called the protocol
+ - "http://api.www.example.com" is called the URL
