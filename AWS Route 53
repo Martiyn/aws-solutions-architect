@@ -218,4 +218,16 @@ Amazon Route 53
     1. Route 53 health checkers are outside the VPC
     2. They can't access private endpoints (private VPC or on-premises resource)
     3. You can create a CloudWatch metric and associate a CloudWatch alarm, then create a health check that checks the alarm itself
- - 
+
+
+ - IP based routing:
+ - Routing is based on a client's IP address
+ - You provide a list of CIDRs for your clients and the corresponding endpoints/locations
+ - Use cases can be:
+    1. Optimize performance
+    2. Reduce network costs
+ - Example:
+    1. Route end users from a particular ISP to a specific endpoint
+    2. If you have two IP ranges like 203.0.113.0/24 (first) and 200.5.4.0/24 (second):
+       - If an IP from the first range like 203.0.113.56 makes a request, it is routed to a particular resource
+       - If an IP from the second range like 200.5.4.49 makes a request, it is routed to a another resource
