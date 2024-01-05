@@ -152,6 +152,10 @@ Amazon Route 53
        - If all records have weight of 0, then all records will be returned equally
        - The percentage of traffic can be set to e.g.: 70% -> resource 1, 20% -> resource 2, 10% resource 3
     3. Failover
+       - The failover must have two specified instances
+       - One instance is the primary one
+       - Second instance is the secondary disaster recovery one
+       - When the primary instance does not pass the health check, DNS requests get sent to the secondary one
     4. Latency based
        - Redirect to the resource that has the least latency close to us
        - Extremely helpful when latency for users is a priority
@@ -159,8 +163,26 @@ Amazon Route 53
        - Germany users may be directed to the US (if that is the lowest latency)
        - Can be associated with Health checks (has failover capability)
     5. Geolocation
+       - Different from latency-based
+       - This routing is based on the user's location
+       - You can specify a location by continent, country or by US state
+       - You should create a default record in case there's no match for the location
+       - Use cases include:
+          1. website localization
+          2. restriction of content distribution
+          3. load balancing
+       - Can be associated with health checks
     6. Multi-Value Answer
     7. Geoproximity (using Route 53 Traffic Flow feature)
+       - Route traffic to your resources based on the geographic location of users and resources
+       - Ability to shift more traffic to resources based on the defined bias
+       - To change the size of the grographic region, specify bias vailues:
+          1. To expand (1 to 99) - more traffic to the resource
+          2. To shrink (-1 to -99) - less traffic to the resource
+       - Resources can be:
+          1. AWS resources (specify AWS region)
+          2. Non-AWS resources (specify latitude and longitude)
+       - You must use Route 53 Traffic Flow (advanced) to use this feature
 
  - Route 53 Health checks
  - HTTP health checks are used mainly for public resources
@@ -196,3 +218,4 @@ Amazon Route 53
     1. Route 53 health checkers are outside the VPC
     2. They can't access private endpoints (private VPC or on-premises resource)
     3. You can create a CloudWatch metric and associate a CloudWatch alarm, then create a health check that checks the alarm itself
+ - 
