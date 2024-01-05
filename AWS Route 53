@@ -126,3 +126,35 @@ Amazon Route 53
           7. Global Accelerator accelerator
           8. Route 53 record in the same hosted zone
           9. CANNOT set an Alias record for an EC2 DNS name
+
+ - Route 53 Routing policies:
+ - The routing policies define how Route 53 responds to DNS queries
+ - IMPORTANT: Do not get confused by the word "Routing":
+    1. This is not the same as Load Balancer routing, which routes traffic
+    2. DNS does not route any traffic, it only responds to DNS queries
+ - Route 53 supports the following Routing Policies:
+    1. Simple
+       - Typically, route traffic to single resource
+       - Can specify multiple values in the same record
+       - If multiple values are returned, a random one is chosen by the client
+       - When Alias is enabled, specify only one AWS resource
+       - Cannot be associated with health checks
+    2. Weighted
+       - Control the % of all requests that go to each specific resource
+       - Assign each record a relative weight:
+          1. traffic (%) = Weight for a specific record ÷ Sum of all the weights for all records
+       - DNS records must have the same name and type
+       - Can be associated with Health checks
+       - Use cases include:
+          1. Load Balancing between regions
+          2. Testing new application versions
+       - Assign a weight of 0 to a record to stop sending traffic to a resource
+       - If all records have weight of 0, then all records will be returned equally
+       - The percentage of traffic can be set to e.g.: 70% -> resource 1, 20% -> resource 2, 10% resource 3
+    3. Failover
+    4. Latency based
+    5. Geolocation
+    6. Multi-Value Answer
+    7. Geoproximity (using Route 53 Traffic Flow feature)
+
+ - 
