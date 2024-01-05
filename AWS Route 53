@@ -98,3 +98,31 @@ Amazon Route 53
  - If there is high TTL, the updates will take longer to reflect
  - Example of such changes can be the underlying IP address behind the hostname
 
+ - CNAME vs. Alias
+ - AWS Resources (Load Balancer, CloudFront, ...) expose an AWS hostname:
+ - "lb1-1234.us-east-2.elb.amazonaws.com" and you want to make it "myapp.mydomain.com"
+ - There are two options to make the above happen:
+    1. CNAME:
+       - Points to a hostname to any other hostname (app.mydomain.com => example.anything.com)
+       - ONLY FOR NON ROOT DOMAIN (aka.something.mydomain.com)
+    2. Alias (Specific to Route 53):
+       - Points a hostname to an AWS resource (app.mydomain.com => example.amazonaws.com)
+       - WORKS FOR ROOT DOMAIN AND NON ROOT DOMAIN (aka.mydomain.com)
+       - Free of charge
+       - Native health check
+       - Maps a hostname to an AWS resource
+       - An extension to DNS functionality
+       - Automatically recognizez changes in the resource's IP addresses
+       - Unlike CNAME, it can be used for the top node of a DNS namespace (Zone apex), e.g.: "example.com"
+       - Alias record is always of type A or AAAA for AWS resources (IPv4 / IPv6)
+       - You cannot set TTL
+       - Targets are:
+          1. Elastic Load Balancers
+          2. CloudFront Distributions
+          3. API Gateway
+          4. Elastic Beanstalk environments
+          5. S3 Websites
+          6. VPN Interface Endpoints
+          7. Global Accelerator accelerator
+          8. Route 53 record in the same hosted zone
+          9. CANNOT set an Alias record for an EC2 DNS name
