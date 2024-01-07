@@ -75,3 +75,40 @@ Amazon S3
     1. http://bucket-name.s3-website.aws-region.amazonaws.com
  - The bucket can serve static HTML website pages, which can be integrated with AWS Lambda for a serverless approach
  - If public reads are not enabled, when accessing the bucket website URL, it will throw a 403 forbidden error
+
+
+ - S3 versioning:
+ - You can version your files in Amazon S3
+ - It must be enabled at the bucket level
+ - Same key overwrite will change the "version": 1, 2, 3, ...
+ - Best practice is to version the buckets because:
+    1. Versioning protects against unintended deletes
+    2. It is easy to roll back to a previous version
+
+ - NOTES:
+    1. Any file that is not versioned prior to enabling versioning will have version "null"
+    2. Suspending versioning does not delete the previous versions
+    3. When a file/version gets deleted, it is only marked as deleted (delete marker can be deleted to resore the file)
+
+
+ - S3 replication:
+ - There are two types of replication:
+    1. Cross-region replication (CRR)
+    2. Same-region replication (SRR)
+ - Versioning must be enabled in both source and destination buckets
+ - Buckets can be in different AWS accounts
+ - Copying is asynchronous
+ - Proper IAM permissions must be given to S3
+ - Use cases can be the following:
+    1. CRR - compliance, lower latency access, replication across accounts
+    2. SRR - log aggregation, live replication between prod and test accounts
+ - NOTES:
+    1. After replication is enabled, only new objects are replicated
+    2. Optionally, you can replicate existing objects using S3 batch replication
+       - replicate existing objects and objects that failed replication
+    3. For DELETE operaions
+       - Can replicate delete markers from source to target (optional setting)
+       - Deletions with a version ID cannot be replicated (to avoid malicious deletes)
+    4. There is no "chaining of replication""
+       - If bucket 1 has replication into bucket 2, which has replication into bucket 3
+       - Objects created in bucket 1 are not replicated to bucket 3
