@@ -1,0 +1,43 @@
+Amazon S3
+
+ - Amazon S3 is one of the main building blocks of AWS
+ - Amazon S3 is advertised as "infinitely scaling" storage
+ - Many websites use Amazon S3 as their backbone
+ - Many AWS services use Amazon S3 as an integration
+ - Use cases include:
+    1. Backup and storage
+    2. Disaster recovery
+    3. Archive
+    4. Hybrid cloud storage (on-prem and cloud)
+    5. Application hosting
+    6. Data lakes & big data analytics
+    7. Software delivery
+    8. Static website
+ - S3 stores files in "buckets", which can be seen as top-level directories
+ - S3 files are viewed as "objects"
+ - Buckets must have a globally unique name (across all regions and all accounts)
+ - Buckets are defined at the region level
+ - S3 looks like a global service but buckets are created in a region
+ - Naming convention for buckets:
+    1. No uppercase, No underscore
+    2. 3-63 characters long
+    3. Must not be an IP
+    4. Must start with lowercase letter or number
+    5. Must not start with the prefix xn--
+    6. Must not end with the suffix -s3alias
+
+ - Amazon S3 objects:
+ - Objects (files) have a key
+ - The key of the object is the full path:
+    1. s3://my-bucket/my_file.txt (where my_file.txt is the key)
+    2. If you want to nest the file in a path, the path becomes the key e.g.
+       - s3://my-bucket/my_folder1/another_folder/my_file.txt (where my_folder1/another_folder/my_file.txt is the key)
+ - The key is composed of a prefix + object name (per the above, my_folder1/another_folder/ is the prefix)
+ - Amazon S3 does not have a concept of "directories" (everything is defined as keys per the above)
+ - Keys are very long names that contain slashes ("/"), which resemble paths
+ - Object values are the content of the body:
+    1. Max object size is 5TB (5000GB)
+    2. If uploading more than 5GB, "multi-part upload" must be used
+ - Objects can have metadata (list of text key / value pairs - system or user metadata)
+ - Objects can have tags (Unicode key / value pair - up to 10) - useful for security / lifecycle
+ - Objects can have a Version ID (if versioning is enabled)
