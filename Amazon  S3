@@ -66,3 +66,12 @@ Amazon S3
     2. There is no explicit DENY
  - Encryption: encrypt objects in Amazon S3 using encryption keys
  - There is a bucket setting for blocking public access (to prevent data leaks)
+
+
+ - S3 static website hosting:
+ - S3 can host static websites and have them accessible on the Internet
+ - The website URL will be (depending on the region):
+    1. http://bucket-name.s3-website-aws-region.amazonaws.com
+    1. http://bucket-name.s3-website.aws-region.amazonaws.com
+ - The bucket can serve static HTML website pages, which can be integrated with AWS Lambda for a serverless approach
+ - If public reads are not enabled, when accessing the bucket website URL, it will throw a 403 forbidden error
