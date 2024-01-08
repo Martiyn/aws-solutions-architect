@@ -302,3 +302,24 @@ Amazon S3
  - This provides better resilience in case of failures
  - Byte-range fetches can be used to speed up downloads (by breaking down the download into parts of bytes)
  - Byte-range fetch can be used to retrieve only partial data (by breaking down the download and retrieving only one part)
+
+
+ - S3 Select & Glacier select:
+ - You can retrieve less data using SQL by performing server-side filtering
+ - Can filter by rows & columns (simple SQL statements)
+ - Less network transfer, less CPU cost client-side
+ - S3 select is up to 400% faster and up to 80% cheaper
+
+
+ - S3 batch operations:
+ - With S3 batch operations, you can perform bulk operations on existing S3 objects with a single request
+ - Example:
+    1. Modify objects metadata and properties in bulk
+    2. Copy objects between S3 buckets
+    3. Encrypt un-encrypted objects
+    4. Modify ACLs, tags
+    5. Restore objects from S3 Glacier
+    6. Invoke Lambda function to perform custom action on each object
+ - A job consists of a list of objects, the action to perform and optional parameters
+ - S3 Batch operations manages retries, tracks progress, sends completion notifications, generates reports
+ - You can use S3 inventory to get object list and use S3 Select to filter your objects
