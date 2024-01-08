@@ -172,3 +172,78 @@ Amazon S3
        - Measures how readily available a service is
        - Varies depending on storage class
        - e.g. S3 standard has 99.99% availability (not available only 53 minutes a year)
+
+
+ - You can move buckets between storage classes
+ - Moving between storage classes is as follows:
+    1. Standard can move to:
+       - Standard IA
+       - Intelligent tiering
+       - One-zone IA
+       - Glacier Instant retrieval
+       - Glacier Flexible retrieval
+       - Glacier Deep archive
+    2. Standard IA can move to:
+       - Intelligent tiering
+       - One-Zone IA
+       - Glacier Instant retrieval
+       - Glacier flexible retrieval
+       - Glacier deep archive
+    3. Intelligent tiering can move to:
+       - One-zone IA
+       - Glacier instant retrieval
+       - Glacier flexible retrieval
+       - Glacier deep archive
+    4. One-zone IA can move to:
+       - Glacier flexible retrieval
+       - Glacier deep archive
+    5. Glacier instant retrieval can move to:
+       - Glacier flexible retrieval
+       - Glacier deep archive
+    6. Glacier flexible retrieval can move to:
+       - Glacier deep archive
+
+ - For infrequently used objects, you can move them to Standard IA
+ - For archive objects that you don't need fast access to, move them to Glacier or Glacier deep archive
+ - Moving objects can be automated using Lifecycle rules
+ - Lifecycle rules can be the following:
+    1. Transition actions:
+       - Configure objects to transition to another storage class
+       - Move objects to Standard IA class 60 days after creation
+       - Move to Glacier for archiving after 6 months
+    2. Expiration actions:
+       - Configure objects to expire (delete) after some time
+       - Access log files can be set to delete after a 365 days
+       - Can be used to delete old versions of files (if versioning is enabled)
+       - Can be used to delete incomplete Multi-part uploads
+
+ - NOTE: Rules can be created for a certain prefix
+ - NOTE: Rules can be created for certain object tags
+
+ - Example scenario for lifecycle rules:
+ - Your application on EC2 creates images thumbnails after profile photos are uploaded
+   to Amazon S3. These thumbnails can be easily recreated, and only need to be kept for 60 days.
+   The source images should be able to be immediately for these 60 days, and afterwards, the user
+   can wait up to 6 hours. How would you design this?:
+
+ - Answers:
+    1. S3 source images can be on Standard, with a lifecycle configuration to transition them to Glacier after 60 days.
+    2. S3 thumbnails can be One-Zone IA, with a lifecycle configuration to expire (delete) them after 60 days.
+
+ - Example Scenario 2:
+ - A rule in your company states that you should be able to recover your deleted S3 objects immediately for 30 days,
+   although this may happen rarely. After this time, and for up to 365 days, deleted objects should be recoverable
+   within 48 hours.
+
+ - Answers:
+    1. Enable S3 versioning in order to have object versions, so that "deleted objects" are in fact hidden by a "delete marker" and can be recovered
+    2. Transition the "noncurrent versions" of the object to Standard IA
+    3. Transition afterwards the "noncurrent versions" to Glacier Deep Archive
+
+ - Storage class Analysis:
+ - Storage class analysis helps you decide when to transition objects to the right storage class
+ - Recommendations for Standard and Standard IA (does NOT work for One-Zone IA or Glacier)
+ - Report is updated daily
+ - 24 to 48 hours to start seeing data analysis
+ - It is a good first step to put together lifecycle rules (or improve them)
+ - Storage class analysis generates .csv reports.
