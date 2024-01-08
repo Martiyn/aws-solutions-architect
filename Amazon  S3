@@ -247,3 +247,30 @@ Amazon S3
  - 24 to 48 hours to start seeing data analysis
  - It is a good first step to put together lifecycle rules (or improve them)
  - Storage class analysis generates .csv reports.
+
+
+ - S3 Requester pays:
+ - In general, bucket owners pay for all Amazon S3 storage and data transfer costs associated with their bucket
+ - With requester pays buckets, the requester pays the cost of the request and the data download from the bucket instead of the bucket owner
+ - Helpful when you want to share large datasets with other accounts
+ - The requester must be authenticated in AWS (cannot be anonymous)
+
+
+ - S3 Event Notifications:
+ - Event notifications can be made for events such as:
+    1. S3:ObjectCreated
+    2. S3:ObjectRemoved
+    3. S3:ObjectRestore
+    4. S3:Replication
+ - You can create as many "S3 events" as desired
+ - S3 event notifications typically deliver events in seconds but can sometimes take a minute or longer
+ - Event notifications require IAM permissions in order to work
+ - An SNS Resource (Access) Policy must be created for the specified service
+ - The S3 service sends data to a certain service (e.g. SNS, SQS), hence the need for the resource access policy
+ - Since S3 sends the notifications to the services, it must have explicit access given by the policy
+
+ - Event notifications with Amazon EventBridge:
+ - Events happen in the bucket -(all events)-> Amazon EventBridge -(rules)-> Over 18 AWS services as destinations
+ - EventBridge gives advanced filtering options with JSON rules (metadata, object size, name, etc..)
+ - Multiple destinations - e.g. Step Functions, Kinesis Streams / Firehose
+ - EventBridge capabilities - Archive, Replay events, Reliable delivery
