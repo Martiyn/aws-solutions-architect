@@ -266,7 +266,7 @@ Amazon S3
  - S3 event notifications typically deliver events in seconds but can sometimes take a minute or longer
  - Event notifications require IAM permissions in order to work
  - An SNS Resource (Access) Policy must be created for the specified service
- - The S3 service sends data to a certain service (e.g. SNS, SQS), hence the need for the resource access policy
+ - The S3 service sends data to a certain service (e.g. SNS, SQS, Lambda), hence the need for the resource access policy
  - Since S3 sends the notifications to the services, it must have explicit access given by the policy
 
  - Event notifications with Amazon EventBridge:
@@ -274,3 +274,31 @@ Amazon S3
  - EventBridge gives advanced filtering options with JSON rules (metadata, object size, name, etc..)
  - Multiple destinations - e.g. Step Functions, Kinesis Streams / Firehose
  - EventBridge capabilities - Archive, Replay events, Reliable delivery
+
+
+ - S3 Baseline performance:
+ - Amazon S3 automatically scales to high request rates, latency 100-200ms
+ - Your application can achieve at least 3,500 PUT/COPY/POST/DELETE requests per second per prefix in a bucket
+ - Your application can achieve at least 5,500 GET/HEAD requests per second per prefix in a bucket
+ - There are no limits to the number of prefixes in a bucket.
+ - Prefix example:
+    1. bucket/folder1/sub1/file
+    2. bucket/folder1/sub2/file
+    3. bucket/folder1/sub3/file
+    4. bucket/folder1/sub4/file
+ - Prefix is everything between bucket and file
+ - If you spread reads across the prefixes evenly, you can achieve 22,000 requests per second for GET and HEAD
+ - To optimize uploads, you can do multi-part uploads across multiple prefixes
+ - Multi-part uploads are recommended for files > 100MB and mandatory for files > 5GB
+ - Multi-part upload parallelizes uploads to speed up transfers (makes the file into small chunks and uploads them in paralel)
+
+ - S3 Transfer acceleration:
+ - Increase the transfer speed by transferring a file to an AWS edge location
+ - Edge locations forward the data to an S3 bucket in the target region
+ - Transfer acceleration is compatible with multi-part upload
+
+ - S3 Byte-range fetches:
+ - You can parallelize GETs by requesting specific byte ranges
+ - This provides better resilience in case of failures
+ - Byte-range fetches can be used to speed up downloads (by breaking down the download into parts of bytes)
+ - Byte-range fetch can be used to retrieve only partial data (by breaking down the download and retrieving only one part)
