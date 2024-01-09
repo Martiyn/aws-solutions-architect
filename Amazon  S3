@@ -371,3 +371,28 @@ Amazon S3
  - Amazon S3 - Force encryption in transit:
  - It works by making an S3 policy with a condition ("aws:SecureTransport": "false")
  - The above condition disallows HTTP requests to be made to the bucket (it allows only HTTPS)
+
+
+ - Amazon S3 Cross-origin resource sharing (CORS):
+ - Origin = scheme (protocol) + host (domain) + port
+ - Example of the above is: https://www.example.com (implied port is 443 for HTTPS, 80 for HTTP)
+ - Web browser based mechanism to allow requests to other origins while visiting the main origin
+ - Same origin example: http://example.com/app1 & http://example.com/app2 (where example.com is the same origin)
+ - Different origins example: http://www.example.com & http://other.example.com (both urls are different)
+ - The requests won't be fulfilled unless the other origin allows for the requests
+ - Requests are allowed via CORS headers (e.g.: Access-Control-Allow-Origin)
+ - CORS headers function per the following:
+    1. Web browser makes a request to a Web server (Origin, e.g. www.origin.com)
+    2. Origin web server returns a response requesting resources from another origin
+    3. Due to browser security, the Web browser will first make a preflight request to the Cross-origin Web server (www.cross-origin.com)
+    4. The request to the cross-origin server is made with the origin www.origin.com to the host www.cross-origin.com
+    5. If the cross-origin server is configured to use CORS, then it will give a response
+    6. Response contains information that it allows the cross origin with the following headers:
+       - Access-Control-Allow-Origin: www.origin.com (allowed origin)
+       - Access-Control-Allow-Methods: GET, PUT, DELETE, POST (allowed methods)
+    7. If the browser accepts the CORS headers, then it will make a true request (not preflight)
+
+ - CORS applies to Amazon S3 in the following way:
+    1. If a client makes a cross-origin request on our S3 bucket, we need to enable the correct CORS headers
+    2. You can allow for a specific origin or for * (all origins)
+ - CORS is a web browser level security tool
