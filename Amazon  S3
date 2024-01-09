@@ -347,9 +347,27 @@ Amazon S3
           9. You can request a quota to increase using the Service Quotas Console
 
        - Server-side encryption with customer-provided keys (SSE-C)
-          1. When you want to manage your own encryption keys
+          1. Server-side encryption using keys fully managed by the customer outside of AWS
+          2. Amazon S3 does NOT store the encryption keys you provide
+          3. HTTPS must be used
+          4. Encryption key must be provided in HTTP headers, for every HTTP request made
 
-    2. Client-side encryption
+    2. Client-side encryption:
        - Encrypt everything client-side and THEN upload it to Amazon S3
+       - Use client libraries such as Amazon S3 client-side encryption library
+       - Clients must encrypt data themselves prior to sending to Amazon S3
+       - Clients must decrypt the data themselves when retrieving Amazon S3
+       - Customer fully manages the keys and encryption cycle
 
- - 
+    3. Encryption in transit (SSL/TLS)
+       - Encryption in flight is also called SSL/TLS
+       - Amazon S3 exposes two endpoints:
+          1. HTTP endpoint - non encrypted
+          2. HTTPS endpoint - encryption in flight
+       - HTTPS is recommended
+       - HTTPS is mandatory for SSE-C
+       - Most clients would use the HTTPS endpoint by default
+
+ - Amazon S3 - Force encryption in transit:
+ - It works by making an S3 policy with a condition ("aws:SecureTransport": "false")
+ - The above condition disallows HTTP requests to be made to the bucket (it allows only HTTPS)
