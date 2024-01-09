@@ -323,3 +323,33 @@ Amazon S3
  - A job consists of a list of objects, the action to perform and optional parameters
  - S3 Batch operations manages retries, tracks progress, sends completion notifications, generates reports
  - You can use S3 inventory to get object list and use S3 Select to filter your objects
+
+
+ - AWS S3 object encryption:
+ - You can encrypt objects in S3 buckets using one of 4 methods:
+    1. Server-Side encryption (SSE)
+       - SSE with amazon S3-managed keys (SSE-S3) - Enabled by default
+          1. Encrypts S3 objects using keys handled, managed, and owned by AWS (you don't have access to this key)
+          2. Object is encrypted server-side
+          3. Security type is AES-256
+          4. Must set header "x-amz-server-side-encryption": "AES256"
+          5. Always enabled by default for new buckets & objects
+
+       - Server-side encryption with KMS keys stored in AWS KMS (SEE-KMS)
+          1. Leverage AWS key management service to manage encryption keys
+          2. KMS advantages: user control + audit key usage using CloudTrail
+          3. Object is encrypted server side
+          4. Must set header "x-amz-server-side-encryption": "aws:kms"
+          5. If you use SSE-KMS, you may be impacted by the limits of KMS
+          6. When you upload: it calls the GenerateDataKey KMS Api
+          7. When you download, it calls the Decrypt KMS API
+          8. Count towards the KMS quota per second (5500, 10000, 30000 req/s based on region)
+          9. You can request a quota to increase using the Service Quotas Console
+
+       - Server-side encryption with customer-provided keys (SSE-C)
+          1. When you want to manage your own encryption keys
+
+    2. Client-side encryption
+       - Encrypt everything client-side and THEN upload it to Amazon S3
+
+ - 
