@@ -396,3 +396,15 @@ Amazon S3
     1. If a client makes a cross-origin request on our S3 bucket, we need to enable the correct CORS headers
     2. You can allow for a specific origin or for * (all origins)
  - CORS is a web browser level security tool
+
+
+ - Amazon S3 - MFA delete:
+ - MFA forces users to generate a code on a device before doing important operations on S3
+ - MFA will be required to:
+    1. Permanently delete an object version
+    2. Suspend versioning on the bucket
+ - MFA won't be required to:
+    1. Enable versioning
+    2. List deleted versions
+ - To use MFA Delete, versioning must be enabled on the bucket
+ - Only the bucket owner (root account) can enable/disable MFA delete
