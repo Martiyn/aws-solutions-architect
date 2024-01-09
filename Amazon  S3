@@ -429,3 +429,31 @@ Amazon S3
     1. Allow only logged-in users to download a premium video from your S3 bucket
     2. Allow an ever-changing list of users to download files by generating URLs dynamically
     3. Temporarily allow a user to upload a file to a precise location in your S3 bucket
+ - Pre-signed URLs provide access even to private buckets
+
+
+ - S3 Glacier vault lock:
+ - Adopt a WORM (write once read many) model
+ - Create a Vault lock policy
+ - Lock the policy for future edits (can no longer be changed or deleted)
+ - Helpful for compliance and data retention
+ - Lock policy on the bucket level
+
+
+ - S3 Object lock (versioning must be enabled):
+ - Adopt a WORM (write once read many) model
+ - Block an object version deletion for a specified amount of time
+ - Lock policy on the objects level (policies can be applied to each object individually)
+ - There are two retention modes:
+    1. Compliance:
+       - Object versions can't be overwritten or deleted by any user, including the root user
+       - Object retention modes can't be changed, and retention periods can't be shortened
+    2. Governance:
+       - Most users can't overwrite or delete an object version or alter its lock settings
+       - Some users have special permissions to change the retention or delete the object
+ - Retention period: protect the object for a fixed period, it can be extended
+ - Legal hold: 
+    1. Protect the object indefinitely, independent from retention period
+    2. Can be freely placed and removed using the s3:PutObjectLegalHold IAM permission
+ 
+ - 
