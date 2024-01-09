@@ -455,5 +455,21 @@ Amazon S3
  - Legal hold: 
     1. Protect the object indefinitely, independent from retention period
     2. Can be freely placed and removed using the s3:PutObjectLegalHold IAM permission
+
+
+ - S3 Access Points:
+ - Access points are policies, which can grant read/write permissions to prefixes
+ - Because of this, the access does not need to be granted to each file behind the prefix individually
+ - Example:
+    1. Policy to grant read/write access to /finance prefix (finance access point) --> /finance/ (prefix)
+    2. Policy to grant read/write access to /sales prefix (sales access point) --> /sales/ (prefix)
+    3. Policy to grant read access to the entire bucket (analytics access point) --> Access to all prefixes
+ - Access points are used to simplify security management for S3 buckets (for scaling purposes)
+ - Each access point has:
+    1. Its own DNS name (internet origin or VPC origin)
+    2. An access point policy (similar to bucket policy) - manage security at scale
+
+ - We can define the access point to be accessible only from within the VPC
+ - You must create a VPC endpoint to access the access point (gateway or interface endpoint)
+ - This VPC endpoint policy must allow access to the target bucket and access point
  
- - 
