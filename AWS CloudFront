@@ -14,6 +14,7 @@ AWS CloudFront
        - Enhanced security with CloudFront Origin Access Control (OAC)
        - OAC is replacing Origin Access Identity (OAI)
        - CloudFront can be used as an ingress (to upload files to S3)
+       - S3 bucket must have a policy configured to allow CloudFront access
     2. Custom Origin (HTTP):
        - Application load balancer
        - EC2 instance
@@ -49,3 +50,27 @@ AWS CloudFront
        - EC2 instances behind the ALB can be private, as the ALB can connect to private resources
        - ALB must be configured to allow the public IP of the Edge locations
        - Configuration works via ALB Security groups (set to allow the IP) 
+
+
+ - CloudFront Geo restriction:
+ - You can restrict who can access your distribution (based on country):
+    1. Allowlist: Allow your users to access content if they're in one of the countries on the approved list
+    2. Blocklist: Prevent your users from accessing content if they're in one of the countries on the banned list
+ - The "country" is determined using a 3rd party Geo-IP database
+ - Use case: Copyright laws to restrict access to content
+
+
+ - CloudFront - Pricing (price classes):
+ - Edge locations are all around the world, thus the cost of data per edge location varies
+ - You can reduce the number of edge locations for cost reduction
+ - Three price classes available:
+    1. Price class All: all regions - best performance
+    2. Price class 200: most regions, but excludes most expensive regions
+    3. Price class 100: only the least expensive regions
+
+
+ - CloudFront - Cache invalidations
+ - In case you update the back-end origin, CloudFront doesn't know about it and will only get refreshed content after expired TTL
+ - You can force an entire or partial cache refresh (bypassing the TTL) by performing a CloudFront invalidation
+ - You can invalidate all files (*) or a particular path (/images/*)
+ - When the files are invalidated, the cache fetches files again
