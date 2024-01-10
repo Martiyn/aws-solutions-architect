@@ -7,6 +7,7 @@ AWS CloudFront
  - DDoS protection (because it is worldwide)
  - Integration with Shield and AWS Web Application Firewall
 
+
  - Cloudfront - Origins:
     1. S3 bucket:
        - For distributing files and caching them at the edge location
@@ -38,4 +39,13 @@ AWS CloudFront
        - Great for dynamic content that needs to be available at low-latency in few regions
 
 
-
+ - CloudFront - ALB or EC2 as an origin:
+    1. EC2:
+       - EC2 must be configured to allow the public IP of the Edge locations
+       - Configuration works via EC2 Security groups (set to allow the IP)
+       - EC2 instance must be public
+    2. ALB:
+       - ALB must be public
+       - EC2 instances behind the ALB can be private, as the ALB can connect to private resources
+       - ALB must be configured to allow the public IP of the Edge locations
+       - Configuration works via ALB Security groups (set to allow the IP) 
