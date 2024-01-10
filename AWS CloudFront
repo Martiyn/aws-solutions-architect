@@ -74,3 +74,49 @@ AWS CloudFront
  - You can force an entire or partial cache refresh (bypassing the TTL) by performing a CloudFront invalidation
  - You can invalidate all files (*) or a particular path (/images/*)
  - When the files are invalidated, the cache fetches files again
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+AWS Global Accelerator
+
+- Unicast vs Anycast IP:
+    1. Unicast IP:
+       - one server holds one IP address
+
+    2. Anycast IP:
+       - all servers hold the same IP address and the client is routed to the nearest one
+
+ - AWS Global Accelerator leverages the AWS internal network to route to your application
+ - 2 Anycast IP are created for your application
+ - The Anycast IP send traffic directly to edge locations
+ - The Edge locations send the traffic to your application
+ - Extremely useful for when you have an application deployed in e.g. India, but users need to access it globally
+ - When users attempt to access the application from the US, while it is hosted in India:
+    1. They usually use the public internet, which means that they go through many "hops"
+       - Hops add much latency, as the connection hops between servers and routers due to the distance
+
+ - AWS Global accelerator works with Elastic IP, EC2 instances, ALB, NLB, can be public or private
+ - Consistent performance
+ - Intelligent routing to the lowest latency and fast regional failover
+ - No issue with client cache (because the IP doesn't change)
+ - Uses internal AWS network
+ - Global Accelarator can also perform health checks for your applications
+ - Helps make your application global (failover less than a minute for unhealthy)
+ - It is great for disaster recovery (thanks to the health checks)
+ - It is also extremely secure, as it only requires 2 external IPs to be whitelisted
+ - Automatic DDoS protection thanks to AWS Shield
+
+
+ - Gloabl Accelerator vs CloudFront:
+ - Both of them use the AWS global network and its edge locations around the world
+ - Both integrate with AWS Shield for DDoS protection
+    1. CloudFront:
+       - Improves performance for both cacheable content (like images and videos)
+       - Also improves performance for Dynamic content (like API acceleration and dynamic site delivery)
+       - Content is served at the edge location
+    2. Gloval Accelerator:
+       - Improves performance for a wide range of applications over TCP or UDP
+       - Proxying packets at the edge to applications running in one or more AWS regions
+       - Good fit for non-HTTP use cases, such as gaming (UDP), IoT (MQTT), or Voice over IP
+       - Good for HTTP use cases that require static IP addresses
+       - Good for HTTP use cases that required deterministic, fast regional failover
