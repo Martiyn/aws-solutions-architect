@@ -10,3 +10,14 @@ AWS DataSync
  - Replication tasks can be scheduled hourly, daily, weekly
  - File permissions and metadata are preserved (NFS POSIX, SMB, ...)
  - One agent task can use 10 Gbps, can setup bandwidth limit
+
+ - AWS DataSync On-Prem NFS / SMB to AWS (s3, EFS, FSx)
+ - AWS DataSync Agent is installed on the on-prem server (NFS or SMB server)
+ - AWS DataSync Agent establishes a connection between the on-prem server and AWS DataSync
+ - Data is distributed however you want (to S3 buckets(any class), AWS EFS or Amazon FSx)
+ - Data can be synchronized from the AWS Storage resources to the on-prem server
+ - AWS Snowcone can be integrated in the process (if you have limited internet access)
+ - AWS Snowcone has DataSync Agent pre-installed on it
+
+ - AWS DataSync between AWS storage services:
+ - You use AWS DataSync to copy metadata between AWS Storage Services
