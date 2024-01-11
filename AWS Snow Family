@@ -97,4 +97,7 @@ AWS Snow Family
            1. AWS EC2 instances
            2. AWS DataSync
            3. Network File System
- 
+
+ - IMPORTANT - Solution Architecture: Snowball into Glacier
+ - Snowball cannot directly import to Glacier
+ - You must use Amazon S3 first, in combination with a lifecycle policy
