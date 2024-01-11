@@ -1,0 +1,81 @@
+AWS FSx
+
+ - Allows you to launch 3rd party high-performance file systems on AWS
+ - Fully managed service
+ - FSx is the cloud solution to launching file systems in the cloud (like RDS does for databases)
+ - You can launch FSx for example:
+    1. Lustre
+    2. Windows File Server
+    3. NetApp ONTAP
+    4. Open ZFS
+
+ - FSx for Windows File server:
+ - Fully managed Windows file system shared drive
+ - Supports SMB protocol & Windows NTFS
+ - MS Active Directory integration, ACLs, user quotas
+ - Can be mounted on Linux EC2 instances
+ - Supports MS Distributet File System (DFS) Namespaces (group files across multiple FS)
+ - Performance scales up to 10s GB/s, millions of IOPS, 100s PB of data
+ - Storage options are:
+    1. SSD - latency sensitive workloads (databases, media processing, data analytics, ...)
+    2. HDD - broad spectrum of workloads (home directory, CMS, ...)
+ - Can be accessed from your on-premises infrastructure (VPN or Direct Connect)
+ - Can be configured to be Multi-AZ for high availability
+ - Data is backed-up daily to S3
+
+ - FSx for Lustre:
+ - Lustre is a type of parallel distributed file system, for large scale computing
+ - The name Lustre comes from "Linux" and "cluster"
+ - Machine Learning, High Performance Computing (HPC)
+ - Video processing, financial modeling, electronic design automation
+ - Scales up to 100s GB/s, millions of IPS, sub-ms latencies
+ - Storage options:
+    1. SSD - low latency, IOPS intensive workloads, small & random file operations
+    2. HDD - throughput-intensive workloads, large & sequential file operations
+ - Seamless integration with S3:
+    1. Can "read S3" as a file system (through FSx)
+    2. Can write the output of the computations back to S3 (through FSx)
+ - Can be used from on-prem servers (VPN or Direct Connect)
+
+ - Amazon FSx for NetApp ONTAP:
+ - Managed NetApp ONTAP on AWS
+ - File System compatible with NFS, SMB, iSCSI protocol
+ - Move workloads running on ONTAP or NAS to AWS
+ - Works with:
+    1. Linux
+    2. Windows
+    3. MacOS
+    4. VMware cloud on AWS
+    5. Amazon Workspaces & AppStream 2.0
+    6. Amazon EC2, ECS and EKS
+ - Storage shrinks or grows automatically
+ - Snapshots, replication, low-cost, compression and data de-duplication
+ - Point-in-time instantaneous cloning (helpful for testing new workloads)
+
+ - Amazon FSx for OpenZFS:
+ - Managed OpenZFS file system on AWS
+ - Move workloads running on ZFS to AWS
+ - File system compatible with NFS (v3, v4; v4.1, v4.2)
+ - Works with:
+    1. Linux
+    2. Windows
+    3. MacOS
+    4. VMware cloud on AWS
+    5. Amazon Workspaces & AppStream 2.0
+    6. Amazon EC2, ECS and EKS
+ - Up to 1,000,000 IOPS with < 0.5ms latency
+ - Snapshots, compression and low-cost
+ - Point-in-time instantaneous cloning (helpful for testing new workloads)
+
+ - File System Deployment options:
+    1. Scratch File System:
+       - Temporary storage
+       - Data is not replicated (does not persist if file server fails)
+       - High burst (6x faster, 200MBps per TiB)
+       - Usage: short-term processing, optimize costs
+    2. Persistent File System:
+       - Long-term storage
+       - Data is replicated within the same AZ
+       - Replace failed files within minutes
+       - Usage: long-term processing, sensitive data
+
