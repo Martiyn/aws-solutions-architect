@@ -19,3 +19,78 @@ Introduction to messaging:
  - These services can scale independently from the application
 
 -----------------------------------------------------------------------------------------------------------------------
+
+Amazon SQS (simple queue service)
+
+ - A Queue is the core of SQS
+ - An SQS queue needs a so-called "producer" (something to send messages to the queue)
+ - You can have multiple producers sending messages to the same queue
+ - Messages can be customized to be whatever you want (e.g. "process video" or "process order")
+ - On the other side of the SQS queue, you have the so-called "consumers"
+ - Consumers poll the messages from the queue, after which they process them and delete them from the queue
+ - The SQS queue is a service, which is used to decouple your producers and consumers
+ - Producer ---(send messages)---> SQS Queue ---(poll messages)---> Consumer
+
+ - Amazon SQS - Standard Queue:
+ - Oldest Amazon offering (over 10 years old)
+ - Fully managed service, used to decouple applications
+ - Attributes:
+    1. Unlimited throughput, unlimited number of messages in queue
+    2. Default retention of messages: 4 days, maximum of 14 days
+    3. Low latency (<10 ms on publish and receive)
+    4. Limitation of 256KB per message sent
+ - Can have duplicate messages (at least once delivery, occasionally)
+ - Can have out of order messages (best effort ordering)
+
+ - SQS - Producing messages:
+ - Produced to SQS using the SDK (SendMessage API)
+ - The message is persisted in SQS until a consumer deletes it (signalling that it has been processed)
+ - Message retention: default 4 days, up to 14 days
+ - Example:
+    1. Send an order to be processed
+    2. Information for the above message would be:
+       - Order id
+       - Customer id
+       - Any other attributes you want
+    3. The consumer will then process the message
+ - SQS standard: unlimited throughput
+
+ - SQS - Consuming Messages:
+ - Consumers (applications that you need to manually write with code)
+ - Consumers can run on:
+    1. EC2 instances
+    2. On-prem servers
+    3. AWS Lambda
+ - Poll SQS for messages (can receive up to 10 messages at a time)
+ - Process messages (e.g.: insert the message in an RDS database)
+ - Once message is processed, delete the messages using the DeleteMessage API
+ - SQS - Multiple EC2 instances consumers:
+    1. Consumers receive and process messages in parallel
+    2. At least once delivery (if message is not processed fast enough, it is received by other consumers)
+    3. Best-effort message ordering
+    4. Consumers delete messages after processing them
+    5. We can scale consumers horizontally to improve throughput processing
+
+ - SQS with Auto Scaling Group (ASG):
+ - When consumers run on EC2 instances inside an ASG, you can set a metric for scaling
+ - Metric can be set with CloudWatch - Queue Length (ApproximateNumberOfMessages)
+ - Then an alarm can be set to CloudWatch, which will trigger the ASG to scale out/in
+ 
+ - SQS to decouple between application tiers
+ - You can scale application front and back-end per the below:
+
+    requests ---> Front-end web app(in ASG) --(send message)-> SQS queue --(receive messages)-> Back-end processing app(in ASG) --(insert)-> S3 bucket
+
+ - The above solution is efficient and highly scalable
+
+ - SQS - Security:
+ - Encryption:
+    1. In-flight encryption using HTTPS API
+    2. At-rest encryption using KMS keys
+    3. Client-side encryption if the client wants to perform encryption/decryption
+ - Access controls: IAM policies to regulate access to SQS API
+ - SQS Access policies (similar to S3 bucket policies):
+    1. Useful for cross-account access to SQS queues
+    2. Useful for allowing other services (SNS, S3, ...) to write to an SQS queue
+
+-----------------------------------------------------------------------------------------------------------------------
