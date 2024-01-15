@@ -110,4 +110,18 @@ Amazon SQS (simple queue service)
  - The wait time can be between 1 to 20 sec (20 sec is preferable)
  - Long polling can be enabled at the queue level or at the API level using WaitTimeSeconds
 
+ - Amazon SQS - FIFO Queue:
+ - FIFO - first in first out (ordering of messages in the queue)
+ - This means that messages will be ordered in the queue and the first message in the queue will be the first message to be processed
+ - Limited throughput: 300 msg/s without batching, 3000 msg/s with batching
+ - Exactly-once send capability (by removing duplicates)
+ - Messages are processed in order by the consumer
+
+ - SQS + Auto Scaling Group (ASG):
+ - If the load is too big, some transactions (requests) may be lost
+ - SQS can be used as a buffer to DB writes
+ - SQS queue is infinitely scalable
+ - When used as a buffer, SQS can ensure no transactions are lost
+ - SQS can also buffer between application tiers (front and back-end)
+
 -----------------------------------------------------------------------------------------------------------------------
