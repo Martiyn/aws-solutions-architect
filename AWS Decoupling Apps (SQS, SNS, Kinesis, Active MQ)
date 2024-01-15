@@ -93,4 +93,14 @@ Amazon SQS (simple queue service)
     1. Useful for cross-account access to SQS queues
     2. Useful for allowing other services (SNS, S3, ...) to write to an SQS queue
 
+ - SQS - Message visibility timeout:
+ - After a message is polled by a consumer, it becomes invisible to other consumers
+ - By default "message visibility timeout" is 30 seconds
+ - That means that the message has 30 seconds to be processed
+ - After the visibility timeout runs out and the message is not deleted, the message will be received by another consumer
+ - A consumer could call the ChangeMessageVisibility API to get more time (to avoid the message being processed twice)
+ - If visibility timeout is high (hours), and consumer crashes, re-processing will take time
+ - If visibility timeout is too low (seconds), we may get duplicate processing, as the message will be picked up by other consumers
+ - Visibility timeout needs to be something reasonable for your application
+
 -----------------------------------------------------------------------------------------------------------------------
