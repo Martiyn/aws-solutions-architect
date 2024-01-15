@@ -1,0 +1,21 @@
+Introduction to messaging:
+
+ - AWS Integration & Messaging:
+ - When we start deploying multiple apps, they will inevitably need to communicate with each other.
+ - There are two patterns of app communication:
+    1. Synchronous communication:
+       - application to application
+       - Buying service <---------------> Shipping service
+    2. Asynchronous / Event based communication:
+       - application to queue to application
+       - Buying service -----> Queue -----> Shipping service
+
+ - Synchronous between applications can be problematic if there are suddens traffic spikes
+ - In case you need to encode 1000 videos but usually it's 10 (this would be a major issue)
+ - In such cases, it is much better to decouple the applications using:
+    1. SQS: queue model
+    2. SNS: pub/sub model
+    3. Kinesis: real-time streaming model
+ - These services can scale independently from the application
+
+-----------------------------------------------------------------------------------------------------------------------
