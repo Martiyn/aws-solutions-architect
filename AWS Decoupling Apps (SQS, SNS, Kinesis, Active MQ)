@@ -305,3 +305,43 @@ Amazon Kinesis
  - Monitor API calls using CloudTrail
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Kinesis Data Firehose
+
+ - Kinesis Data Firehose has the following producers:
+    1. Applications
+    2. SDK, KPL
+    3. Client
+    4. Kinesis Agent
+    5. Kinesis Data Streams
+    6. Amazon CloudWatch (logs & events)
+    7. AWS IoT
+ - You can transform data from Kinesis Firehose by using AWS Lambda functions (optional)
+ - Kinesis Firehose can perform batch writes to the following:
+    1. Amazon S3
+    2. Amazon Redshift (copy through S3)
+    3. Amazon OpenSearch
+    4. Datadog, splunk, mongoDB
+    5. HTTP Endpoint
+ - 1-3 are AWS services that Firehose can write to (MUST KNOW)
+ - 4 is third-party vendors
+
+ - Kinesis Firehose is a fully managed service, no administration, automatic scaling, serverless
+ - Kinesis Data streams vs Kinesis Data Firehose:
+ - Kinesis Data streams:
+    1. Streaming service for ingest at scale
+    2. Write custom code (producer / consumer)
+    3. Real-time (~200ms)
+    4. Manage scaling (shard splitting / merging)
+    5. Data storage for 1 to 365 days
+    6. Supports replay capability
+ - Kinesis Data Firehose:
+    1. Load straming data into S3 / Redshift / OpenSearch / 3rd party / custom HTTP
+    2. Fully managed
+    3. Near real-time (buffer time min. 60 sec)
+    4. Automatic scaling
+    5. No data storage
+    6. Doesn't support replay capability
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
