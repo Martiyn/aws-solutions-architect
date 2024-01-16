@@ -233,3 +233,75 @@ SNS + SQS: Fan Out
    Buying Service ---(new transaction)---> SNS Topic ----(Filter policy 1)--> SQS queue 1, ----(Filter policy 2)--> SQS queue 2
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Kinesis
+
+ - Kinesis makes it easy to collect, process and analyze streaming data in real time
+ - Ingest real-time data such as: App logs, Metrics, Website clickstreams, IoT telemetry data, ...
+ - There are four types of Kinesis:
+    1. Kinesis Data Streams: capture, process and store data streams
+    2. Kinesis Data Firehose: load data streams into AWS data stores
+    3. Kinesis Data Analytics: analyze data streams with the SQL or Apache Flink
+    4. Kinesis Video Streams: capture, process and store video streams
+
+ - Kinesis Data Streams:
+ - It is a way to stream big data in your systems
+ - It is made up of multiple shards (must provision ahead of time)
+ - Data will be split among all shards
+ - Producers send data to the client data stream
+ - Producers can be:
+    1. Applications
+    2. SDK, KPL
+    3. Client
+    4. Kinesis Agent
+ - Producers produce records, which are made up of:
+    1. Partition key (defines and determines in which shard the record will go to)
+    2. Data blob (is the data itself, up to 1 MB)
+ - Data can be sent at a rate of 1 MB/s or 1000 msg/s per shard
+ - Once the data is processed by the Kinesis streams, it is then passed to the Consumers
+ - Consumers can be:
+    1. Apps (can depend on KCL or SDK)
+    2. AWS Lambda
+    3. Kinesis Data Firehose
+    4. Kinesis Data Analytics
+ - The consumers consume a record, which contains:
+    1. Partition key
+    2. Sequence no. (represents where the record was in the shard)
+    3. Data blob
+ - There are different consumption modes:
+    1. 2 MB/s (shared) per shard all consumers
+    2. 2 MB/s (enhanced) per shard per consumer
+ - How it would look like
+
+   Producers ---(record)---> Kinesis Data Stream ---(record)---> Consumers
+
+ - Retention in the data stream is between 1 day to 365 days
+ - Ability to reprocess (replay) data
+ - Once data is inserted in Kinesis, it can't be deleted (immutable)
+ - Data that shares the same partition goes to the same shard (ordering)
+ - Producers: AWS SDK, Kinesis Producer Library (KPL), Kinesis Agent
+ - Consumers:
+    1. Write your own: Kinesis Client Library (KCL), AWS SDK
+    2. Managed: AWS Lambda, Kinesis Data Firehose, Kinesis Data Analytics
+
+ - Kinesis Data Streams - Capacity Modes:
+ - Provisioned mode: 
+    1. You choose the number of shards provisioned, scale manually or using API
+    2. Each shard gets 1 MB/s in (or 1000 records per second)
+    3. Each shard gets 2 MB/s out (classic or enhanced fan-out consumer)
+    4. You pay per shard provisioned per hour
+ - On-demand mode:
+    1. No need to provision or manage capacity
+    2. Default capacity provisioned (4 MB/s in or 4000 records per second)
+    3. Scales automatically based on observed throughput peak during the last 30 days
+    4. Pay per stream per hour & data in/out per GB
+
+ - Kinesis Data Streams Security:
+ - Control access / authorization using IAM policies
+ - Encryption in flight using HTTPS endpoints
+ - Encryption at rest using KMS
+ - You can implement encryption/decryption of data on client side (harder)
+ - VPC endpoints available for Kinesis to access within VPC
+ - Monitor API calls using CloudTrail
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
