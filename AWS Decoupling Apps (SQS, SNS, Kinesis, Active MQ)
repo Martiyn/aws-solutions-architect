@@ -183,3 +183,53 @@ Amazon SNS
     2. Useful for allowing other services (S3, ...) to write to an SNS topic
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SNS + SQS: Fan Out
+
+ - The idea is that you want a message to be sent to multiple SQS queues
+ - If you send them individually to SQS queues, issues can arise
+ - To solve this, you can push once in SNS and receive the topic in all SQS queues that are subscribed to the topic
+ - What it would look like:
+
+   Buying Service --------> SNS Topic ----(fan-out)-----> SQS queue 1 --------> Fraud Service, SQS queue 2 --------> Shipping service
+
+ - Push once in SNS, receive in all SQS queues that are subscribers
+ - Fully decoupled, no data loss
+ - SQS allows for: data persistence, delayed processing and retries of work
+ - Ability to add more SQS subscribers over time (scalable)
+ - Make sure your SQS queue access policy allows for SNS to write
+ - Cross-region delivery: works with SQS queues in other regions
+
+ - We can use the above pattern for other services like S3 events to multiple queues:
+ - For the same combination of event type(e.g. object create) and prefix(e.g. images/), you can only have one S3 event rule
+ - If you want to send the same S3 event to many SQS queues, you can use fan-out
+ - What it would look like:
+
+   S3 object created ----(event)----> Amazon S3 ---------> SNS Topic ----(fan-out)-----> SQS queue, SQS queue, Lambda Function
+
+ - You can also send data directly from SNS to Amazon S3 with Kinesis Data Firehose
+ - SNS can send to Kinesis and therefore we can have the following architecture:
+
+   Buying Service ------> SNS Topic --------> Kinesis Data Firehose ---------> Amazon S3 (or any supported KDF destination)
+
+ - Amazon SNS - FIFO Topic:
+ - FIFO = first in first out (ordering of messages in the topic)
+ - Similar features as SQS FIFO:
+    1. Ordering by message group ID (all messages in the same group are ordered)
+    2. Deduplication using a deduplication ID or content based deduplication
+ - Can have SQS standard and FIFO queues as subscribers
+ - Limited throughput (same throughput as SQS FIFO)
+
+ - SQS FIFO + SNS FIFO: Fan Out:
+ - In case you need fan out + ordering + deduplication:
+
+   Buying service -------> SNS FIFO Topic -----(fan-out)----> SQS FIFO queue 1 --------> Fraud service, SQS FIFO queue 2 --------> Shipping service
+
+ - SNS - Message Filtering:
+ - JSON policy used to filter messages sent to SNS topic's subscribtions
+ - If a subscribtion doesn't have a filter policy, it receives every message
+ - Only messages that match the policy can be sent from the SNS topic to example: an SQS queue:
+
+   Buying Service ---(new transaction)---> SNS Topic ----(Filter policy 1)--> SQS queue 1, ----(Filter policy 2)--> SQS queue 2
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
