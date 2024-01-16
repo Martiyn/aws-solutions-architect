@@ -377,3 +377,60 @@ Data Ordering for Kinesis vs SQS FIFO
 
  - In some cases, it would be better to use FIFO, if you have a dynamic number of consumers based on the number of Group IDs
  - In other cases, it is better to use Kinesis, if you have 10,000 trucks and you need to send a lot of data as well as data ordering per shard
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SQS vs SNS vs Kinesis
+
+ - SQS:
+    1. Consumer "pull data"
+    2. Data is deleted after being consumed
+    3. Can have as many consumers as we want
+    4. No need to provision throughput
+    5. Ordering guarantees only on FIFO queues
+    6. Individual message delay capability
+
+ - SNS:
+    1. Push data to many subscribers
+    2. Up to 12,500,000 subscribers
+    3. Data is not persisted (lost if not delivered)
+    4. Pub/Sub
+    5. Up to 100,000 topics
+    6. No need to provision the throughput
+    7. Integrates with SQS for fan-out architecture patters
+    8. FIFO capability for SQS FIFO
+
+ - Kinesis:
+    1. Standard: pull data (2 MB per shard)
+    2. Enhanced fan-out: push data (2 MB per shard per consumer)
+    3. Possibility to replay data
+    4. Meant for real-time big data analytics and ETL
+    5. Ordering at the shard level
+    6. Data expires after X days
+    7. Provisioned mode or on-demand capacity mode
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon MQ
+
+ - SQS, SNS are cloud-native services: proprietary protocols from AWS
+ - Traditional applications running from on-premises may use open protocols such as:
+    1. MQTT
+    2. AMQP
+    3. STOMP
+    4. Openwire
+    5. WSS
+ - When migrating to the cloud, instead of re-engineering the application to use SQS and SNS, we can use Amazon MQ
+ - Amazon MQ is a managed message broker service for:
+    1. RabbitMQ
+    2. ActiveMQ
+ - Amazon MQ doesn't scale as much as SQS/SNS
+ - Amazon MQ runs on servers, can run in Multi-AZ with failover
+ - Amazon MQ has both queue feature (~SQS) and topic features (~SNS)
+
+ - Amazon MQ -High availability:
+ - You have an active Amazon MQ Broker in AZ 1
+ - You have a standby Amazon MQ Broker in AZ 2
+ - Both AZs are in the same region
+ - For the failover to work, you need to define EFS as your backend storage
+ - Whenever the failover happens, the standby will be mounted on EFS (thus receiving the same data as the active)
