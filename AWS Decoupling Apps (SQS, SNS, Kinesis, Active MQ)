@@ -345,3 +345,35 @@ Kinesis Data Firehose
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Data Ordering for Kinesis vs SQS FIFO
+
+ - Ordering data into Kinesis:
+ - Imagine you have 100 trucks on the road sending their GPS positions regularly into AWS (each with their own ID)
+ - You want to consume the data in order for each truck, so that you can track their movement accurately
+ - How should you send that data into Kinesis?:
+ - Answer: Send using a "partition key" value of the truck_id
+ - The same key will always go to the same shard
+
+ - Ordering data into SQS:
+ - For SQS FIFO, if you don't use a group ID, messages are consumed in the order they are sent, with only one consumer
+ - The order that messages are sent is the order that they will be consumed in
+ - You want to scale the number of consumers, but you want messages to be "grouped" when they are related to each other
+ - Then you use a Group ID (similar to a partition key in Kinesis)
+ - The more Group IDs you have, the more consumers you can have
+
+ - Kinesis vs SQS ordering:
+ - Let's assume 100 trucks, 5 kinesis shards, 1 SQS FIFO
+ - Kinesis Data Streams:
+    1. On average you'll have 20 trucks per shard
+    2. Trucks will have their data ordered within each shard
+    3. The maximum amount of consumers in parallel we can have is 5
+    4. Can receive up to 5 MB/s of data
+
+ - SQS FIFO:
+    1. You only have one SQS FIFO queue
+    2. You will have 100 Group ID
+    3. You can have up to 100 consumers (due to the 100 Group ID)
+    4. You have up to 300 messages per second (or 3000 if using batching)
+
+ - In some cases, it would be better to use FIFO, if you have a dynamic number of consumers based on the number of Group IDs
+ - In other cases, it is better to use Kinesis, if you have 10,000 trucks and you need to send a lot of data as well as data ordering per shard
