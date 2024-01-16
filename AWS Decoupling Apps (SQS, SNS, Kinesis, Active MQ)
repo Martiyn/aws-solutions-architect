@@ -18,8 +18,7 @@ Introduction to messaging:
     3. Kinesis: real-time streaming model
  - These services can scale independently from the application
 
------------------------------------------------------------------------------------------------------------------------
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Amazon SQS (simple queue service)
 
  - A Queue is the core of SQS
@@ -124,4 +123,63 @@ Amazon SQS (simple queue service)
  - When used as a buffer, SQS can ensure no transactions are lost
  - SQS can also buffer between application tiers (front and back-end)
 
------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon SNS
+
+ - In case you want to send one message to many receivers
+ - Direct integration would be:
+
+   Buying service ---(message)----> Email notification, Fraud Service, Shipping Service, SQS Queue
+
+ - Integrating SNS in known as Pub / Sub (publish / subscribe)
+ - Pub / Sub integration would be
+
+   Buying Service ---(message)----> SNS Topic --------> Email notification, Fraud Service, Shipping Service, SQS Queue
+
+ - The "event producer" sends messages to only one SNS topic
+ - As many "event receivers" (subscriptions) as we want to listen to the SNS topic notifications
+ - Each subscriber to the topic will get all the messages (note: new feature to filter messages)
+ - Up to 12,500,000 subscribtions per topic
+ - 100,000 topics limit
+ - SNS can publish to the following subscribers:
+    1. Email notifications
+    2. SMS & Mobile notifications
+    3. HTTP / HTTPS Endpoints
+    4. SQS
+    5. AWS Lambda
+    6. Kinesis Data Firehose
+ - Many AWS services can send data directly to SNS for notifications
+ - SNS can receive data from the below AWS Services:
+    1. CloudWatch Alarms
+    2. Auto Scaling Group (notifications)
+    3. S3 buckets (events)
+    4. AWS Lambda
+    5. AWS Budgets
+    6. DynamoDB
+    7. RDS Events
+    8. AWS DMS (New Replic)
+    9. CloudFormation (State Changes)
+    10. Any other service that can produce a notification
+ - AWS SNS - How to publish:
+ - Topic publish (using the SDK):
+    1. Create a topic
+    2. Create a subscribtion (or many)
+    3. Publish to the topic
+ - Direct Publish (for mobile apps SDK):
+    1. Create a platform application
+    2. Create a platform endpoint
+    3. Publish to the platform endpoint
+    4. Works with Google GCM, Apple APNS, Amazon ADM, ...
+
+ - Amazon SNS - Security:
+ - Encryption:
+    1. In-flight encryption using HTTPS API
+    2. At-rest encryption using KMS keys
+    3. Client-side encryption if the client wants to perform encryption / decryption
+ - Access controls: IAM policies to regulate access to the SNS API
+ - SNS Access Policies (similar to S3 bucket policies):
+    1. Useful for cross-account access to SNS topics
+    2. Useful for allowing other services (S3, ...) to write to an SNS topic
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
