@@ -83,7 +83,7 @@ Docker
     4. Amazon ECR
        - Store container images
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Amazon ECS
 
@@ -150,4 +150,27 @@ Amazon ECS
     2. Capacity provider paired with an ASG
     3. Add EC2 instances when you're missing capacity (CPU, RAM, ...)
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ - ECS - Solution Architecture:
+ - You can have the below architecture with ECS tasks (example):
+
+   Client ---(upload object)---> S3 bucket ---(event)---> Amazon EventBridge ---(rule: run ECS task)---> Task (New) ---(get object)---> S3 bucket ---(task saves result)---> DynamoDB
+
+ - The above is a fully serverless approach for processing objects from S3 using a Docker container with ECS Fargate
+ - The task has an ECS Task Role attached to it (for access to S3 & DynamoDB)
+ - Fargate (and by extension the Fargate tasks) are inside of an ECS Cluster
+
+ - The below architecture utilizes ECS tasks invoked by Event Bridge Schedule:
+
+   Amazon EventBridge ---(Rule: run ECS task)---> Task (New) ---(batch processing)---> Amazon S3
+
+ - The above architecture is also fully serverless
+ - Again, Fargate (and the Task) is inside the ECS Cluster
+
+
+ - ECS - SQS Queue example:
+
+   ---(Messages)---> SQS Queue ---(poll for messages)---> ECS Service Auto Scaling (Service A(contains the Tasks))
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
