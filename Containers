@@ -174,3 +174,44 @@ Amazon ECS
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon Elastic Container Registry (ECR)
+
+ - Store and manage Docker images on AWS
+ - Private and Public repository (Amazon ECR public gallery: https://gallery.ecr.aws)
+ - Fully integrated with ECS, backed by Amazon S3
+ - Access is controlled through IAM (permission errors => policy)
+ - Supports image vulnerability scanning, versioning, image tags, image lifecycle, etc...
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Elastic Kubernetes Service (EKS)
+
+ - It is a way to launch managed Kubernetes clusters on AWS
+ - Kubernetes is an open-source system for automatic deployment, scaling and management of containerized (usually Docker) application
+ - It is an alternative to ECS, similar goal but different API
+ - EKS supports EC2 if you want to deploy worker nodes or Fargate to deploy serverless containers
+ - Use case: if your company is already using Kubernetes on-prem or in another cloud and wants to migrate to AWS
+ - Kubernetes is cloud-agnostic (can be used in any cloud platform - Azure, AWS, GCP, etc..)
+ - Amazon EKS - Node types:
+    1. Managed Node groups:
+       - Creates and manages Nodes (EC2 instances) for you
+       - Nodes are part of an ASG managed by EKS
+       - Support on-demand or spot instances
+    2. Self-managed nodes:
+       - Nodes created by you and registered to the EKS cluster and managed by an ASG
+       - You can use prebuilt AMI - Amazon EKS optimized AMI
+       - Supports on-demand or spot instances
+    3. AWS Fargate:
+       - No maintenance required, no nodes managed
+
+ - Amazon EKS - Data Volumes:
+ - Need to specify StorageClass manifest in your EKS cluster
+ - Leverages a Container Storage Interface (CSI) compliant driver
+ - Support for:
+    1. Amazon EBS
+    2. Amazon EFS (works with Fargate)
+    3. Amazon FSx for Lustre
+    4. Amazon FSx for NetApp ONTAP
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
