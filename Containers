@@ -215,3 +215,20 @@ Amazon Elastic Kubernetes Service (EKS)
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS App Runner
+
+ - Fully managed service that makes it easy to deploy web applications and APIs at scale
+ - No infrastructure experience required
+ - Start with your source code or container image
+ - Configure basic settings (vCPU, RAM, Auto Scaling, Health check)
+ - After configuration, the app is created and deployed
+ - You can then access it using the URL
+ - Automatically builds and deploys your web app
+ - Automatic scaling, highly available, load balancer, encryption
+ - VPC access support
+ - Use cases:
+    1. Web apps
+    2. APIs
+    3. Microservices
+    4. Rapid production deployments
+ - 
