@@ -1,0 +1,86 @@
+Docker
+
+ - Docker is a software development plarform to deploy apps
+ - Apps are packaged in containers that can be run on any OS
+ - Apps run the same, regardless of where they're run
+ - Docker is useful because:
+    1. Makes apps run on any machine
+    2. Makes it so the app has no compatibility issues
+    3. Has predictable behavior
+    4. Makes the app require less work
+    5. Makes app easier to maintain and deploy
+    6. It works with any language, any OS, any technology
+ - Use cases are:
+    1. Microservices architecture
+    2. Lift-and-shift apps from on-prem to AWS cloud
+    3. Anything that involves containerizing your apps
+
+ - Docker on OS:
+ - Docker can be used on any OS and server
+ - Imagine you have an EC2 instance with some applications on it
+ - You can use Docker to containerize the applications
+ - You can containerize the front and back-end, as well as the DB
+ - This allows you to ship these containers to other servers without worrying about dependencies
+
+ - Where are Docker images stored?:
+ - Docker images are stored in Docker repositories:
+ - Docker Hub (https://hub.docker.com):
+    1. Public repository
+    2. Find base images for many technologies or OS (e.g. Ubuntu, MySQL, etc...)
+ - Amazon ECR (Amazon Elastic Container Registry)
+    1. Private repository
+    2. Public repo (Amazon ECR Public Gallery https://gallery.ecr.aws)
+
+ - Docker vs Virtual Machines
+ - Docker is "sort of" a virtualization technology, but not quite
+ - Resources are shared with the host => many containers on one server
+ - The architecture for a VM is as follows:
+
+                     Apps
+                       ^
+                 Guest OS (VM)
+                       ^
+                  Hypervisor
+                       ^
+                    Host OS    
+                       ^
+                 Infrastructure
+
+ - When you get an EC2 instance, it is actually a VM running on the Hypervisor
+ - This allows AWS to offer many different instances
+ - All these VMs are separate (won't share resources)
+
+ - Architecture for Docker containers is as follows:
+
+                   Container
+                       ^
+                  Docker Daemon
+                       ^
+                    Host OS    
+                       ^
+                 Infrastructure
+
+ - You can have multiple containers on top of the Docker Daemon
+ - This allows the containers to co-inhabit together
+ - Containers can share the same networking, data, etc...
+ - Containers are not as secure as a VM but they allow you to run many containers on a single server
+
+ - Starting with Docker:
+ - You need to create a Docker file
+ - Once files are added, you build the Image
+ - The image is then pushed to a Docker repository (Docker hub or AWS ECR)
+ - You can can then pull the docker image from the repository
+ - Once you run the Docker image, it becomes a Docker container (which runs your application code)
+
+ - Docker container management on AWS:
+    1. Amazon Elastic Container Service (Amazon ECS):
+       - Amazon's own container platform
+    2. Amazon Elastic Kubernetes Service (Amazon EKS):
+       - Amazon's managed Kubernetes (open source)
+    3. AWS Fargate:
+       - Amazon's own Serverless container platform
+       - Works with ECS and EKS
+    4. Amazon ECR
+       - Store container images
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
