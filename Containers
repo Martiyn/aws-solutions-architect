@@ -128,5 +128,26 @@ Amazon ECS
 
  - NOTE: Amazon S3 cannot be mounted as a file system on your ECS tasks
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------
+ - ECS Service Auto Scaling:
+ - Automatically increase / decrease the desired number of ECS tasks
+ - Amazon ECS Auto Scaling uses AWS Application Auto Scaling:
+    1. ECS Service average CPU utilization
+    2. ECS service average memory utilization - scale on RAM
+    3. ALB request count per targer - metric coming from the ALB
+ - Target tracking - scale based on target value for a specific CloudWatch metric
+ - Step Scaling - scale based on specified CloudWatch Alarm
+ - Scheduled Scaling - scale based on a specified date/time (predictable changes)
+ - ECS service auto scaling (task level) does not equate to EC2 Auto Scaling (EC2 instance level)
+ - Fargate auto scaling is much easier to setup (because it is serverless)
 
+ - EC2 Launch type - Auto scaling EC2 instances:
+ - Accommodate ECS Service scaling by adding underlying EC2 instances
+ - Auto Scaling group scaling:
+    1. Scale your ASG based on CPU utilization
+    2. Add EC2 instances over time
+ - ECS cluster capacity provider:
+    1. Used to automatically provision and scale the infrastructure of your ECS tasks
+    2. Capacity provider paired with an ASG
+    3. Add EC2 instances when you're missing capacity (CPU, RAM, ...)
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------
