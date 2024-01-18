@@ -105,5 +105,19 @@ AWS Lambda
     3. Can use the /tmp directory to load other files at startup
     4. Size of environment variables: 4 KB
 
+
+ - Lambda SnapStart:
+ - Improves your Lambda functions performance up to 10x at no extra cost for Java 11 and above
+ - Lambda invocation has lifecycle phases
+ - Ususally Lambda works as follows:
+   Init --> Invoke --> Shutdown
+ - When SnapStart is enabled, function is invoked from a pre-initialized state (skips Init phase)
+ - When you publish a new version:
+    1. Lambda initializes the function
+    2. Lambda takes a snapshot of memory and disk state of the initialized function
+    3. Snapshot is cached for low-latency access (hence why it's called SnapStart)
+
+
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
