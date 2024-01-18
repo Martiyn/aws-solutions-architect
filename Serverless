@@ -118,6 +118,91 @@ AWS Lambda
     3. Snapshot is cached for low-latency access (hence why it's called SnapStart)
 
 
+ - Customization at the Edge:
+ - Many modern applications execute some form of the logic at the edge
+ - This is called Edge Functions:
+    1. A code that you write and attach to CloudFront distributions
+    2. Runs close to your users to minimize latency
+ - CloudFront provides two types: CloudFront Functions & Lambda@Edge
+ - You don't have to manage any servers
+ - Functions are deployed globally
+ - Use cases: 
+    1. Customize the CDN content
+    2. Website Security and Privacy
+    3. Dynamic Web Application at the Edge
+    4. Search Engine Optimization (SEO)
+    5. Intelligently route across origins and data centers
+    6. Bot mitigation at the edge
+    7. Real-time image transformation
+    8. A/B testing
+    9. User authentication and authorization
+    10. User prioritization
+    11. User tracking and analytics
+ - Pay only for what you use
+ - Fully serverless
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ - CloudFront Functions:
+ - CloudFront functions are lightweight and written in JavaScript
+ - Used for high-scale, latency-sensitive CDN customizations
+ - Sub-MS startup times, millions of requests per second
+ - Diagram of how requests and responses work:
+
+   Client ---(Viewer Request)---> CloudFront ---(Origin Request)---> Origin ---(Origin Response)---> CloudFront ---(Viewer Response)---> Client
+
+ - Used to change Viewer requests and responses:
+    1. Viewer requests: after CloudFront receives a request from a viewer
+    2. Viewer response: before CloudFront forwards the response to the viewer
+ - Native feature of CloudFront (manage code entirely with CloudFront)
+
+ - Lambda@Edge:
+ - Lambda functions written in NodeJS or Python
+ - Scales to 1000s of requests per second
+ - Used to change CloudFront requests and responses:
+    1. Viewe Request - after CloudFront receives a request from a viewer
+    2. Origin Request - Before CloudFront forwards the request to the origin
+    3. Origin Response - after CloudFront receives the response from the origin
+    4. Viewer Response - before CloudFront forwards the response to the viewer
+ - Author your functions in one AWS Region (us-east-1), then CloudFront replicates to its locations
+
+ - CloudFront Functions vs. Lambda@Edge
+ - CloudFront functions:
+    1. Runtime support - JavaScript
+    2. # of requests - Millions of requests per second
+    3. CloudFront Triggers - Viewer Request/Response
+    4. Max. Execution time - < 1 ms
+    5. Max. Memory - 2 MB
+    6. Total Package Size - 10 KB
+    7. Network Access, File System Access - No
+    8. Access to the request body - No
+    9. Pricing - Free tier available, 1/6th the price of @Edge
+
+ - Lambda@Edge:
+    1. Runtime support - NodeJS, Python
+    2. # of requests - Thousands of request per second
+    3. CloudFront Triggers - Viewer request/response, Origin request/response
+    4. Max. Execution time - 5-10 seconds
+    5. Max. Memory - 128 MB up to 10 GB
+    6. Total Package Size - 1 MB - 50 MB
+    7. Network Access, File System Access - Yes
+    8. Access to the request body - Yes
+    9. Pricing - No free tier, charged per request & duration
+
+ - CloudFront Functions vs. Lambda@Edge - Use Cases
+ - CloudFront Functions:
+    1. Cache key normalization:
+       - Transform request attributes (headers, cookies, query strings, URL) to create an optimal Cache key
+    2. Header manipulation:
+       - Insert/modify/delete HTTP headers in the request or response
+    3. URL rewrites or redirects
+    4. Request authentication & authorization:
+       - Create and validate user-generated tokens (e.g. JWT) to allow/deny requests
+
+ - Lambda@Edge:
+    1. Longer execution time (several ms)
+    2. Adjustable CPU or memory
+    3. Your code depends on 3rd party libraries (e.g. AWS SDK to access other AWS services)
+    4. Network access to use external services for processing
+    5. File system access or access to the body of HTTP requests
+
+ -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
