@@ -219,5 +219,30 @@ AWS Lambda
  - The Lambda function must be deployed in your VPC, because RDS Proxy is never publicly accessible
 
 
+ - Invoking Lambda from RDS & Aurora:
+ - Invoke Lambda functions from within your DB instance
+ - Allows you to process data events from within a database
+ - Supported by RDS for PostgreSQL and Aurora MySQL
+ - Must allow outbound traffic to your Lambda function from within your DB instance (Public, NAT GW, VPC Endpoints)
+ - DB instance must have the required permissions to invoke the Lambda function (Lambda Resource-based Policy & IAM Policy)
+ - Diagram:
+
+   User ---(register(INSERT))---> RDS DB Instance(with permissions) ---(invoke)---> Lambda function ---(send Email)---> Amazon SES ---(route mail)---> User
+
+
+ - RDS Event notifications:
+ - Notifications that tell information about the DB instance itself (created, stopped, start, etc...)
+ - You don't have any information about the data itself
+ - Subscribe to the following event categories:
+    1. DB instance
+    2. DB snapshot
+    3. DB parameter group
+    4. DB Security group
+    5. RDS Proxy
+    6. Custom Engine Version
+ - Near real-time events (up to 5 mins)
+ - Send notifications to SNS or subscribe to events using EventBridge
+
+
  -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
