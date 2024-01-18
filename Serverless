@@ -90,5 +90,20 @@ AWS Lambda
     4. After that $1.00 for 600,000 GB-seconds
  - It is usually very cheap to run AWS Lambda, so it is very popular
 
+
+ - AWS Lambda Limits to know - per region
+ - Execution:
+    1. Memory allocation: 128 MB - 10 GB (1 MB increments)
+    2. Maximum execution time: 900 seconds (15 minutes)
+    3. Environment variables (4 KB)
+    4. Disk capacity in the "function container" (in /tmp): 512 MB to 10 GB
+    5. Concurrency executions: 1000 (can be increased)
+
+ - Deployment:
+    1. Lambda function deployment siza (compressed .zip): 50 MB
+    2. Size of uncompressed deployment (code + dependencies): 250 MB
+    3. Can use the /tmp directory to load other files at startup
+    4. Size of environment variables: 4 KB
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
