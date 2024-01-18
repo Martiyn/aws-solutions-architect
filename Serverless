@@ -31,3 +31,64 @@ Introduction to Serverless
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Lambda
+
+ - AWS Lambda are Virtual Functions (no servers to manage!)
+ - Limited by time (short executions)
+ - They run on-demand (only run when invoked)
+ - Scaling is automated
+
+ - Benefits of AWS Lambda:
+ - Easy pricing:
+    1. Pay per request and compute time
+    2. Free tier of 1,000,000 Lambda requests and 400,000 GBs of compute time
+ - Integrated with the whole AWS suite of services
+ - Integrated with many programming languages
+ - Easy monitoring through AWS CloudWatch
+ - Easy to get more resources per functions (up to 10GB of RAM)
+ - Increasing RAM will also improve CPU and network
+
+ - AWS Lambda language support:
+ - Node,js (JavaScript)
+ - Python
+ - Java (java 8 compatible)
+ - C# (.NET Core)
+ - Golang
+ - C# / Powershell
+ - Ruby
+ - Custom Runtime API (community supported, e.g. Rust)
+
+ - Lambda container image:
+    1. The container image must implement the Lambda Runtime API
+    2. ECS / Fargate is preferred for running arbitraru Docker images
+
+ - AWS Lambda Integrations:
+ - Main ones:
+    1. API Gateway (create REST API and invoke functions)
+    2. Kinesis (uses Lambda to do data transformations on the fly)
+    3. DynamoDB (used to create triggers for Lambda functions upon DB event)
+    4. S3 (Lambda function triggers whenever a change is made in S3)
+    5. CloudFront (Lambda at edge locations)
+    6. CloudWatch Events EventBridge (whenever something happens in the infrastructure and we want to react to it with a Lambda function)
+    7. CloudWatch Logs (to stream logs whenever you want with Lambda)
+    8. SNS (to react to notifications and SNS topics with Lambda)
+    9. SQS (to process messages from your queue with Lambda)
+    10. Cognito (react to whenever a user logs in, e.g. to a DB)
+ - With Lambda, you can have an Automated and fully Reactive architecture
+ - Example: Serverless CRON job
+ - You can make an EventBridge rule that triggers every hour and invokes the Lambda Function to perform a task
+
+ - AWS Lambda Pricing:
+ - You can find overalll pricing information here: https://aws.amazon.com/lambda/pricing
+ - Pay per calls:
+    1. First 1,000,000 requests are free
+    2. $0.20 per 1 million requests thereafter ($0.0000002 per request)
+ - Pay per duration: (in increment of 1 ms) 
+    1. 400,000 GB-seconds of compute time per month if FREE
+    2. == 400,000 seconds if function is 1 GB RAM
+    3. == 3,200,000 seconds if function is 128 MB RAM
+    4. After that $1.00 for 600,000 GB-seconds
+ - It is usually very cheap to run AWS Lambda, so it is very popular
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
