@@ -244,5 +244,50 @@ AWS Lambda
  - Send notifications to SNS or subscribe to events using EventBridge
 
 
- -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon DynamoDB
+
+ - Fully managed, highly available with replication across multiple AZs
+ - NoSQL database - not a relational database - has transaction support
+ - Scales to massive workloads, distributed database
+ - Millions of requests per seconds, trillions of rows, 100s of TB of storage
+ - Fast and consistent in performance (single-digit millisecond)
+ - Integrated with IAM for security, authorization and administration
+ - Low cost and auto-scaling capabilities
+ - No maintenance or patching, always available
+ - Standard & Infrequent Access (IA) table class
+
+ - DynamoDB - Basics:
+ - DynamoDB is made of Tables
+ - Each table has a Primary Key (must be decided at creation time)
+ - Each table can have an infinite number of items (= rows)
+ - Each item has attributes (can be added over time - can be null)
+ - You can add attributes overtime (without having to add columns like in a relational DB)
+ - Maximum size of an item is 400KB
+ - Data types supported are:
+    1. Scalar Types - String, Number, Binary, Boolean, Null
+    2. Document types - List, Map
+    3. Set Types - String Set, Number Set, Binary Set
+ - Therefore, in DynamoDB you can have rapidly evolving schemas
+ - DB structure is made up of:
+    1. Primary key, which includes:
+       - Partition Key
+       - Sort Key
+    2. Attributes
+
+ - DynamoDB - Read/Write Capacity Modes:
+ - Control how you manage your table's capacity (read/write throughput)
+ - Provisioned Mode (default):
+    1. You specify the number of reads/writes per second
+    2. You need to plan capacity beforehand
+    3. Pay for provisioned Read Capacity Units (RCU) & Write Capacity Units (WCU)
+    4. Possibility to add auto-scaling mode for RCU & WCU
+ - On-Demand mode:
+    1. Read/writes automatically scale up/down with your workloads
+    2. No capacity planning needed
+    3. Pay for what you use (more expensinve)
+    4. Great for unpredictable workloads, steep sudden spikes
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
