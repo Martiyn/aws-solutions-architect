@@ -289,5 +289,97 @@ Amazon DynamoDB
     3. Pay for what you use (more expensinve)
     4. Great for unpredictable workloads, steep sudden spikes
 
+
+ - DynamoDB Accelerator (DAX):
+ - Fully-managed, highly available, seamless in-memory cache for DynamoDB
+ - Help solve read congestion by caching
+ - Microseconds latency for cached data
+ - Doesn't require application logic modification (compatible with existing DynamoDB APIs)
+ - 5 minutes TTL for cache (default)
+ - You essentially create a DAX cluster made of a few cache nodes
+ - You connect to the DAX cluster, which in turn is connected to the DynamoDB
+ - Diagram:
+
+   Application ------> DAX Cluster(made of several cache nodes) ------> Amazon DynamoDB
+
+ - Why you would use DAX instead of ElastiCache
+ - DAX is in front of DynamoDB and is helpful for individual objects cache + queries and scan cache
+ - ElastiCache is better for storing aggregation results
+
+ - DynamoDB - Stream Processing:
+ - Ordered stream of item-level modifications (create/update/delete) in a table
+ - Use cases:
+    1. React to changes in real-time (welcome email to users)
+    2. Real-time usage analytics
+    3. Insert into derivative tables
+    4. Implement cross-region replication
+    5. Invoke AWS Lambda on changes to your DynamoDB table
+
+ - DynamoDB Streams:
+ - 24 hours retention
+ - Limited # of consumers
+ - Process using AWS Lambda Triggers, or DynamoDB Stream Kinesis adapter
+
+ - Kinesis Data Streams (newer):
+ - 1 year retention
+ - High number of consumers
+ - Process using AWS Lambda, Kinesis Data Analytics, Kinesis Data Firehose, AWS Glue Streaming ETL...
+
+ - DynamoDB Streams diagram:
+                                                                                                                        |---(messaging, notifications)---> Amazon SNS
+   Application ---(create/update/delete)---> DynamoDB Table ------> Processing layer (DynamoDB KCL Adapter or Lambda) --| 
+                                                                                                                        |---(filtering. transforming )---> DynamoDB Table       
+ - Kinesis Data Streams diagram:
+                                                                                                                          |---(analytics)---> Amazon Redshift
+   Application ---(create/update/delete)---> DynamoDB Table ------> Kinesis Data Streams ------> Kinesis Data Firehose  --|---(archiving)---> Amazon S3
+                                                                                                                          |---(indexing)--->Amazon OpenSearch
+
+ - DynamoDB Global Tables:
+ - A table that can be replicated in multiple regions
+ - Two-way replication between tables
+ - The goal is to make DynamoDB table accessible with low latency in multiple regions
+ - Active-Active replication
+ - Applications can Read and Write to the table in any region
+ - Must enable DynamoDB Streams as a pre-requisite
+
+ - DynamoDB - Time To Live (TTL):
+ - Automatically delete items after an expiry timestamp
+ - TTL is contained in the SessionData (Table)
+ - Attributes for the SessionData are:
+    1. User_ID
+    2. Session_ID
+    3. ExpTime (TTL)
+ - ExpTime has a timestamp in it
+ - Once the current time passes the timestamp, the item gets deleted
+ - Use cases:
+    1. Reduce stored data by keeping only current items
+    2. Adhere to regulatori obligations
+    3. Web session handling (important for exam)
+
+ - DynamoDB - Backups for disaster recovery
+ - Continuous backups using point-in-time recovery (PITR):
+    1. Optionally enabled for the last 35 days
+    2. Point-in-time recovery to any time within the backup window
+    3. The recovery process creates a new table
+ - On-demand backups:
+    1. Full backups for long-term retention, until explicitly deleted
+    2. Doesn't affect performance or latency
+    3. Can be configured and managed in AWS Backup (enables cross-region copy)
+    4. The recovery process creates a new table
+
+ - DynamoDB - Integration with Amazon S3:
+ - Export to S3 (must enable PITR):
+    1. Works for any point in time in the last 35 days
+    2. Doesn't affect the read capacity of your table
+    3. Perform data analysis on top of DynamoDB
+    4. Retain snapshots for auditing
+    5. ETL on top of S3 data before importing back into DynamoDB
+    6. Export in DynamoDB JSON or ION format
+  - Import from S3:
+     1. Import CSV, DynamoDB JSON or ION format
+     2. Doesn't consume any write capacity
+     3. Creates a new table
+     4. Import errors are logged into CloudWatch Logs
+
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
