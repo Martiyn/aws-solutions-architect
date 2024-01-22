@@ -444,3 +444,51 @@ API Gateway
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Step Functions
+
+ - Step functions are a way to build a serverless visual workflow to orchestrate your Lambda functions
+ - Features:
+    1. Sequence
+    2. Parallel
+    3. Conditions
+    4. Timeouts
+    5. Error handling
+ - Can integrate with EC2, ECS, on-prem servers, API gateway, SQS queues, etc...
+ - Possibility for implementing human approval feature
+ - Use cases:
+    1. Order fulfillment
+    2. Data processing
+    3. Web applications
+    4. Any other workflow
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Cognito
+
+ - Amazon Cognito gives users an identity to interact with our web or mobile app
+ - Cognito user pools:
+    1. Sign in functionality for app users
+    2. Integrate with API Gateway & Application Load Balancer
+ - Cognito Identity Pools (Federated Identity):
+    1. Provice AWS credentials to users so they can access AWS resources directly
+    2. Integrate with Cognito user pools as an identity provider
+ - Cognito vs. IAM: "hundreds of users", "mobile users", "authenticate with SAML"
+
+ - Cognito User Pools (CUP) - User Features:
+ - Create a serverless database of users for your web & mobile apps
+ - Simple login: Username (or email) / password combination
+ - Password reset
+ - Email & Phone number verification
+ - MFA
+ - Federated identities: users from Facebook, Google, SAML, ...
+
+ - Cognito user pools (CUP) - Integrations:
+ - CUP integrates with API gateway and Application load balancer
+
+ - Cognito Identity Pools (Federated Identities):
+ - Get identities for "users" so they obtain temporary AWS credentials
+ - Users source can be Cognito user pools, 3rd party logins, etc...
+ - Users can then access AWS services directly or through API Gateway
+ - The IAM policies applied to the credentials are defined in Cognito
+ - They can be customized based on the user_id for fine grained control
+ - Default IAM roles for authenticated and guest users
