@@ -300,3 +300,56 @@ Amazon Kinesis Data Analytics
     4. Flink does not read from Firehose (use Kinesis Analytics for SQL instead)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Managed Streaming for Apache Kafka (Amazon MSK)
+
+ - Amazon MSK is an alternative to Amazon Kinesis
+ - Fully managed Apache Kafka on AWS
+ - Allows you to create, update, delete clusters
+ - MSK creates & manages Kafka brokers nodes & Zookeeper nodes for you
+ - Deploy the MSK cluster in your VPC, multi-AZ (up to 3 for HA)
+ - Automatic recovery from common Apache Kafka failures
+ - Data is stored on EBS volumes for as long as you want
+
+ - MSK Serverless:
+    1. Run Apache Kafka on MSK without managing the capacity
+    2. MSK automatically provisions resources and scales compute & storage
+
+ - Apache Kafka is a way for you to stream data
+ - An Apache cluster is made up of multiple "brokers"
+ - Apache Kafka has Producers(your code), such as:
+    1. Kinesis
+    2. IoT
+    3. RDS
+    4. etc...
+ - The producers send the data to a topic, which is replicated between all brokers
+ - Consumers(your code) are:
+    1. EMR
+    2. S3
+    3. SageMaker
+    4. Kinesis
+    5. RDS
+    6. etc...
+
+ - Kinesis Data Streams vs Amazon MSK:
+    1. Kinesis Data Streams:
+       - 1 MB message size limit
+       - Data Streams with Shards
+       - Shard Splitting & Merging
+       - TLS in-flight encryption
+       - KMS at-rest encryption
+    2. Amazon MSK:
+       - 1 MB default, configure for higher (e.g. 10 MB)
+       - Kafka Topics with Partitions
+       - Can only add partitions to a topic
+       - PLAINTEXT or TLS In-flight Encryption
+       - KMS at-rest encryption
+
+ - Amazon MSK Consumers:
+    1. Kinesis Data Analytics for Apache Flink
+    2. AWS Glue Streaming ETL Jobs Powered by Apache Spark Streaming
+    3. Lambda
+    4. Any applications running on EC2/ECS/EKS
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
