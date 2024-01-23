@@ -259,3 +259,44 @@ AWS Lake Formation
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon Kinesis Data Analytics
+
+ - There are two types of Kinesis Data Analytics:
+    1. For SQL applications
+    2. For Apache Flink
+
+ - Kinesis Data Analytics for SQL applications
+ - It has two data sources that it can read from:
+    1. Kinesis Data Streams
+    2. Kinesis Data Firehose
+ - You can apply SQL statements to perform real-time analytics
+ - You can join reference data by referencing it from an S3 bucket (allows you to enrich data in real-time)
+ - You can send the data to the following destinations:
+    1. Kinesis Data Streams (can do real-time processing of the stream with Lambda or personal applications)
+    2. Kinesis Data Firehose (can send data to the usual Firehose destinations)
+ - Real-time analytics on Kinesis Data Streams & Firehose using SQL
+ - Add reference data from Amazon S3 to enrich streaming data
+ - Fully managed, no servers to provision
+ - Automatic scaling
+ - Pay for actual consumption rate
+ - Output:
+    1. Kinesis Data Streams: create streams out of the real-time analytics queries
+    2. Kinesis Data Firehose: send analytics query results to destinations
+ - Use cases:
+    1. Time-series analytics
+    2. Real-time dashboards
+    3. Real-time metrics
+    
+ - Kinesis Data Analytics for Apache Flink (Amazon Managed Service for Apache Flink):
+ - Use Flink (Java, Scala or SQL) to process and analyze streaming data
+ - You can read from two data sources:
+    1. Kinesis Data Streams
+    2. Amazon MSK
+ - Flink is used for running very complicated queries (above the capabilities of SQL)
+ - With this service, you get:
+    1. Provisioning compute resources, parallel computation, automatic scaling
+    2. Application backups (implemented as checkpoints and snapshots)
+    3. Use any Apache Flink programming features
+    4. Flink does not read from Firehose (use Kinesis Analytics for SQL instead)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
