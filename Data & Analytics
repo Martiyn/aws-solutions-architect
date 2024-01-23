@@ -224,3 +224,38 @@ AWS Glue
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Lake Formation
+
+ - Data lake = central place to have all your data for analytics purposes
+ - Lake formation is a fully managed service that makes it easy to setup a data lake in days
+ - Discover, cleanse, transform, and ingest data into your Data Lake
+ - It automates many complex manual steps (collecting, cleansing, mpving, cataloging data, ...) and de-duplicate (using ML Transforms)
+ - Combine structured and unstructured data in the data lake
+ - Out-of-the-box source blueprints: S3, RDS, Relational & NoSQL DB, ...
+ - Fine-grained Access Control for your applications (row and column-level)
+ - Built on top of AWS Glue (does not interact with it directly)
+ - The data lake is stored in Amazon S3
+ - Data sources can be:
+    1. Amazon S3
+    1. RDS
+    1. Aurora
+    1. On-prem. DB (SQL & NoSQL)
+ - The lake formation ingests the data from the above data sources
+ - The data lake contains the following:
+    1. Source crawlers
+    2. ETL and Data prep.
+    3. Data catalog
+    4. Security settings
+    5. Access control
+ - Services that can leverage Lake formation are:
+    1. Athena
+    2. Redshift
+    3. EMR
+    4. Apache Spark (non-AWS)
+ - Users connect to the above services, which in turn connect to Data Lake
+ - Lake formation allows you to setup access control (column & row-level security) from within the Lake Formation itself
+ - In that way, any service that connects to Lake Formation is allowed to view data that is allowed by the Lake Formation access control
+ - This centralizes permissions (makes them easier to manage)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
