@@ -193,3 +193,34 @@ Amazon QuickSight
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Glue
+
+ - AWS Glue is a managed extract, transform, and load (ETL) service
+ - Useful to prepare and transform data for analytics
+ - Fully serverless service
+ - Example diagram:
+
+   S3 bucket/Amazon RDS ---(Extract)---> Glue ETL ---(Load)---> RedShift Data Warehouse
+
+ - AWS Glue - Convert data into Parquet format:
+
+   ---(S3 put)---> Input S3 bucket ---(Import CSV)---> Glue ETL ---(Parquet)---> Output S3 bucket ---(Analyze)---> Amazon Athena
+
+ - To automate the process, you can place event notifications on S3 put, which would trigger a Lambda function or EventBridge to trigger a Glue ETL job.
+
+ - Glue Data Catalog: catalog of datasets:
+
+   Amazon S3/Amazon RDS/Amazon DynamoDB/On-prem (JDBC) ------> AWS Glue Data Crawler ---(writes metadata)---> AWS Glue Data Catalog ---(data discovery)---> Amazon Athena/Amazon Redshift Spectrum/Amazon EMR
+
+ - Glue - things to know at a high level:
+ - Glue Job Bookmarks: prevent re-processing of old data
+ - Glue Elastic Views:
+    1. Combine and replicate data across multiple data stores using SQL
+    2. No custom code, Glue monitors for changes in the source data, serverless
+    3. Leverages a "virtual table" (materialized view)
+ - Glue DataBrew: clean and normalize data using pre-built transformation
+ - Glue Studio: new GUI to create, run and monitor ETL jobs in Glue
+ - Glue Streaming ETL (built on Apache Spark Structured Streaming): compatible with Kinesis Data Streaming, Kafka, MSK (managed Kafka)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
