@@ -1,0 +1,39 @@
+Amazon Athena
+
+ - Athena is a serverless query service to analyze data stored in Amazon S3
+ - Uses standard SQL language to query the files (built on Presto)
+ - Supports CSV, JSON, ORC, Avro, Parquet
+ - Pricing: $5.00 per TB of data scanned
+ - Commonly used with Amazon Quicksight for reporting/dashboards
+ - Use cases:
+    1. Business intelligence
+    2. Analytics
+    3. Reporting
+    4. Analyze & query VPC flow logs
+    5. Analyze & query ELB logs
+    6. Analyze & query CloudTrail trails
+ - Exam Tip: analyze data in S3 using serverless SQL, use Athena
+
+ - Amazon Athena - Performance improvement:
+ - Use columnar data for cost-savings (less scan)
+ - Recommended formats for this are:
+    1. Apache Parquet
+    2. ORC
+ - You can use Glue to convert your data to Parquet or ORC
+ - This provides a huge performance improvement
+ - Compress data for smaller retrievals (bzip2, gzip, lz4, snappy, zlip, zstd...)
+ - Partition datasets in S3 for easy querying on virtual columns
+ - s3://yourBucket/pathToTable
+                 /<PARTITION_COLUMN_NAME>=<VALUE>
+                   /<PARTITION_COLUMN_NAME>=<VALUE>
+                     /<PARTITION_COLUMN_NAME>=<VALUE>
+                       /etc...
+
+ - Example: s3://athena-examples/flight/parquet/year=1991/month=1/day=1/
+ - Use larger files (> 128 MB) to minimize overhead
+
+ - Amazon Athena - Federated Query:
+ - Allows you to run SQL queries across data stored in relational, non-relational, object and custom data sources (AWS or on-prem)
+ - User Data Source Connectors that run on AWS Lambda to run Federated Queries (e.g., CloudWatch Logs, DynamoDB, RDS, ...)
+ - Store the results back in Amazon S3
+ - The Data Source Connector is a Lambda function.
