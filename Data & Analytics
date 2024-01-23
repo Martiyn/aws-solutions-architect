@@ -86,3 +86,36 @@ Amazon Redshift
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon OpenSearch Service
+
+ - Amazon OpenSearch is a successor to Amazon ElasticSearch
+ - In DynamoDB, queries only exist by primary key or indexes
+ - With OpenSearch, you can search any field, even partial matches
+ - It is common to use OpenSearch as a compliment to another database
+ - Two modes: managed cluster or serverless cluster
+ - Does not natively support SQL (SQL support can be enabled via plugin)
+ - Ingestion from Kinesis Data Firehose, AWS IoT, CloudWatch Logs
+ - Security through Cognito & IAM, KMS encryption, TLS
+ - Comes with OpenSearch Dashboards (visualization)
+
+ - OpenSearch patterns (DynamoDB):
+
+   ---(CRUD)---> DynamoDB Table ------> DynamoDB Stream ------> Lambda Function ------> Amazon OpenSearch
+
+ - Per the above, your application can perform a partial search (to search for a specific item)
+ - Item can be searched via name or another attribute and then the item ID will be found
+ - Once the item ID is found, it will be used to call DynamoDB to retrieve the full item
+
+ - OpenSearch patterns (CloudWatch Logs):
+
+   CloudWatch Logs ------> Subscription Filter ------> Lambda Function ---(Real Time)---> Amazon OpenSearch
+ - or
+   CloudWatch Logs ------> Subscription Filter ------> Kinesis Data Firehose ---(Near Real Time)---> Amazon OpenSearch
+
+ - OpenSearch patterns (Kinesis Data Streams & Kinesis Data Firehose)
+
+   Kinesis Data Streams ------> Kinesis Data Firehose ---(Optionally transform data with Lambda func.)---> Amazon OpenSearch
+ - or
+   Kinesis Data Streams ------> Lambda Function ------> Amazon OpenSearch
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
