@@ -119,3 +119,30 @@ Amazon OpenSearch Service
    Kinesis Data Streams ------> Lambda Function ------> Amazon OpenSearch
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon EMR
+
+ - EMR stands for Elastic MapReduce
+ - EMR helps with the creation of Hadoop clusters (big data) to analyze and process vast amounts of data
+ - The clusters can be made of hundreds of EC2 instances
+ - EMR comes bundled with Apache Spark, HBase, Presto, Flink
+ - EMR takes care of all the provisioning and configuration
+ - Auto-scaling and integrated with Spot instances
+ - Use cases:
+    1. Data processing
+    2. Machine learning
+    3. Web indexing
+    4. Big data
+
+ - Amazon EMR - Node types & purchasing
+ - Master node: manage the cluster, coordinate, manage health - long running
+ - Core node: run tasks and store data - long running
+ - Task node (optional): just to run tasks - usually Spot instances
+ - Purchasing options:
+    1. On-demand: reliable, predictable, won't be terminated
+    2. Reserved (min 1 year): cost savings (EMR will automatically use if available)
+    3. Spot instances: cheaper, can be terminated, less reliable
+ - Can have long-running cluster or transient (temporary) cluster
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
