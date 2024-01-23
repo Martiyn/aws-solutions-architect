@@ -53,6 +53,7 @@ Amazon Redshift
  - vs Athena: faster queries / joins / aggregations thanks to indexes
  - Athena is more useful for small-scale queries on S3
  - Redshift is more useful for intense data warehousing with many complicated queries
+ - You can use Enhanced VPC Routing to force all Copy and Unload traffic moving between your cluster and data repositories through your VPC
 
  - Redshift cluster:
  - Leader node: for query planning, results aggregation
