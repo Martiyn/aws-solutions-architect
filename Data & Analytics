@@ -146,3 +146,50 @@ Amazon EMR
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon QuickSight
+
+ - Amazon QuickSight is a serverless machine learning-powered business intelligence service to create interactive dashboards
+ - Dashboards are connected to data sources you own
+ - Fast, automatically scalable, embeddable, with per-session pricing
+ - Use cases:
+    1. Business analytics
+    2. Building visualizations
+    3. Perform ad-hoc analysis
+    4. Get business insights using data
+ - Integrated with RDS, Aurora, Athena, Redshift, S3, ...
+ - In-memory computation using SPICE engine if data is imported into QuickSight
+ - Enterprise edition: possibility to setup column-level securitu (CLS)
+
+ - QuickSight integrations:
+ - Data sources (AWS Services):
+    1. RDS
+    2. Aurora
+    3. Redshift
+    4. Athena
+    5. S3
+    6. OpenSearch
+    7. Timestream
+ - Data sources (3rd party SaaS):
+    1. Salesforce
+    2. Jira
+    3. etc...
+ - Data sources: on-premises DB (JDBC)
+ - Data sources (imports):
+    1. .XLSX
+    1. .CSV
+    1. .JSON
+    1. .TSV
+    1. ELF & CLF (log format)
+
+ - QuickSight - Dashboard & Analysis:
+ - Define users (standard versions) and Groups (enterprise version)
+    1. These users & groups only exist within QuickSight, not IAM !!
+ - A dashboard:
+    1. Is a read-only snapshot of an analysis that you can share
+    2. Preserves the configuration of the analysis (filtering, parameters, controls, sort)
+ - You can share the analysis or the dashboard with Users or Groups
+ - To share a dashboard, you must first publish it
+ - Users who see the dashboard can also see the underlying data
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
