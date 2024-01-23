@@ -37,3 +37,52 @@ Amazon Athena
  - User Data Source Connectors that run on AWS Lambda to run Federated Queries (e.g., CloudWatch Logs, DynamoDB, RDS, ...)
  - Store the results back in Amazon S3
  - The Data Source Connector is a Lambda function.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Redshift
+
+ - Redshift is based on PostgreSQL, but it's not used for onlile transaction processing (OLTP)
+ - It is actually for online analytical processing (OLAP)
+ - It is used for analytics and data warehousing
+ - 10x better performance than other data warehouses, scale to PBs of data
+ - Columnar storage of data (instead of row based) & parallel query engine
+ - Pay as you go based on provisioned instances
+ - Has a SQL interface for performing the queries
+ - BI tools such as Amazon Quicksight or Tableau integrate with it
+ - vs Athena: faster queries / joins / aggregations thanks to indexes
+ - Athena is more useful for small-scale queries on S3
+ - Redshift is more useful for intense data warehousing with many complicated queries
+
+ - Redshift cluster:
+ - Leader node: for query planning, results aggregation
+ - Compute node: for performing the queries, sends results to leader node
+ - You provision the node size in advance
+ - You can use reserved instances for cost savings
+
+ - Redshift - Snapshots & Disaster Recovery:
+ - Redshift has multi-az mode for some clusters
+ - Snapshots are point-in-time backups of a cluster, stored internally in S3
+ - Snapshots are incremental (only what has changed is saved)
+ - You can restore a snapshot into a new cluster
+ - Automated: every 8 hours, every 5 GB, or on a schedule. Set retention.
+ - Manual: snapshot is retained until you delete it
+ - You can configure Amazon Redshift to automatically copy snapshots (automated or manual) of a cluster to another AWS region
+ - You can restore a new Redshift cluster from the copied snapshot
+
+ - Loading data into Redshift:
+ - Large inserts are MUCH better
+ - You can use Amazon Kinesis Data Firehose
+ - Firehose will receive data from different sources and then send it to Redshift
+ - To do so, it will first write the data in an S3 bucket, after which, Firehose will automatically issue an S3 copy command
+ - This will load the data into Redshift
+ - You can also issue a copy command manually (requires IAM role)
+ - You can also use an EC2 Instance JDBC driver (better for writing large batches of data)
+
+ - Redshift Spectrum:
+ - Query data that is already in S3 without loading it
+ - Must have a Redshift cluster available to start the query
+ - The query is then submitted to thousands of Redshift Spectrum nodes
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
