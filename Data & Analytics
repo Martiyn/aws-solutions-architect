@@ -353,3 +353,31 @@ Amazon Managed Streaming for Apache Kafka (Amazon MSK)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Big Data Ingestion Pipeline
+
+ - We want the ingestion pipeline to be fully serverless
+ - We want to collect data in real time
+ - We want to transform the data
+ - We want to query the transformed data using SQL
+ - The reports created using the queries should be in S3
+ - We want to load that data into a warehouse and create dashboards
+
+ - IoT Devices (can be managed by IoT Core)
+ - We can have the below Pipeline diagram
+
+   IoT Devices ---(real-time)---> Amazon Kinesis Data Streams ------> Amazon Kinesis Data Firehose ------> Amazon S3(Ingestion Bucket) ------> Amazon SQS queue(optional) ------ Lambda ---(trigger)---> Athena ---(pull data)---> S3 (ingestion) bucket ------> S3 (reporting) bucket
+
+ - It is possible to also manipulate the data using a Lambda function, which is linked directly to Firehose (in the above diagram)
+ - We can visualize the data from the reporting bucket with Amazon QuickSight
+ - We can also store the data in Amazon Redshift
+
+ - Big Data Ingestion Pipeline discussion:
+ - IoT Core allows you to harvest data from IoT devices
+ - Kinesis is great for real-time data collection
+ - Firehose helps with data delivery to S3 in near real-time (1 minute)
+ - Lambda can help Firehose with data transformations
+ - Amazon S3 can trigger notifications to SQS
+ - Lambda can subscribe to SQS (we could have connected to S3 to Lambda)
+ - Athena is a serverless SQL service and results stored in S3
+ - The reporting bucket contains analyzed data and can be used by reporting tools such as QuickSight, Redshift, etc...
+
