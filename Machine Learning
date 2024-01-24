@@ -76,3 +76,30 @@ Amazon Lex & Connect
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon Comprehend
+
+ - For natural language processing - NLP
+ - Fully managed and serverless service
+ - Uses ML to find insights and relationships in text
+    1. Language of the text
+    2. Understands how positive or negative the text is
+    3. Extracts key phrases, places, people, brands or events
+    4. Analyzes text using tokenization and parts of speech
+    5. Automatically organizes a collection of text files by topic
+ - Sample use cases:
+    1. analyze customer interactions (emails) to find what leads to a positive or negative experience
+    2. create and group articles by topics that Comprehend will uncover
+
+    
+ - Amazon Comprehend Medical:
+ - Amazon Comprehend Medical detects and returns useful information in unstructured clinical text:
+    1. Physician's notes
+    2. Discharge summaries
+    3. Test results
+    4. Case notes
+ - Uses NLP to detect protected health information (PHI) - DetectPHI API
+ - Store your documents in Amazon S3, analyze real-time data with Kinesis Data Firehose
+ - You can also use Amazon Transcribe to transcribe patient narrative into text that can be analyzed by Amazon Comprehend Medical
+
+
+
