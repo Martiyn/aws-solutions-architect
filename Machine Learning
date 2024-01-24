@@ -101,5 +101,21 @@ Amazon Comprehend
  - Store your documents in Amazon S3, analyze real-time data with Kinesis Data Firehose
  - You can also use Amazon Transcribe to transcribe patient narrative into text that can be analyzed by Amazon Comprehend Medical
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon SageMaker
+
+ - Fully managed service for developers / data scientists to build ML models
+ - Typically difficult to do all the processes in one place + provision servers
+ - Machile learning process (simplified): predicting your exam score
+
+   Historical data: ---------(label)----------> Score: -------(build)--------> ML model <----------(train and tune)-----------> Data
+   - # years of experience in IT                - 650
+   - # years of experience in AWS               - 890
+   - Time spent on course                       - 934
+
+ - Now that we have an ML model, it can be applied to new data and make an educated prediction for the test score
+ - Building, training and using the AI can all be done with SageMaker
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
