@@ -1,0 +1,22 @@
+Amazon Rekognition
+
+ - Find objects, people, text, scenes in images and videos using ML
+ - Facial analysis and facial search to do user verification, people counting
+ - Create a database of "familiar faces" or compare against celebrities
+ - Use cases:
+    1. Labeling
+    2. Content Moderation
+    3. Text Detection
+    4. Face Detection and Analysis (gender, age range, emotions, ...)
+    5. Face Search and Verification
+    6. Celebrity Recognition
+    7. Pathing (ex: for sports game analysis)
+
+ - Amazon Rekognition - Content Moderation:
+ - Detect content that is inappropriate, unwanted, or offensive (image or videos)
+ - Used in social media, broadcast media, advertising and e-commerce situations to create a safer user experience
+ - Set a Minimum Confidence Theshold for items that will be flagged
+ - Flag sensitive content for manual review in Amazon Augmented AI (A2I)
+ - Help comply with regulations
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
