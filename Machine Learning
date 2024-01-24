@@ -162,3 +162,29 @@ Amazon Kendra
    - 3rd party APNs Custom
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Personalize
+
+ - Fully managed ML-service to build apps with real-time personalized recommendations
+ - Example: personalized product recommendations/re-ranking, customized direct marketing
+    1. E.g.: User bought gardening tools, provide recommendations on the next one to buy
+ - Same technology used by Amazon.com
+ - Integrates into existing websites, applications, SMS, email marketing systems, ...
+ - Implement in days, not months (you don't need to build, train and deploy MS solutions)
+ - Use cases:
+    1. retail stores
+    1. media & entertainment
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Textract
+
+ - Automatically extracts text, handwriting and data from any scanned documents using AI and ML
+ - Extract data from forms and tables
+ - Read and process any type of document (PDFs, images, ...)
+ - Use cases:
+    1. Financial services (e.g., invoices, financial reports)
+    2. Healthcare (e.g., medical records, insurance claims)
+    3. Public sector (e.g., tax forms, ID documents, passports)
+
+
