@@ -52,4 +52,27 @@ Amazon Polly
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon Translate
+
+ - Natural and accurate language translation
+ - Amazon translate allows you to localize content - such as websites and applications - for international users, and to easily translate large volumes of text efficiently
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Lex & Connect
+
+ - Amazon Lex: (the technology that powers Alexa)
+    1. Automatic speech recognition (ASR) to convert speech to text
+    2. Natural language understanding to recognize the intent of text, callers
+    3. Helps build chatbots, call center bots
+ - Amazon Connect:
+    1. Receive calls, create contact flows, cloud-based virtual contact center
+    2. Can integrate with other CRM systems or AWS
+    3. No upfront payments, 80% cheaper than traditional contact center solutions
+
+ - Example diagram:
+
+   Phone Call to schedule an appointment ---(call)--- Connect ---(stream)---> Lex ---(invoke)---> Lambda ---(schedule)---> CRM
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
