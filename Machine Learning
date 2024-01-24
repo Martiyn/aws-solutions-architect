@@ -119,3 +119,25 @@ Amazon SageMaker
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon Forecast
+
+ - Fully managed service that uses ML to deliver highly accurate forecasts
+ - Example: predict the future sales of a raincoat
+ - 50% more accurate than looking at the data itself
+ - Reduce forecasting time from months to hours
+ - Use cases:
+    1. Product demand planning
+    2. Financial planning
+    3. Resource planning
+
+ - Diagram:
+
+   Historical time-series data: ---(upload)---> Amazon S3 ------> Amazon Forecast ---(produce)---> Forecasting model ------> Future sales of raincoat:
+   - product features                                                                                                        - $500,000 (prediction)
+   - prices
+   - discounts
+   - website traffic
+   - store locations
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
