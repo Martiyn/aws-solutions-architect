@@ -20,3 +20,36 @@ Amazon Rekognition
  - Help comply with regulations
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Transcribe
+
+ - Automatically convert speech to text 
+ - Uses a deep learning process called automatic speech recognition (ASR) to convert speech to text quickly and accurately
+ - Automatically remove Personally Identifiable Information (PII) using Redaction
+ - Supports automatic language identification for multi-lingual audio
+ - Use cases:
+    1. Transcribe customer service calls
+    2. Automate closed captioning and subtitling
+    3. Generate metadata for media assets to create a fully searchable archive
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Polly
+
+ - Turn text into lifelike speech using deep learning
+ - This allows you to create applications that talk
+
+ - Amazon Polly - Lexicon & SSML
+ - Customize the pronunciation of words with Pronunciation lexicons
+    1. Stylized words: St3ph4ne => "Stephane"
+    2. Actonyms: AWS => "Amazon Web Services"
+ - Upload the lexicons and use them in the SynthesizeSpeech operation
+ - Generate speech from plain text or from documents marked up with Speech Synthesis Markup Language (SSML) - enables more customization
+    1. Emphasizing specific words or phrases
+    2. Using phonetic pronunciation
+    3. Including breathing sounds, whispering
+    4. Using the Newscaster speaking style
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
