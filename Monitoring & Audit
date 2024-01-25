@@ -305,4 +305,42 @@ AWS CloudTrail
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Config
+
+ - Helps with auditing and recording compliance of your AWS resources
+ - Helps record configurations and changes over time
+ - Questions that can be solved by AWS Config:
+    1. Is there unrestricted SSH access to my security groups?
+    2. Do my buckets have public access?
+    3. How has my ALB configuration changed over time?
+ - You can receive alerts (SNS notifications) for any changes
+ - AWS Config is a per-region service
+ - Can be aggregated across regions and accounts
+ - Possibility of storing the configuration data into S3 (analyzed by Athena)
+
+ - Config Rules:
+ - Can use AWS managed config rules (over 75)
+ - Can make custom config rules (must be defined with Lambda):
+    1. Ex: evaluate each EBS disk is of type gp2
+    2. Ex: evaluate if each EC2 instance is a t2.micro
+ - Rules can be evaluated/triggered:
+    1. For each config change
+    2. And/or: at regular time intervals
+ - AWS Config Rules does not prevent actions from happening (no deny)
+ - Pricing: no free tier, $0.003 per configuration item recorded per region, $0.001 per config rule evaluation per region
+ - View compliance of a resource over time
+ - View configuration of a resource over time
+ - View CloudTrail API calls of a resource over time
+
+ - Config Rules - Remediations
+ - Automate remediation of non-compliant resources using SSM Automation Documents
+ - TIP: you can create custom Automation Documents that invoke Lambda functions
+ - You can set Remediation Retries if the resource is still non-compliant after auto-remediation
+
+ - Config Rules - Notifications:
+ - Use EventBridge to trigger notifications when AWS resources are non-compliant
+ - Ability to send configuration changes and compliance state notifications to SNS (all events - use SNS Filtering or filter at client-side)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
