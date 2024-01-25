@@ -1,0 +1,26 @@
+CloudWatch Metrics
+
+ - CloudWatch provides metrics for every AWS service
+ - Metric is a variable to monitor (CPU util, Networking, etc..)
+ - Metrics belong to namespaces
+ - Dimension is an attribute of a metric (instance id, environment, etc..)
+ - Up to 30 dimensions per metric
+ - Metrics have timestamps
+ - Can create CloudWatch dashboards of metrics
+ - Can create CloudWatch Custom Metrics (e.g., for the RAM)
+
+ - CloudWatch Metric Streams:
+ - Continually stream CloudWatch metrics to a destination of your choice with near-real-time delivery and low latency
+    1. Amazon Kinesis Data Firehose (and then its destinations)
+    2. 3rd party service provider: Datadog, Dynatrace, New Relic, Splunk, Sumo logic, etc..
+
+ - Diagram:
+
+   CloudWatch Metrics ---(stream near-real-time)---> Kinesis Data Firehose ------> Amazon S3 ------> Athena 
+
+ - The data is stored in Amazon S3 and can then be analyzed with Athena
+ - You can alternatively store your data in Amazon Redshift (data warehouse) - from Firehose
+ - You can also route the data from Firehose to Amazon OpenSearch to perform analytics there
+ - Option to filter metrics to only stream a subset of them
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
