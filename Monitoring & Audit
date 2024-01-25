@@ -159,4 +159,58 @@ CloudWatch Alarms
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon EventBridge (formerly CloudWatch Events)
+
+ - Schedule: Cron jobs (scheduled scripts)
+ - Event Pattern: Event rules to react to a service doing something
+ - Trigger Lambda functions, send SQS/SNS messages, etc..
+
+ - Amazon EventBridge Rules:
+ - EventBridge has sources:
+    1. EC2 Instance (ex: Start instance)
+    2. CodeBuild (ex: failed build)
+    3. S3 Event (ex: upload object)
+    4. Trusted Advisor (ex: new finding)
+    5. CloudTrail (any API call)
+    6. Schedule a Cron (ex: every hour)
+ - EventBridge also has destinations:
+    1. Lambda
+    2. AWS Batch
+    3. ECS Task
+    4. SQS
+    5. SNS
+    6. Kinesis Data Stream
+    7. Step Functions
+    8. CodePipeline
+    9. CodeBuild
+    10. SSM
+    11. EC2 Actions
+
+ - Diagram:
+
+   Source(one of the above listed) ---(optionally filter events)---> Amazon EventBridge ---(send data in JSON format)---> Destination(one of the above listed)
+
+ - Amazon EventBridge is the Default Event Bus
+ - Partner event buses can be:
+    1. Zendesk
+    2. DataDog
+    3. etc..
+ - Partner event bus allows you to monitor events outside of AWS
+ - You also have a custom event bus, which can be your own custom app
+ - Event buses can be accessed by other AWS accounts using Resource-based Policies
+ - You can archive events (all/filter) sent to an event bus (indefinitely or set period)
+ - Ability to replay archived events (handy for debugging/troubleshooting)
+
+ - Amazon EventBridge - Schema Registry
+ - EventBridge can analyze the events in your bus and infer the schema
+ - The Schema Registry allows you to generate code for your application, that will know in advance how data is structured in the event bus
+ - Schema can be versioned
+
+ - Amazon EventBridge - Resource-based Policy:
+ - Manage permissions for a specific Event Bus
+ - Example: allow/deny events from another AWS account or AWS region
+ - Use case: aggregate all events from your AWS Organization in a single AWS account or region
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
