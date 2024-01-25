@@ -24,3 +24,70 @@ CloudWatch Metrics
  - Option to filter metrics to only stream a subset of them
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CloudWatch Logs
+
+ - Log groups: arbitrary name, usually representing an application that is to be monitored
+ - Log stream: instances within application / log files / containers
+ - Can define log expiration policies (never expire, 1 day to 10 years)
+ - CloudWatch Logs can send logs to:
+    1. Amazon S3 (exports)
+    2. Kinesis Data Streams
+    3. Kinesis Data Firehose
+    4. AWS Lambda
+    5. OpenSearch
+ - Logs are encrypted by default
+ - Can setup KMS-based encryption with your own keys
+
+ - CloudWatch Logs - Sources:
+    1. SDK
+    2. CloudWatch Logs Agent
+    3. CloudWatch Unified Agent
+    4. Elastic Beanstalk: collection of logs from app
+    5. ECS: collection from containers
+    6. AWS Lambda: collection from function logs
+    7. VPC Flow Logs: VPC specific logs
+    8. API Gateway
+    9. CloudTrail based on filter
+    10. Route 53: Log DNS queries
+
+ - CloudWatch Logs Insights (can be used to query CloudWatch Logs)
+ - Search and analyze log data stored in CloudWatch Logs
+ - Example: find a specific IP inside a log, count occurrences of "ERROR" in your logs
+ - Provides a purpose-built query language:
+    1. Automatically discovers fields from AWS services and JSON log events
+    2. Fetch desired event fields, filter based on conditions, calculate aggregate statistics, sort events, limit number of events...
+    3. Can save queries and add them to CloudWatch Dashboards
+ - Can query multiple Log Groups in different AWS accounts
+ - It's a query engine, not a real-time engine
+
+ - CloudWatch Logs - S3 Export
+ - Log data can take up to 12 hours to become available for export
+ - The API call is CreateExportTask
+ - Not near-real-time or real-time... use Log Subscribtions instead
+
+ - CloudWatch Logs Subscribtions:
+ - Get a real-time log events from CloudWatch Logs for processing an analysis
+ - Send to Kinesis Data Streams, Kinesis Data Firehose, or Lambda
+ - Subscribtion Filter - filter which logs are events delivered to your destination
+
+ - Diagram
+
+   CloudWatch Logs ---(logs)---> Subscribtion Filter ------> Kinesis Data Streams ------> Kinesis Data Firehose/Kinesis Data Analytics/EC2/Lambda
+
+ - or
+
+   CloudWatch Logs ---(logs)---> Subscribtion Filter ------> Kinesis Data Firehose ---(near-real-time)---> S3/OpenSearch
+
+ - or
+
+   CloudWatch Logs ---(logs)---> Subscribtion Filter ------> Lambda ---(real-time)---> OpenSearch
+
+ - CloudWatch Logs Aggregation is possible from multiple accounts and multiple regions
+
+ - CloudWatch Logs Subscribtions:
+ - Cross-account Subscribtions - send log events to resources in a different AWS account (Data Stream, Firehose)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
