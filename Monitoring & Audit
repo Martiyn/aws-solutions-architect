@@ -252,4 +252,52 @@ CloudWatch Container Insights
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS CloudTrail
+
+ - Provides governance, compliance and audit for your AWS Account
+ - CloudTrail is enabled by default
+ - Get a history of events / API calls made withing your AWS account by:
+    1. Console
+    2. SDK
+    3. CLI
+    4. AWS Services
+ - Can put logs from CloudTrail into CloudWatch Logs or S3
+ - A trail can be applied to All Regions (default) or a single region
+ - If a resource is deleted in AWS, investigate CloudTrail first!
+ - Diagram:
+
+   SDK/CLI/Console/IAM users & IAM roles ------> CloudTrail Console(inspect & audit) ------> CloudWatch Logs/S3 bucket
+
+ - CloudTrail Events:
+ - Management Events:
+    1. Operations that are performed on resources in your AWS account
+    2. Examples:
+       - Configuring security (IAM AttachRolePolicy)
+       - Configuring rules for routing data (Amazon EC2 CreateSubnet)
+       - Setting up logging (AWS CloudTrail CreateTrail)
+    3. By default, trails are configured to log management events
+    4. Can separate Read Events from Write Events
+ - Data Events:
+    1. By default, data events are not logged because they are very high volume operations
+    2. Amazon S3 object-level activity (ex: GetObject, DeleteObject, PutObject): can separate Read and Write Events
+    3. AWS Lambda function execution activity (the Invoke API)
+
+ - CloudTrail Insights:
+ - Enable CloudTrail Insights to detect unusual activity in your account:
+    1. Inaccurate resource provisioning
+    2. Hitting service limits
+    3. Bursts of AWS IAM actions
+    4. Gaps in periodic maintenance activity
+ - CloudTrail Insights analyzes normal management events to create a baseline
+ - And then continuously analyzes write events to detect unusual patterns
+    1. Anomalies appear in the CloudTrail console
+    2. Event is sent to Amazon S3
+    3. An EventBridge event is generated
+
+ - CloudTrail Events Retention:
+ - Events are stored for 90 days in CloudTrail
+ - To keep events beyond this period, log them to S3 and use Athena
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
