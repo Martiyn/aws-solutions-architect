@@ -24,56 +24,24 @@ IAM policies
 
 {
   "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Sid": "DenyAllAwsReourcesOutsideAccountExceptAmazonS3",
-      "Effect": "Deny",
-      "NotAction": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:PutObjectAcl"
-      ],
-      "Resource": "*",
-      "Condition": {
-        "StringNotEquals": {
-          "aws:ResourceAccount": [
-            "111122223333"
-          ]
-        }
-      }
-    },
-    {
-      "Sid": "DenyAllS3ResourcesOutsideAccountExceptDataExchange",
-      "Effect": "Deny",
-      "Action": [
-        "s3:GetObject",
-        "s3:PutObject",
-        "s3:PutObjectAcl"
-      ],
-      "Resource": "*",
-      "Condition": {
-        "StringNotEquals": {
-          "aws:ResourceAccount": [
-            "111122223333"
-          ]
-        },
-        "ForAllValues:StringNotEquals": {
-          "aws:CalledVia": [
-            "dataexchange.amazonaws.com"
-          ]
-        }
-      }
-    }
-  ]
+  "Statement": [{
+    "Sid": "1",
+    "Effect": "Allow",
+    "Principal": {"AWS": ["arn:aws:iam::account-id:root"]},
+    "Action": "s3:*",
+    "Resource": [
+      "arn:aws:s3:::mybucket",
+      "arn:aws:s3:::mybucket/*"
+    ]
+  }]
 }
 
- - The above example policy is for denying access to Amazon S3 resources outside your account except AWS Data Exchange.
- - AWS policies usually contain the following parameters:
- - Resource: This is the specified resource that the policy targets (like a particular S3 bucket or particular EC2 instance).
  - The * symbol indicates a so-called "wildcard" (meaning it does not target a particular resource).
- - Effect: The effect can either be "Allow" or "Deny" (to allow or deny the specified action).
- - Action: The action that is to be targeted in the policy (ex. s3:GetObject)
- - Statement: The statement of the policy.
+ - AWS policies usually contain the following parameters:
+    1. Resource: This is the specified resource that the policy targets (like a particular S3 bucket or particular EC2 instance).
+    2. Effect: The effect can either be "Allow" or "Deny" (to allow or deny the specified action).
+    3. Action: The action that is to be targeted in the policy (ex. s3:GetObject)
+    4. Statement: The statement of the policy.
 
 --------------------------------------------------------------------------------------------------------------------
 
