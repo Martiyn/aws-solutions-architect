@@ -158,4 +158,41 @@ IAM Permission Boundaries
 
 ---------------------------------------------------------------------------------------------------------------------
 
+AWS IAM Identity Center (successor to AWS Single Sign-On)
+
+ - One login (SSO) for all your:
+    1. AWS accounts in AWS Organizations
+    2. Business cloud apps (Salesforce, Box, Microsoft 365, ...)
+    3. Works for SAML2.0-enabled applications
+    4. EC2 Windows Instances
+
+ - Identity providers:
+    1. Built-in identity store in IAM Identity Center
+    2. 3rd party: Active Directory, OneLogin, Okta, ...
+
+ - AWS IAM Identity Center - Login Flow:
+
+   Login to AWS account ------> AWS IAM Identity Center ---(select account)---> Management console opens with selected account logged in
+
+ - How it works:
+
+   Browser Interface ---(login)---> AWS IAM Identity Center ---(store/retrieve user identities)---> Active Directory/IAM Identity Center(built-in store)
+
+ - From there, you integrate your SSO from the Identity Center to AWS Cloud/Business Cloud Apps/Custom SAML2.0-enabled apps
+
+ - IAM Identity Center (Fine-grained Permissions and Assignments)
+ - Multi-account Permissions:
+    1. Manage access across AWS accounts in your AWS Organization
+    2. Permission Sets - a collection of one or more IAM Policies assigned to users and groups to define AWS access
+ - Applications assignments:
+    1. SSO access to many SAML2.0 business apps (Salesforce, Box, MS 365)
+    2. Provide required URLs, certificates and metadata
+ - Attribute-Based Access Control (ABAC):
+    1. Fine-grained permissions based on users' attributes stored in IAM Identity Center Identity Store
+    2. Example: cost center, title, locale, ...
+    3. Use case: Define permissions once, then modify AWS access by changing the attributes
+
+---------------------------------------------------------------------------------------------------------------------
+
+
 
