@@ -110,3 +110,37 @@ IAM Conditions
 
 ---------------------------------------------------------------------------------------------------------------------
 
+IAM Roles vs Resource Based Policies
+
+ - Cross account:
+    1. attaching a resource-based policy to a resource (example: S3 bucket policy)
+       - access policy is applied to the bucket policy
+    2. OR using a role as a proxy
+       - access policy is applied to the role
+ - Both approaches are valid but different
+ - When you assume a role (user, application or service), you give up your original permissions and take the permissions assigned to the role
+ - When using a resource-based policy, the principal does not have to give up his permissions
+ - Example: User in account A needs to scan a DynamoDB table in Account A and dump it in an S3 bucket in Account B
+ - Supported by:
+    1. S3 buckets
+    2. SNS topics
+    3. SQS queues
+    4. etc..
+
+ - Amazon EventBridge - Security
+ - When a rule runs, it needs permissions on the target
+ - Resource-based policy:
+    1. Lambda
+    2. SQS
+    3. SNS
+    4. CloudWatch Logs
+    5. API Gateway
+ - IAM role:
+    1. Kinesis stream
+    2. Systems Manager Run Command
+    3. ECS tasks
+
+---------------------------------------------------------------------------------------------------------------------
+
+
+
