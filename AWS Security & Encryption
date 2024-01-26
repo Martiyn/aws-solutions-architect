@@ -1,0 +1,39 @@
+Encryption 101 (Overview)
+
+ - What is encryption?
+
+ - Encryption in flight (TLS/SSL)
+ - Data is encrypted before sending and decrypted after receiving
+ - TLS certificates help using encryption (HTTPS)
+ - Encryption in flight ensures no MITM (man in the middle attack) can happen
+ - Diagram
+
+   Client ---(username and password)---> TLS Encryption ------> TLS Decryption ---(username and password)---> HTTPS Website
+
+ - Server-side encryption at rest
+ - Data is encrypted after being received by the server
+ - Data is decrypted before being sent
+ - Data is stored in an encrypted form thanks to a key (usually data key)
+ - The encryption/decryption keys must be managed somewhere, and the server must have access to that location
+ - Diagram:
+
+   Object ---(HTTP(S))---> Object + Data Key = Encryption ------> Enctypted object + Data key = Decryption ---(HTTP(S))---> Object
+
+ - Everything between the objects is the server!
+
+ - Client-side encryption
+ - Data is encrypted by the client and never decrypted by the server
+ - Data will be decrypted by a receiving client
+ - The server should not be able to decrypt the data
+ - Could leverage Envelope Encryption
+ - Diagram:
+
+   Object + Data key (client-side) ---(encryption)---> Encrypted object ---(store)---> Storage service(FTP, S3, ...)
+
+   Storage service(FTP, S3, ...) ---(retrieve)---> Encrypted object + Data key ---(Decryption)---> Decrypted object
+
+ - Encryption is completely handled client-side
+ - No decryption or encryption occurs on the storage service
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
