@@ -94,7 +94,7 @@ IAM Organizations
  - Even if you apply a Deny SCP to the management account, it will not apply (no SCPs apply to the management account)
  - For all other accounts, if you have an explicit deny policy on the OU, even if you have an allow policy after that on an account in the OU, the allow will not apply
  - SCPs are inherited from OUs (parent - child relationship)
-
+ 
 ---------------------------------------------------------------------------------------------------------------------
 
 IAM Conditions
@@ -142,5 +142,20 @@ IAM Roles vs Resource Based Policies
 
 ---------------------------------------------------------------------------------------------------------------------
 
+IAM Permission Boundaries
+
+ - IAM Permission Boundaries are supported for users and roles (not groups)
+ - Advanced feature to use a managed policy to set the maximum permissions an IAM entity can get
+ - If you set an IAM Policy with permissions outside of the IAM Permissions Boundary, the policy will not be applied
+ - IAM Permission Boundaries can be used in combinations of AWS Organizations SCP
+ - Use cases:
+    1. Delegate responsibilities to non administrators within their permission boundaries, for example to create new IAM users
+    2. Allow developers to self-assign policies and manage their own permissions, while making sure they can't escalate their privileges (make themselves admin)
+    3. Useful to restrict one specific user (instead of a whole account using Organizations & SCP)
+
+ - NOTE: If there is an explicit Deny in a policy, access will not be allowed, even if there is a contradicting allow!
+ - NOTE: If there is no explicit Deny but neither is there an explicit Allow in a policy, access will not be allowed.
+
+---------------------------------------------------------------------------------------------------------------------
 
 
