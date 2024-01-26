@@ -194,5 +194,42 @@ AWS IAM Identity Center (successor to AWS Single Sign-On)
 
 ---------------------------------------------------------------------------------------------------------------------
 
+AWS Directory Services
+
+ - What is MS Active Directory?:
+ - Found on any Windows Server with AD Domain Services
+ - Database of objects:
+    1. User Accounts
+    2. Computers
+    3. Printers
+    4. File Shares
+    5. Security Groups
+ - Centralized security management, create account, assign permissions
+ - Objects are organized in trees
+ - A group of trees is called a forest
+ - Diagram:
+
+   Domain Controller (John password) ---(sync to)---> All computers joined to the Domain Controller
+
+ - AWS Directory Services allows you to create an Active Directory in AWS:
+ - AWS Managed Microsoft AD:
+    1. Create your own AD in AWS, manage users locally, supports MFA
+    2. Establish "trust" connections with your on-premise AD
+ - AD Connector:
+    1. Directory Gateway (proxy) to redirect to on-prem AD, supports MFA
+    2. Users are managed on the on-prem AD
+ - Simple AD:
+    1. AD-compatible managed directory on AWS
+    2. Cannot be joined with on-prem AD
+
+ - IAM Identity Center - AD Setup:
+ - Connect to an AWS Managed MS AD (Directory Service):
+    1. Integration is out of the box
+ - Connect to a self-managed directory:
+    1. Create Two-way Trust Relationship using AWS Managed Microsoft AD
+    2. Other option is to use an AD Connector
+
+---------------------------------------------------------------------------------------------------------------------
+
 
 
