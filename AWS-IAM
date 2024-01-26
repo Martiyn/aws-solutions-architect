@@ -63,3 +63,38 @@ IAM Roles
  - Once the policy is attached to the resource, it can then be configured to allow or deny actions of said resource.
  - Example again being an AWS EC2 instance being granted permissions to access the contents of an S3 bucket.
  - Once the EC2 instance is terminated, the IAM role is not applied to it anymore and is thus, not used further, creating no further obligations to it.
+
+---------------------------------------------------------------------------------------------------------------------
+
+IAM Organizations
+
+ - Global Service
+ - Allows to manage multiple AWS accounts
+ - The main account is the management account
+ - Other accounts are member accounts
+ - Member accounts can only be part of the organization
+ - Consolidated Billing across all accounts - single payment method
+ - Pricing benefits from aggregated usage (volume discount for EC2, S3, etc..)
+ - Shared reserved instances and Savings Plans discounts across all accounts
+ - API is available to automate AWS account creation
+ - You have a root Organizational Unit (OU)
+ - Within the OU is the Management account
+ - Whithin the OU, you can mace sub OUs (Dev, Prod, Test, as well as OUs within them like HR, Finance, etc..)
+ - Advantages of AWS Organizations:
+    1. Multi Account vs One Account Multi VPC
+    2. Use tagging standards for billing purposes
+    3. Enable CloudTrail Logs to central logging account
+    4. Enable CloudTrail on all accounts, send logs to central S3 account
+    5. Establish Cross Account Roles for Admin purposes
+ - Security: Service Control Policies (SCP):
+    1. IAM policies applied to OU or Accounts to restrict Users and Roles
+    2. They do not apply to the management account (which has full admin power)
+    3. Must have an explicit allow (does not allow anything by default - like IAM)
+ - Usually, accounts in the root OU have FullAWSAccess SCP (full admin rights)
+ - Even if you apply a Deny SCP to the management account, it will not apply (no SCPs apply to the management account)
+ - For all other accounts, if you have an explicit deny policy on the OU, even if you have an allow policy after that on an account in the OU, the allow will not apply
+ - SCPs are inherited from OUs (parent - child relationship)
+
+---------------------------------------------------------------------------------------------------------------------
+
+
