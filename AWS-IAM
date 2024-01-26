@@ -97,4 +97,16 @@ IAM Organizations
 
 ---------------------------------------------------------------------------------------------------------------------
 
+IAM Conditions
+
+ - They apply to policies in IAM (any kind of policies):
+    1. aws:SourceIp - restrict the client IP from which the API calls are being made
+       - You can use the above policy to restrict every IP other than your company IP's access to your AWS resources
+    2. aws:RequestedRegion - restrict the region API calls are made to
+       - The above policy can be used to allow or deny access on a regional level
+    3. ec2:ResourceTag - restrict based on tags
+    4. aws:MultiFactorAuthPresent - force MFA
+    5. Resource Policies & aws:PrincipalOrgID - can be used in any resource policies to restrict access to accounts that are/are not a member of an AWS Organization
+
+---------------------------------------------------------------------------------------------------------------------
 
