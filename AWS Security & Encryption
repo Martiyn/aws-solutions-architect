@@ -97,4 +97,40 @@ Amazon Key Management Service (KMS)
     4. (in target) Create a copy of the Snapshot, encrypt it with a CMK in your account
     5. Create a volume from the snapshot
 
----------------------------------------------------------------------------------------------------------------------
+ - KMS Multi-Region Keys:
+ - You can have a key in one region, which will be replicated to other regions
+ - The key ID will be the same in all regions
+ - They are Identical KMS keys in different AWS Regions that can be used interchangeably
+ - Multi-Region keys have the same key ID, key material, automatic rotation
+ - Encrypt in one Region and decrypt in other Regions
+ - No need to re-encrypt or making cross-region API calls
+ - KMS Multi-Region are NOT global (Primary + Replicas)
+ - Each Multi-Region key is managed independently
+ - Not widely recommended aside from the below use cases:
+    1. global client-side encryption
+    2. encryption on Global DynamoDB
+    3. Global Aurora
+
+ - DynamoDB Global Tables and KMS Multi-Region Keys Client-Side encryption:
+ - We can encrypt specific attributes client-side in our DynamoDB table using the Amazon DynamoDB Encryption Client
+ - If we use a multi-region key, replicated in the same region as the DynamoDB Global table, then clients in these regions can use low-latency API calls to KMS in their region to decrypt the data client-side
+ - Using client-side encryption, we can protect specific fields and guarantee only decryption if the client has access to an API key
+    1. Encrypt attribute with primary MRK
+    2. Put encrypted attribute in the DDB Table
+    3. Global Table Replication
+    4. Get encrypted attribute
+    5. Decrypt attribute with replica of MRK
+
+ - Global Aurora and KMS Multi-Region Keys Client-Side encryption:
+ - We can encrypt specific attributes client-side in our Aurora table using the AWS Encryption SDK
+ - Combined with Aurora Global Tables, the client-side encrypted data is replicated to other regions
+ - If we use a multi-region key, replicated in the same region as the Global Aurora DB, then clients in these regions can use low-latency API calls to KMS in their region to decrypt the data client-side
+ - Using client-side encryption, we can protect specific fields and guarantee only decryption if the client has access to an API key, we can protect specific fields even from DB admins
+    1. Encrypt attribute with primary MRK
+    2. Put encrypted column in the Aurora Table
+    3. Global DB Replication
+    4. Get encrypted column
+    5. Decrypt attribute with replica of MRK
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
