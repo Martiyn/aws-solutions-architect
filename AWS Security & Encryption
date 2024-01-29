@@ -311,3 +311,18 @@ AWS WAF - Web Application Firewall
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Shield - DDoS Protection
+
+ - DDoS: Distributed Denial of Service - many requests at the same time
+ - AWS Shield Standard:
+    1. Free service that is activated for every AWS customer
+    2. Provides protection from attacks such as SYN/UDP Floods, Reflection attacks and other Layer 3/layer 4 attacks
+ - AWS Shield Advanced:
+    1. Optional DDoS mitigation service ($3,000 per month per organization)
+    2. Protect against more sophisticated attack on EC2, ELB, CloudFront, Global Accelerator and Route 53
+    3. 24/7 access to AWS DDoS response team (DRP)
+    4. Protect against higher fees during usage spikes due to DDoS
+    5. Shield Advanced automatic application layer DDoS mitigation automatically creates, evaluates and deploys AWS WAF rules to mitigate layer 7 attacks
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
