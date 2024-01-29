@@ -413,3 +413,28 @@ Amazon GuardDuty
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon Inspector
+
+ - Automated Security Assessments
+ - For EC2 Instances:
+    1. Leveraging the AWS System Manager (SSM) agent
+    2. Analyze against unintended network accessibility
+    3. Analyze the running OS against known vulnerabilities
+ - For Container images push to Amazon ECR
+    1. Assessment of Container Images as they are pushed
+ - For Lambda Functions:
+    1. Identifies software vulnerabilities in function code and package dependencies
+    2. Assessment of functions as they are deployed
+
+ - Reporting & integration with AWS Security Hub
+ - Send findings to Amazon EventBridge
+ - Continuous scanning of the infrastructure, only when needed
+ - A risk score is associated with all vulnerabilities for prioritization
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Amazon Macie
+
+ - Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect sensitive data in AWS
+ - Macie helps identify and alert you to sensitive data, such as personally identifiable information
+
