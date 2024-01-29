@@ -395,3 +395,21 @@ AWS Best Practices for DDoS Resiliency
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Amazon GuardDuty
+
+ - Intelligent Threat discovery to protect your AWS Account
+ - Uses Machine Learning algorithms, anomally detection, 3rd party data
+ - One click to enable (30 day trial), no need to install software
+ - Input data includes:
+    1. CloudTrail Events Logs:
+       - CloudTrail Management Events - create VPC, subnet, create trail
+       - CloudTrail S3 Data Events - get object, list objects, delete object
+    2. VPC Flow Logs - unusual internal traffic, unusual IP addresses
+    3. DNS Logs - compromised EC2 instances sending encoded data within DNS queries
+    4. Optional Features - EKS Audit Logs, RDS & Aurora, EBS, Lambda, S3 Data Events
+ - Can setup EventBridge rules to be notified in case of findings
+ - EventBridge rules can target AWS Lambda or SNS
+ - Can protect against CryptoCurrency attacks (has a dedicated "finding" for it)
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
