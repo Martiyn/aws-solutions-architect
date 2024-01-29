@@ -132,5 +132,19 @@ Amazon Key Management Service (KMS)
     4. Get encrypted column
     5. Decrypt attribute with replica of MRK
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+S3 Replication Encryption Considerations
+
+ - Unencrypted objects and objects encrypted with SSE-S3 are replicated by default
+ - Objects encrypted with SSE-C (customer provided key) can be replicated
+ - For objects encrypted with SSE-KMS, you need to enable the option:
+    1. Specify which KMS Key to encrypt the objects within the target bucket
+    2. Adapt the KMS Key Policy for the target key
+    3. An IAM Role with kms:Decrypt for the source KMS Key and kms:Encrypt for the target KMS Key
+    4. You might get KMS throttling errors, in which case, you can ask for a Service Quotas increae
+ - You can use multi-region AWS KMS Keys, but they are currently treated as independent keys by Amazon S3 (the object will still be decrypted and then encrypted)
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
