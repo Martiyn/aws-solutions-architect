@@ -157,3 +157,50 @@ AMI Sharing Process Encrypted via KMS
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+SSM Parameter Store
+
+ - Secure storage for configuration and secrets
+ - Optional Seamless Encryption using KMS
+ - Serverless, scalable, durable, easy SDK
+ - Version tracking of configurations / secrets
+ - Security through IAM
+ - Notifications with Amazon EventBridge
+ - Integration with CloudFormation
+
+ - SSH Parameter Store Hierarchy:
+
+     */my-department/
+      * my-app/
+       * dev/
+           * db-url
+           * db-password
+       * prod/
+           * db-url
+           * db-password
+
+ - As seen by the dev and prod environments under the app, you can also have different departments and apps altogether
+ - You can access the secrets of secrets manager through the parameter store with: /aws/reference/secretsmanager/secret_ID_in_Secrets_Manager
+ - If you want to find the latest AMI for a Linux VM in your region through the parameter store, you can: /aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gb2 (this is public)
+
+ - You have two types of parameter tiers:
+    1. Standard
+       - Total number of parameters allowed (per AWS acc and Region): 10,000
+       - Maximum size of a parameter value: 4 KB
+       - Parameter policies available: No
+       - Cost: No additional charge
+       - Storage Pricing: Free
+    2. Advanced
+       - Total number of parameters allowed (per AWS acc and Region): 100,000
+       - Maximum size of a parameter value: 8 KB
+       - Parameter policies available: Yes
+       - Cost: Charges apply
+       - Storage Pricing: $0.05 per advanced parameter per month
+
+ - Parameter policies (for advanced params):
+ - Allow to assign a TTL to a parameter (expiration date) to force updating or deleting sensitive data such as password
+ - You can assign multiple policies at a time
+ - You can create notifications for EventBridge
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
