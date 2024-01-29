@@ -203,4 +203,21 @@ SSM Parameter Store
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Secrets Manager
+
+ - Newer service, meant for storing secrets
+ - Capability to force rotation of secrets every X days
+ - Automate generation of secrets on rotation (uses Lambda)
+ - Integration with RDS (MySQL, PostgreSQL, Aurora)
+ - You can use Secrets Manager to store for example the username and password to a DB
+ - Secrets are encrypted using KMS
+ - Mostly meant for RDS integration
+
+ - AWS Secrets Manager - Multi-Region Secrets:
+ - Replicate Secrets across multiple AWS Regions
+ - Secrets Manager keeps read replicas in sync with the primary Secret
+ - You can promote a Replica Secret to Primary Secret in case of a disaster
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
