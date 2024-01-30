@@ -139,6 +139,7 @@ NAT Instance (outdated, but still in the exam)
  - The destination IP is that of the Server
  - When a response from the server is returned, the destination is the NAT instance IP
  - The NAT instance then changes the destination IP to the private IP of the private EC2 instance
+ - NOTE: You must stop source / destination checking, as a NAT instance must be able to send and receive traffic when the source or destination is not itself
 
  - NAT Instance - Comments:
  - Pre-configured Amazon Linux AMI is available
