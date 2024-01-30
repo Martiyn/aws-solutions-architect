@@ -156,4 +156,45 @@ NAT Instance (outdated, but still in the exam)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+NAT Gateway
+
+ - AWS-managed NAT, higher bandwidth, high availability, no administration
+ - Pay per hour for usage and bandwidth
+ - NATGW is created in a specific AZ, uses an Elastic IP
+ - Can't be used by EC2 instance in the same subnet (only from other subnets)
+ - Requires an IGW (Private Subnet => NATGW => IGW)
+ - 5 Gbps of bandwidth with automatic scaling up to 100 Gbps
+ - No Security Groups to manage / required
+ - Diagram:
+
+   Internet <---(www)---> Internet Gateway <------> Router <------> NAT Gateway <------> Private EC2 instance
+
+ - In the above, the NAT Gateway lives in the public subnet, while the private EC2 instance lives in the private subnet
+
+ - NAT Gateway with High Availability:
+ - NAT Gateway is resilient within a single AZ
+ - Must create multiple NAT Gateways in multiple AZs for fault-tolerance
+ - There is no cross-AZ failover needed because if an AZ goes down, it doesn't need NAT
+
+ - NAT Gateway vs. NAT Instance:
+ - NAT Gateway:
+    1. Availability - Highly available within AZ (create in another AZ)
+    2. Bandwidth - Up to 100 Gbps
+    3. Maintenance - Managed by AWS
+    4. Cost - Per hour & amount of data transferred
+    5. Public IPv4 - Yes
+    6. Private IPv4 - Yes
+    7. Security Groups - No
+    8. Use as Bastion Host? - No
+ - NAT Instance:
+    1. Availability - Use a script to manage failover between instances
+    2. Bandwidth - Depends on EC2 instance type
+    3. Maintenance - Managed by you (software, OS pathces, etc..)
+    4. Cost - Per hour, EC2 instance type and size + network $
+    5. Public IPv4 - Yes
+    6. Private IPv4 - Yes
+    7. Security Groups - Yes
+    8. Use as Bastion Host? - Yes
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
