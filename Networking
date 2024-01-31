@@ -198,3 +198,54 @@ NAT Gateway
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Security Groups & NACLs
+
+ - Network Access Control List (NACL)
+ - NACL are like a firewall, which controls traffic from and to subnets
+ - One NACL per subnet, new subnets are assigned the Default NACL
+ - You define NACL Rules:
+    1. Rules have a number (1-32766), higher precedence with a lower number
+    2. First rule match will drive the decision
+    3. Example: if you define #100 ALLOW 10.0.0.10/32 and #200 DENY 10.0.0.10/32, the IP address will be allowed because 100 has a higher precedence over 200
+    4. The last rule is an asterisk (*) and denies a request in case of no rule match
+    5. AWS recommends adding rules by increment of 100
+ - Newly created NACLs will deny everything
+ - NACLs are a great way of blocking a specific IP address at the subnet level
+
+ - Default NACL:
+ - Accepts everything inbound/outbound with the subnets it's associated with
+ - Do NOT modify the Default NACL, instead create custom NACLs
+
+ - Ephemeral Ports:
+ - For any two endpoints to establish a connection, they must use ports
+ - Clients connect to a defined port, and expect a response on an ephemeral port
+ - Different Operating Systems use different port ranges, examples:
+    1. IANA & MS Windows 10 -> 49152 - 65535
+    2. Many Linux Kernels -> 32768 - 60999
+ - Diagram:
+ - Client has:
+    1. IP - 11.22.33.44
+    2. Ephemeral Port: 50105
+ - Web Server has:
+    1. IP - 55.66.77.88
+    2. Fixed Port: 443
+
+   Client ---(Src. IP, Src. Port, Dest. IP, Dest. Port, Payload)---> Web Server
+
+   Web Server ---(Src. IP, Src. Port, Dest. IP, Dest. Port, Payload)---> Client
+
+ - Security Group vs. NACLs:
+ - Security Group:
+    1. Operates at the instance level
+    2. Supports allow rules only
+    3. Stateful: return traffic is automatically allowed, regardless of any rules
+    4. All rules are evaluated before deciding whether to allow traffic
+    5. Applies to an EC2 instance when specified by someone
+ - NACL:
+    1. Operates at the subnet level
+    2. Supports allow rules and deny rules
+    3. Stateless: return traffic must be explicitly allowed by rules (thing of ephemeral ports)
+    4. Rules are evaluated in order (lowest to highest) when deciding whether to allow traffic, firts match wins
+    5. Automatically applies to all EC2 instances in the subnet that it's associated with
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
