@@ -266,3 +266,30 @@ VPC Peering
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+VPC Endpoints (AWS PrivateLink)
+
+ - Every AWS service is publicly exposed (public URL)
+ - VPC Endpoints (powered by AWS PrivateLink) allows you to connect to AWS services using a private network instead of the public Internet
+ - They're redundant and scale horizontally
+ - They remove the need of IGW, NATGW, ... to access AWS Services
+ - In case of issues:
+    1. Checl DNS Setting Resolution in your VPC
+    2. Check Route Tables
+
+ - Types of Endpoints:
+    1. Interface Endpoints (powered by PrivateLink):
+       - Provisions an ENI (private IP address) as an entry point (must attach a Security Group)
+       - Supports most AWS services
+       - $ per hour + $ per GB of data processed
+    2. Gateway Endpoints:
+       - Provisions a gateway and must be used as a target in a route table (does not use security groups)
+       - Supports both S3 and DynamoDB
+       - Free
+
+ - Gateway or Interface Endpoint for S3?
+ - Gateway is most likely going to be preferred all the time at the exam
+ - Cost: free for Gateway, $ for interface endpoint
+ - Interface Endpoint is preferred access is required from on-premises (Site to Site VPN or Direct Connect), a different VPC or a different region
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
