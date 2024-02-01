@@ -435,3 +435,37 @@ Site-to-Site VPN connection as a backup
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Transit Gateway
+
+ - Network topologies can become complicated
+ - The solution to this problem is the Transit Gateway:
+ - For having transitive peering between thousands of VPC and on-premises, hub-and-spoke (star) connection
+ - Regional resource, can work cross-region
+ - Share cross-account using Resource Access Manager (RAM)
+ - You can peer Transit Gateways across regions
+ - Route Tables limit which VPC can talk with other VPC
+ - Works with Direct Connect Gateway, VPN connections
+ - Supports IP Multicast (not supported by any other AWS service)
+
+ - Transit Gateway: Site-to-Site VPN ECMP:
+ - ECMP = Equal-cost multi-path routing
+ - Routing strategy to allow to forward a packet over multiple best paths
+ - Use case: create multiple Site-to-Site VPN connections to increase the bandwidth of your connection to AWS
+
+ - VPN to virtual private gateway:
+ - One connection, one tunnel to one VPC
+ - One connection gives you 1.25 Gbps
+ - VPN connection is made of 2 tunnels
+
+ - VPN to transit gateway:
+ - One connection, multiple tunnels to multiple VPCs
+ - One connection gives you 2.5 Gbps (ECMP) - 2 tunnels used
+ - Two connections give you 5.0 Gbps (ECMP)
+ - Three connections give you 7.5 Gbps (ECMP)
+ - $$ per GB of TGW processed data
+
+ - Transit Gateway - Share Direct Connect between multiple accounts:
+ - You can use AWS Resource Access Manager to share Transit Gateway with other accounts
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
