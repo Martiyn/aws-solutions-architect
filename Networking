@@ -293,3 +293,54 @@ VPC Endpoints (AWS PrivateLink)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+VPC Flow Logs
+
+ - Capture information about IP traffic going into your interfaces:
+    1. VPC Flow Logs
+    2. Subnet Flow Logs
+    3. Elastic Network Interface (ENI) Flow Logs
+ - Helps monitor & troubleshoot connectivity issues
+ - Flow logs data can go to S3, CloudWatch Logs, and Kinesis Data Firehose
+ - Captures network information from AWS managed interfaces too: ELB, RDS, ElastiCache, Redshift, WorkSpaces, NATGW, Transit Gateway...
+ - VPC Flow Logs Syntax is specifically formatted and has the following:
+    1. version
+    2. account-id
+    3. interface-id
+    4. srcaddr
+    5. dstaddr
+    6. srcport
+    7. dstport
+    8. protocol
+    9. packets
+    10. bytes
+    11. start
+    12. end
+    13. action
+    14. log-status
+ - This is metadata that is in your packets that enter your VPC
+ - srcaddr & dstaddr - help identify problematic IP address
+ - srcport & dstport - help identify problematic ports
+ - Action - success or failure of the request due to Security Group / NACL
+ - Can be used for analytics on usage patterns, or malicious behavior
+ - Query VPC flow logs using Athena on S3 or CloudWatch Logs Insights
+
+ - VPC Flow Logs - Troubleshoot SG & NACL issues:
+ - Look at the "ACTION" field
+ - incoming requests:
+    1. Inbound Reject => NACL or SG
+    2. Inbound ACCEPT, Outbound REGECT => NACL (due to NACL being stateless)
+ - Outgoing Requests:
+    1. Outbound REJECT => NACL or SG
+    2. Outbound ACCEPT, Inbound REJECT => NACL (due to NACL being stateless)
+   
+ - VPC Flow Logs - Architectures:
+ - Diagram:
+
+   VPC Flow Logs ------> CloudWatch Logs ------> CloudWatch Contributor Insights ------> Top 10 IP addresses
+ - or
+   VPC Flow Logs ------> CloudWatch Logs ---(metric filter)---> CW Alarm ---(Alert)---> Amazon SNS
+ - or
+   VPC Flow Logs ------> S3 Bucket ------> Amazon Athena ---(visualize)---> Amazon QuickSight
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
