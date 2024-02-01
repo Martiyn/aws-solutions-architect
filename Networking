@@ -367,5 +367,7 @@ Site to Site VPN, Virtual Private Gateway & Customer Gateway
  - Low-cost hub-and-spoke model for primary or secondary network connectivity between different locations (VPN only)
  - To set it up, connect with multiple VPN connections on the same VGW, setup dynamic routing and configure route tables
 
+ - VERY IMPORTANT: To create a Site-to-Site VPC connection, you must create a Customer Gateway and a Virtual Private Gateway, which to connect.
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
