@@ -371,3 +371,60 @@ Site to Site VPN, Virtual Private Gateway & Customer Gateway
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Direct Connect and Direct Connect Gateway
+
+ - Direct Connect (DX):
+ - Provides a dedicated private connection from a remote network to your VPC
+ - Dedicated connection must be setup between your DC and AWS Direct Connect locations
+ - You need to setup a Virtual Private Gateway on your VPC
+ - Access public resources (S3) and private (EC2) on the same connection
+ - Use cases:
+    1. Increase bandwidth throughput - working with large data sets - lower cost (as you are using a private connection)
+    2. More consistent network experience (as it uses a private network) - applications using real-time data feeds
+    3. Hybrid Environments (on prem + cloud)
+ - Supports both IPv4 and IPv6
+ - Diagram:
+
+   AWS Region > VPC > Private Subnet > EC2 Instances <---(virtual private gateway)---> AWS Direct Connect Location > AWS Direct Connect Endpoint & Customer or partner router <------> Corporate data center > Customer Router/firewall
+
+ - The private EC2 instances within the private subnet of the AWS region use the Virtual Private Gateway to connect to the AWS Direct Connect Location, which then connects to the Corporate data center
+ - This happens entirely via the private network
+ - The connection between the private subnet, going through the Virtual Private Gateway up until the Corporate data center is a Private Virtual Interface
+ - The AWS Direct Connect Location has two cages:
+    1. AWS Cage, which contains the AWS Direct Connect Endpoint
+    2. The Customer/partner cage, which contains the customer/partner router
+ - You can also conenct public resources, such as S3 buckets or Amazon Glacier
+ - Imagine the same diagram as above, only the connection does not go through the Virtual Private Gateway and instead goes directly to the Direct Connect Location and then to the Corp data center
+ - This public connection is a Public Virtual Interface
+
+ - Direct Connect Gateway:
+ - If you want to setup a Direct Connect to one or more VPC in many different regions (same account), you must use a Direct Connect Gateway
+
+ - IMPORTANT: Direct Connect takes more than a month to establish!
+
+ - Direct Connect - Connection Types:
+ - Dedicated Connections: 1 Gbps, 10 Gbps and 100 Gbps capacity:
+    1. Physical ethernet port dedicated to a customer
+    2. Request made to AWS first, then completed by AWS Direct Connect Partners
+ - Hosted Connections: 50 Mbps, 500 Mbps, to 10 Gbps:
+    1. Conenction requests are made via AWS Direct Connect Partners
+    2. Capacity can be added or removed on demand
+    3. 1, 2, 5, 10 Gbps available at select AWS Direct Connect Partners
+ - Lead times are often longer than 1 month to establish a new connection
+
+ - Direct Connect - Encryption:
+ - Data in transit is not encrypted but is private
+ - AWS Direct Connect + VPN provides an IPsec-encrypted private connection
+ - Good for an extra level of security, but slightly more complex to put in place
+
+ - Direct Connect - Resiliency:
+ - High Resiliency for Critical Workloads:
+    1. We can have two Direct Connect Locations up and running
+    2. The two Direct Connect Locations can be connected to two separate Corp data centers
+    3. Each Direct Connect location has only one connection each
+ - Maximum Resiliency for Critical Workloads:
+    1. We can have two Direct Connect Locations up and running
+    2. Each Direct Connect location has two connections each, which are independent of one another (increasing resiliency even more)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
