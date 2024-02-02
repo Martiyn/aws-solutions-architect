@@ -551,4 +551,37 @@ VPC Section Summary
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Networking Costs in AWS per GB - Simplified
+
+ - Use Private IP instead of Public IP for good savings and better network performance
+ - Use same AZ for maximum savings (at the cost of high availability)
+
+ - Minimizing egress traffic network cost:
+ - Egress traffic: outbound traffic (from AWS to outside)
+ - Ingress traffic: inbound traffic - from outside to AWS (typically free)
+ - Try to keep as much internet traffic within AWS to minimize costs
+ - Egress cost is high!!!
+ - If you have an application on a corporate data center, and your DB is on the AWS Cloud, if run a query directly from the application, the Egress cost will be high
+ - However, if you run the DB query on an EC2 instance within the AWS cloud and send only the query results to the application from the EC2 instance, the cost will be much lower
+ - Direct Connect location that are co-located in the same AWS Region result in lower cost for egress work
+
+ - S3 Data Transfer Pricing - Analysis for USA
+ - S3 ingress: free
+ - S3 to Internet: $0.09 per GB
+ - S3 Transfer Acceleration:
+    1. Faster transfer times (50 to 500% better)
+    2. Additional cost on top of Data Transfer, Pricing: +0.04 to $0.08 per GB
+ - S3 to CloudFront: $0.00 per GB
+ - CloudFront to Internet: $0.085 per GB (slightly cheaper than S3)
+    1. Caching capability (lower latency)
+    2. Reduce costs associated with S3 Requests, Pricing (7x cheaper with CloudFront)
+ - S3 Cross Region Replication: $0.02 per GB
+
+ - Gateway VPC Endpoint vs NAT Gateway (Pricing):
+ - Gateway VPC Endpoint is much cheaper for accessing resources such as an S3 bucket over the private web
+ - NAT Gateways go through the public internet, so they are more expensive
+
+ - NOTE: Using the Private Internet is much cheaper than using the Public Internet!!!
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
