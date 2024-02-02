@@ -469,3 +469,16 @@ Transit Gateway
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+VPC Traffic Mirroring
+
+ - Allows you to capture and inspect network traffic in your VPC
+ - Route the traffic to security appliances that you manage
+ - Capture the traffic:
+    1. From (Source) - ENIs
+    2. To (Targets) - an ENI or a NLB
+ - Capture all packets or capture the packets of your interest (optinally, truncate packets)
+ - Source and Target can be in the same VPC or different VPCs (VPC Peering)
+ - Use cases: content inspection, threat monitoring, troubleshooting
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
