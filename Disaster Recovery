@@ -1,0 +1,71 @@
+Disaster Recovery in AWS
+
+ - Any event that has a negative impact on a company's business continuity or finances is a disaster
+ - Disaster Recovery (DR) is about preparing for and recovering from a disaster
+ - What kind of disaster recovery?:
+    1. On-premise => On-premise - traditional DR, very expensive
+    2. On-premise => AWS Cloud - hybrid recovery
+    3. AWS Cloud Region A => AWS Cloud Region B - cloud recovery
+ - Need to define two terms:
+    1. RPO: Recovery Point Objective
+    2. RTO: Recovery Time Objective
+
+ - RPO and RTO:
+ - RPO is the points in time that you make backups of your data, time between the RPO and the disaster is a data loss (as all updates since last recovery point have been lost)
+ - RTO is the amount of downtime that the application has after experiencing a disaster
+
+ - Disaster Recovery Strategies:
+ - Backup and Restore
+ - Pilot Light
+ - Warm Standby
+ - Hot Site / Multi Site Approach
+
+ - In terms of RTO speed, they are as follows:
+
+   ---------------------(Faster RTO)-------------------------->
+
+    Backup & Restore, Pilot Light, Warm Standby, Multi Site
+
+ - The faster the RTO, the higher the cost
+
+ - Backup and Restore (High RPO):
+    1. It is very cheap (pay only for the storage of the snapshots)
+    2. Has high RPO (can make snapshots often), but low RTO
+ - Pilot light:
+    1. A small version of the app is always running in the cloud
+    2. Useful for the critical core (pilot light)
+    3. Very similar to Backup & Restore
+    4. Faster than Backup and Restore as critical systems are already up
+ - Warm standby:
+    1. Full system is up and running, but at minimum size
+    2. Upon disaster, we can scale to production load
+ - Multi Site / Hot Site Approach:
+    1. Very low RTO (minutes or seconds) - very expensive
+    2. Full Production Scale is running on AWS and On-prem
+
+ - Disaster Recovery Tips:
+ - Backup:
+    1. EBS Snapshots, RDS automated backups / Snapshots, etc..
+    2. Regular pushes to S3 / S3 IA / Glacier, Lifecycle Policy, Cross Region Replication
+    3. From On-Premise: Snowball or Storage Gateway
+ - High Availability:
+    1. Use Route53 to migrate DNS over from Region to Region
+    2. RDS Multi-AZ, ElastiCache Multi-AZ, EFS, S3
+    3. Site to Site VPN as a recovery from Direct Connect
+ - Replication:
+    1. RDS Replication (Cross Region), AWS Aurora + Global Databases
+    2. Database replication from on-premise to RDS
+    3. Storage Gateway
+ - Automation:
+    1. CloudFormation / Elastic Beanstalk to re-create a whole new environment
+    2. Recover / Reboot EC2 instances with CloudWatch if alarms fail
+    3. AWS Lambda functions for customized automations
+ - Chaos:
+    1. Netflix has a "simian-army" randomly terminating EC2
+    2. This essentially testing on Production to ensure that the infrastructure is viable
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
