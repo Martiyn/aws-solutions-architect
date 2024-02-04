@@ -585,3 +585,32 @@ Networking Costs in AWS per GB - Simplified
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Network Firewall
+
+ - To protect network on AWS, we've seen:
+    1. Network Access Control Lists (NACLs)
+    2. Amazon VPC security groups
+    3. AWS WAF (protect against malicious requests)
+    4. AWS Shield & AWS Shield Advanced
+    5. AWS Firewall Manager (to manage them across accounts)
+
+ - But what if we want to protect in a sophisticated way our entire VPC?
+ - Protect your entire Amazon VPC with AWS Network Firewall
+ - From Layer 3 to Layer 7 protection
+ - Any direction, you can inspect:
+    1. VPC to VPC traffic
+    2. Outbound to internet
+    3. Inbound from internet
+    4. To / from Direct Connect & Site-to-Site VPN
+ - Internally, the AWS Network Firewall uses the AWS Gateway Load Balancer    
+ - Rules can be centrally managed cross-account by AWS Firewall Manager to apply to many VPCs
+
+ - Network Firewall - Fine Grained Controls
+ - Supports 1000s of rules:
+    1. IP & port - example: 10,000s of IPs filtering
+    2. Protocol - example: block the SMB protocol for outbound communications
+    3. Stateful domain list rule groups: only allow outbound traffic to *.mycorp.com or third-party software repo
+    4.  General pattern matching using regex
+ - Traffic filtering: Allow, drop, or alert for the traffic that matches the rules
+ - Active flow inspection to protect against network threats with intrusion-prevention capabilities (like Gateway Load Balancer, but all managed by AWS)
+ - Send logs of rule matches to Amazon S3, CloudWatch Logs, Kinesis Data Firehose
