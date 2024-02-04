@@ -200,3 +200,23 @@ AWS Backup
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Application Migration Service (MGN)
+
+ - AWS Application Discovery Service (migration from on-prem to cloud):
+ - Plan migration projects by gathering information about on-prem data centers
+ - Server utilization data and dependency mapping are important for migrations
+ - Agentless Discovery (AWS Agentless Discovery Connector)
+    1. VM inventory, configuration, and performance history such as CPU, memory, and disk usage
+ - Agent-based Discovery (AWS Application Discovery Agent)
+    1. System configuration, system performance, running processes, and details of the network connections between systems
+ - Resulting data can be viewed within AWS Migration Hub
+
+ - AWS Application Migration Service (MGN):
+ - The "AWS evolution" of CloudEndure Migration replacing AWS Server Migration Service (SMS)
+ - Lift-and-shift (rehost) solution which simplifies migrating applications to AWS
+ - Converts your physical, virtual, and cloud-based servers to run natively on AWS
+ - Supports wide range of platforms, Operating Systems, and databases
+ - Minimal downtime, reduced costs
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
