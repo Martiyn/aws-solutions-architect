@@ -168,3 +168,35 @@ On-Premise strategy with AWS
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+AWS Backup
+
+ - AWS Backup is a Fully managed service
+ - Centrally manage and automate backups across AWS services
+ - No need to create custom scripts and manual processes
+ - Supported services:
+    1. Amazon EC2 / Amazon EBS
+    2. Amazon S3
+    3. Amazon RDS (all DBs engines) / Amazon Aurora / Amazon DynamoDB
+    4. Amazon DocumentDB / Amazon Neptune
+    5. Amazon EFS / Amazon FSx (Lustre & Windows File Server)
+    6. AWS Storage Gateway (Volume Gateway)
+ - Supports cross-region backups
+ - Supports cross-account backups
+ - Supports point-in-time recovery (PITR) for supported services
+ - On-Demand and Scheduled backups
+ - Tag-based backup policies
+ - You create backup policies known as Backup Plans:
+    1. Backup frequency (every 12 hours, daily, weekly, monthly, cron expression)
+    2. Backup window
+    3. Transition to Cold Storage (Never, Days, Weeks, Months, Years)
+    4. Retention Period (Always, Days, Weeks, Months, Years)
+
+ - AWS Backup Vault Lock:
+ - Enforce a Write Once Read Many state for all the backups that you store in your AWS Backup Vault
+ - Additional layer of defense to protect your backups against:
+    1. Inadvertent or malicious delete operations
+    2. Updates that shorten or alter retention periods
+ - Even the root user cannot delete backups when enabled
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
