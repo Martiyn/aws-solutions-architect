@@ -115,5 +115,12 @@ DMS - Database Migration Service
     1. Ex: On-Premise PostgreSQL => RDS PostgreSQL
     2. The DB engine is still PostgreSQL (RDS is the platform)
 
+ - AWS DMS - Multi-AZ Deployment:
+ - When Multi-AZ is Enabled, DMS provisions and maintains a synchronously stand replica in a different AZ
+ - Advantages:
+    1. Provides Data Redundancy
+    2. Eliminates I/O freezes
+    3. Minimizes latency spikes
+
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
