@@ -237,3 +237,12 @@ Transferring Large Datasets into AWS
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+VMware Cloud on AWS
+
+ - Some customers use VMware Cloud to manage their on-premises Data Center
+ - They want to extend the Data Center capacity to AWS, but keep using the VMware Cloud software
+ - ...Enter VMware Cloud on AWS
+ - Use cases:
+    1. Migrate your VMware vSphere-based workloads to AWS
+    2. Run your production workloads across VMware vSphere-based private, public, and hybrid cloud environments
+    3. Have a disaster recover strategy
