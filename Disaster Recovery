@@ -66,6 +66,54 @@ Disaster Recovery in AWS
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+DMS - Database Migration Service
 
+ - Quickly and securely migrate databases to AWS, resilient, self-healing
+ - The source database remains available during the migration
+ - Supports:
+    1. Homogenous migrations: ex Oracle to Oracle
+    2. Heterogeneous migrations: ex Microsoft SQL Server to Aurora
+ - Continuous Data Replication using CDC
+ - You must create an EC2 instance to perform the replication tasks
 
+ - DMS Sources and Targets
+ - Sources:
+    1. On-prem and EC2 instances databases:
+       - Oracle
+       - MS SQL Server
+       - MySQL
+       - MariaDB
+       - PostgreSQL
+       - MongoDB
+       - SAP
+       - DB2
+    2. Azure: Azure SQL Database
+    3. Amazon RDS: all including Aurora
+    4. Amazon S3
+    5. DocumentDB
+- Targets:
+   1. On-Premises and EC2 instances databases:
+      - Oracle
+      - MS SQL Server
+      - MySQL
+      - MariaDB
+      - PostgreSQL
+      - SAP
+   2. Amazon RDS
+   3. Redshift, DynamoDB, S3
+   4. OpenSearch Service
+   5. Kinesis Data Streams
+   6. Apache Kafka
+   7. DocumentDB & Amazon Neptune
+   8. Redis & Babelfish
+
+ - AWS Schema Conversion Tool (SCT):
+ - Convert you Database's Schema from one engine to another
+ - Example OLTP: (SQL Server or Oracle) to MySQL, PostgreSQL, Aurora
+ - Example OLAP: (Teradata or Oracle) to Amazon Redshift
+ - You do not need to use SCT if you are migrating the same DB engine
+    1. Ex: On-Premise PostgreSQL => RDS PostgreSQL
+    2. The DB engine is still PostgreSQL (RDS is the platform)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
