@@ -71,3 +71,43 @@ System Manager - SSM Session Manager
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Systems Manager - Other Services
+
+ - Systems Manager - Run Command:
+ - Execute a document (=script) or just run a command
+ - Run command across multiple instances (using resource groups)
+ - No need for SSH
+ - Command Output can be shown in the AWS Console, sent to S3 bucket or CloudWatch Logs
+ - Send notifications to SNS about command status (In progress, Success, Failed, ..)
+ - Integrated with IAM & CloudTrail
+ - Can be invoked using EventBridge
+
+ - Systems Manager - Patch Manager:
+ - Automates the process of patching managed instances
+ - OS updates, applications updates, security updates
+ - Supports EC2 instances and on-prem servers
+ - Supports Linux, macOS, and Windows
+ - Patch on-demand or on a schedule using Maintenance Windows
+ - Scan instances and generate patch compliance report (missing patches)
+
+ - Systems Manager - Maintenance Windows:
+ - Defines a schedule for when to perform actions on your instances
+ - Example: OS patching, updating drivers, installing software, ...
+ - Maintenance Window contains:
+    1. Schedule
+    2. Duration
+    3. Set of registered instances
+    4. Set of registered tasks
+
+ - Systems Manager - Automation:
+ - Simplifies common maintenance and deployment tasks of EC2 instances and other AWS resources
+ - Examples: restart instances, create an AMI, EBS snapshot
+ - Automation Runbook - SSM Documents to define actions performed on your EC2 instances or AWS resources (pre-defined or custom)
+ - Can be triggered using:
+    1. Manually using AWS Console, AWS CLI or SDK
+    2. Amazon EventBridge
+    3. On a schedule using Maintenance Windows
+    4. By AWS Config for rules remediations
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
